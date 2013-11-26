@@ -2,20 +2,18 @@
 Class Core3_model extends CI_Model
 {
 
-	function get_core3($parent = false,$limit = NULL,$offset = NULL)
+	function get_core3($id = false,$limit = NULL,$offset = NULL)
 	{
 		if($limit)
 		{
 		$this->db->limit($limit,$offset); 
 		}
-		if ($parent !== false)
+		if ($id !== false)
 		{
-			$this->db->where('user_id', $parent);
+			$this->db->where('id', $id);
 		}
-
 	
-		$result	= $this->db->get('core3')->row();
-		
+		$result	= $this->db->get('core3')->row();		
 		
 		return $result;
 	}

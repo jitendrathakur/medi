@@ -20,6 +20,10 @@
               <th>Patient</th>
               <th>Zip</th>
               <th>Identify</th>
+              <th>Is present</th>
+              <th>Is service</th>
+              <th>Pulse</th>
+              <th>Relationship</th>
               <th>Supporter</th>
               <th>Visits</th>
               <th>Medicins</th>
@@ -37,6 +41,10 @@
                 <td><?php echo $row->firstname." ".$row->lastname; ?></td>
                 <td><?php echo $row->zip; ?></td>
                 <td><?php echo $row->identify; ?></td>
+                <td><?php echo $row->is_present; ?></td>
+                <td><?php echo $row->is_service; ?></td>
+                <td><?php echo $row->pulse; ?></td>
+                <td><?php echo $row->relatiopnship; ?></td>
                 <td><?php echo $row->supporter; ?></td>
                 <td><?php echo $row->visits; ?></td>
                 <td><?php echo $row->medicine; ?></td>
@@ -54,7 +62,7 @@
 
                     }
                   ?>
-               
+                </td>               
                 
               </tr>
             <?php

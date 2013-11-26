@@ -261,7 +261,7 @@ class Supert extends CI_Controller
 			
 			
 		$data['admin_session'] = $this->admin_session->userdata('admin');
-		$user_id = $data['admin_session']['id'];
+		//$user_id = $data['admin_session']['id'];
 		
 		$this->load->helper('form');
 		$this->load->library('form_validation');
@@ -272,17 +272,17 @@ class Supert extends CI_Controller
 		
 		//default values are empty if the customer is new
 			//$data['id']				= "";
-			$data['user_id']		= "";			
-			$data['coredate']			= "";
-			$data['renewal']		= "";
-			$data['plan']			= "";
-			$data['goal']= "";	
-			$data['step1']			= "";
-			$data['step2']			= "";
-			$data['step3']			= "";
-			$data['target']			= "";
-			
-			$category_data ="";
+		$data['user_id']		= "";			
+		$data['coredate']			= "";
+		$data['renewal']		= "";
+		$data['plan']			= "";
+		$data['goal']= "";	
+		$data['step1']			= "";
+		$data['step2']			= "";
+		$data['step3']			= "";
+		$data['target']			= "";
+		
+		$category_data ="";
 			
 	
 		if ($user_id)
@@ -359,14 +359,17 @@ class Supert extends CI_Controller
 
 		$data['admin_session'] = $this->admin_session->userdata('admin');
 		//print_r($data);	
+		//exit;
 
 		$this->load->model('Supert_model');
 
 		$data['uri']=$this->uri->segment(2);
 
-        $option = array('user_id' => $userId);        
-		$result= $this->Supert_model->get_therapist_details_core3($option);
 
+
+        $option = array('user_id' => $userId);        
+		$result = $this->Supert_model->get_therapist_details_core3($option);
+		
 		$data['user_id'] = $userId;
 		 
 		$data['view'] = 'core_journal3_list';
@@ -404,7 +407,7 @@ class Supert extends CI_Controller
 		$data['identify']		= "";
 		$data['is_present']			= "";
 		$data['is_service']= "";	
-			$data['pulse']			= "";
+		$data['pulse']			= "";
 		$data['relatiopnship']			= "";
 		$data['supporter']			= "";
 		$data['visits']			= "";
@@ -412,30 +415,30 @@ class Supert extends CI_Controller
 		$data['concentration']			= "";
 		$data['pulse2']			= "";
 		
-		$identify_data ="";
+		$identify_data = "";
 		$visits_data = "";
 			
 	
-		if ($user_id)
-		{	
-			$core3		= $this->Core3_model->get_core3($user_id);
+		if (!empty($id)) {	
+
+			$core3		= $this->Core3_model->get_core3($id);
 			//if the cooccurring does not exist, redirect them to the cooccurring list with an error
 			if ($core3)
 			{
-			$id 						= $core3->id;
-			$data['id']					= $core3->id;
-			$data['user_id']			= $core3->user_id;			
-			$data['zip']			= $core3->zip;
-			$data['identify']		= $core3->identify;
-			$data['is_present']		= $core3->is_present;
-			$data['is_service']= $core3->is_service;	
-			$data['pulse']= $core3->pulse;
-			$data['relatiopnship']			= $core3->relatiopnship;
-			$data['supporter']			= $core3->supporter;
-			$data['visits']			= $core3->visits;
-			$data['medicine']			= $core3->medicine;
-			$data['concentration']			= $core3->concentration;
-			$data['pulse2']			= $core3->pulse2;
+				$id 						= $core3->id;
+				$data['id']					= $core3->id;
+				$data['user_id']			= $core3->user_id;			
+				$data['zip']			= $core3->zip;
+				$data['identify']		= $core3->identify;
+				$data['is_present']		= $core3->is_present;
+				$data['is_service']= $core3->is_service;	
+				$data['pulse']= $core3->pulse;
+				$data['relatiopnship']			= $core3->relatiopnship;
+				$data['supporter']			= $core3->supporter;
+				$data['visits']			= $core3->visits;
+				$data['medicine']			= $core3->medicine;
+				$data['concentration']			= $core3->concentration;
+				$data['pulse2']			= $core3->pulse2;
 			
 			}
 			
@@ -443,8 +446,7 @@ class Supert extends CI_Controller
 	
 		$this->form_validation->set_rules('zip', 'lang:name', 'trim|required');
 
-		$data['view'] = 'core_journal3_edit';
-	
+		$data['view'] = 'core_journal3_edit';	
 		
 		// validate the form
 		if ($this->form_validation->run() == FALSE)
@@ -452,15 +454,19 @@ class Supert extends CI_Controller
 			$this->load->view($this->config->item('supert').'/layout', $data);
 		}
 		else
-		{			
+		{
 						
 			$save['user_id']			= $user_id;
-			//$save['id']					= $id;
+			$save['id']					= $id;
 			$save['zip']			= $this->input->post('zip');
-			foreach ($this->input->post('identify') as $identify)
-			{
-				$identify_data .=  $identify.',';
+			$identifies = $this->input->post('identify');
+			if (!empty($identifies)) {
+				foreach ($identifies as $identify)
+				{
+					$identify_data .=  $identify.',';
+				}
 			}
+			
 
 			$save['identify'] = $identify_data;
 			
@@ -469,10 +475,15 @@ class Supert extends CI_Controller
 			$save['pulse']		= $this->input->post('pulse');
 			$save['relatiopnship']		= $this->input->post('relatiopnship');
 			$save['supporter']		= $this->input->post('supporter');
-				foreach ($this->input->post('visits') as $visits)
+
+			$visits = $this->input->post('visits');
+
+			if (!empty($visits)) {
+				foreach ($visits as $visit)
 				{
-				$visits_data .=  $visits.',';
+					$visits_data .=  $visit.',';
 				}
+			}				
 
 			$save['visits'] = $visits_data;
 			$save['medicine']		= $this->input->post('medicine');
@@ -481,7 +492,7 @@ class Supert extends CI_Controller
 			
 			$core3_id	= $this->Core3_model->save($save);
 			$this->session->set_flashdata('message', lang('message_core3_saved'));
-			redirect($this->config->item('supert').'/core_journal3_list');
+			redirect($this->config->item('supert').'/core_journal3_list/'.$user_id);
 		}
 		
 	}

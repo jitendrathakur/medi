@@ -53,7 +53,6 @@
 
     <div class="container">
       <div>        
-        :before
         <div class="page-header" id="banner">
           <div class="row">
             
