@@ -53,9 +53,7 @@
 
 				<li id="fieldBox_96" class="mainForm">
 					<label class="formFieldQuestion">Goal One:&nbsp;*</label>
-                    
-
-<?php
+                    <?php
 				$data	= array('name'=>'goal',  'value'=>set_value('goal', $goal),'style'=>'border-image:initial; height:100px; color:#000000; border:1px solid #000000;');
 				echo form_textarea($data);
 				?>

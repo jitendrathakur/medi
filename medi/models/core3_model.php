@@ -48,9 +48,19 @@ Class Core3_model extends CI_Model
 			}
 		
 	}
-	
 
-	
-	
 
+	function close($bayId = null, $flag = false)
+	{	
+
+		if (!empty($bayId))
+		{			
+			//$this->db->where('user_id', $core1['user_id']);
+			$this->db->where('id', $bayId);
+			$this->db->update('core3', array("close" => $flag));
+			return $bayId;
+		}
+		
+	}	
+		
 }
