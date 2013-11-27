@@ -1,0 +1,22 @@
+
+#content { font-size: 1.2em; /* for the rest of the page to show at a normal size */
+           font-family: "Lucida Sans Unicode", "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
+           width: 950px; margin: auto;
+}
+.code { margin: 6px; padding: 9px; background-color: #fdf5ce; border: 1px solid #c77405; }
+fieldset { padding: 0.5em 2em }
+hr { margin: 0.5em 0; clear: both }
+a { cursor: pointer; }
+#requirements li { line-height: 1.6em; }
+
+table.ui-timepicker .ui-state-default {
+    text-align: left;
+    width: 30px;
+}
+
+select {
+    background: url("../img/icon-arrow-down.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
+    background-size: 10% auto !important;
+    background-position:right !important;
+    background-color:#fff !important;
+}

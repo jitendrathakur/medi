@@ -47,7 +47,7 @@
  
                 <div class='col-lg-10'>
                   <?php
-                  $data = array('name'=>'coredate', 'value'=>set_value('coredate', $coredate), 'class'=>'form-control');
+                  $data = array('id' => 'datepicker', 'name'=>'coredate', 'value'=>set_value('coredate', $coredate), 'class'=>'form-control');
                   echo form_input($data); ?>
                 </div>
               </div>
@@ -58,7 +58,7 @@
 
                 <div class='col-lg-10'>
                             <?php
-                  $data = array('name'=>'starttime', 'value'=>set_value('starttime', $starttime), 'class'=>'form-control');
+                  $data = array('id' => 'timepicker_start', 'name'=>'starttime', 'value'=>set_value('starttime', $starttime), 'class'=>'form-control');
                   echo form_input($data); ?>
                 </div>
               </div>                          
@@ -67,7 +67,7 @@
                 <label class="formFieldQuestion">Stop Time :&nbsp;*</label>
                 <div class='col-lg-10'>
                             <?php
-                  $data = array('name'=>'endtime', 'value'=>set_value('endtime', $endtime), 'class'=>'form-control');
+                  $data = array('id' => 'timepicker_end', 'name'=>'endtime', 'value'=>set_value('endtime', $endtime), 'class'=>'form-control');
                   echo form_input($data); ?>
                 </div>
               </div>             

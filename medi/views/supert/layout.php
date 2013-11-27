@@ -8,8 +8,16 @@
     <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css') ?>" type="text/css" />
     <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap-responsive.min.css') ?>" type="text/css" />
 
+    <link rel="stylesheet" href="<?php echo base_url('assets/include/ui-1.10.0/ui-lightness/jquery-ui-1.10.0.custom.min.css') ?>" type="text/css" />
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/jquery.ui.timepicker.css?v=0.3.3') ?>" type="text/css" />
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/supert.css') ?>" type="text/css" />
+
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/include/ui-1.10.0/jquery.ui.core.min.js') ?>"></script>   
+    <script type="text/javascript" src="<?php echo base_url('assets/js/supert.js') ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.ui.timepicker.js?v=0.3.3') ?>"></script>
+    
 
 
     <script type="text/javascript" src="<?php echo base_url('assets/js/bootstrap.min.js') ?>"></script>

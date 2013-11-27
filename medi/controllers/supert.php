@@ -414,6 +414,10 @@ class Supert extends CI_Controller
 		$data['medicine']			= "";
 		$data['concentration']			= "";
 		$data['pulse2']			= "";
+
+		$this->load->model('Core1_model');
+		$pat_data=$this->Core1_model->getNormalUser();
+		$data['patient']=$pat_data;
 		
 		$identify_data = "";
 		$visits_data = "";
