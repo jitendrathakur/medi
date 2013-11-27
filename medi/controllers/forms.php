@@ -1451,22 +1451,26 @@ class Forms extends Admin_Controller {
 		$data['page_title']		= "core3";
 		
 		//default values are empty if the customer is new
-			$data['id']				= "";
-			$data['user_id']		= "";			
-			$data['zip']			= "";
-			$data['identify']		= "";
-			$data['is_present']			= "";
-			$data['is_service']= "";	
-				$data['pulse']			= "";
-			$data['relatiopnship']			= "";
-			$data['supporter']			= "";
-			$data['visits']			= "";
-			$data['medicine']			= "";
-			$data['concentration']			= "";
-			$data['pulse2']			= "";
-			
-			$identify_data ="";
-			$visits_data = "";
+		$data['id']				= "";
+		$data['user_id']		= "";			
+		$data['zip']			= "";
+		$data['identify']		= "";
+		$data['is_present']			= "";
+		$data['is_service']= "";	
+			$data['pulse']			= "";
+		$data['relatiopnship']			= "";
+		$data['supporter']			= "";
+		$data['visits']			= "";
+		$data['medicine']			= "";
+		$data['concentration']			= "";
+		$data['pulse2']			= "";
+		
+		$identify_data ="";
+		$visits_data = "";
+
+        $this->load->model('Core1_model');
+		$pat_data=$this->Core1_model->getNormalUser();
+		$data['patient']=$pat_data;
 			
 	
 		if ($user_id)
@@ -1515,12 +1519,20 @@ class Forms extends Admin_Controller {
 			$save['user_id']			= $user_id;
 			//$save['id']					= $id;
 			$save['zip']			= $this->input->post('zip');
-			foreach ($this->input->post('identify') as $identify)
+			$save['patient_id']			= $this->input->post('patient');
+			$identifies = $this->input->post('identify');
+
+			if (!empty($identifies)) {
+
+				foreach ($identifies as $identify)
 				{
-				$identify_data .=  $identify.',';
+					$identify_data .=  $identify.',';
 				}
 
-			$save['identify'] = $identify_data;
+				$save['identify'] = $identify_data;
+
+			}
+			
 			
 			$save['is_present']			= $this->input->post('is_present');
 			$save['is_service']		= $this->input->post('is_service');

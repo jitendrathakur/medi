@@ -19,6 +19,15 @@
 
 <div align="center"><h3 style="position:relative; left:0; top:-4px; " color="#FFFFFF" <font=""><font color="#2869D6">T-MeD Compass Center </font></h3></div>
 
+				<li id="pfieldBox_83" class="mainForm">
+					<label class="formFieldQuestion">Patient:&nbsp;*</label>
+	      			<select name="patient">
+						<?php foreach ($patient as $key => $value) {
+						?>
+						<option value="<?php echo $value->id; ?>"><?php echo $value->firstname. ' '.$value->lastname; ?></option>
+						<?php } ?>
+					</select>
+				</li>
 				<li id="fieldBox_101" class="mainForm">
 					<label class="formFieldQuestion">Please Select the ZIP Code of your current residence&nbsp;*</label>
                     
