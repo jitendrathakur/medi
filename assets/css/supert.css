@@ -13,10 +13,3 @@ table.ui-timepicker .ui-state-default {
     text-align: left;
     width: 30px;
 }
-
-select {
-    background: url("../img/icon-arrow-down.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
-    background-size: 10% auto !important;
-    background-position:right !important;
-    background-color:#fff !important;
-}
