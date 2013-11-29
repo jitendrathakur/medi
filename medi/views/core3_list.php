@@ -5,7 +5,7 @@
 
 	<div style="height:100%;margin-left:-90px;border:0px solid; " id="mainForm" >
 		
-	<table border="0" cellpadding="10" cellspacing="0" width="50%">
+	<table class="table table-striped table-bordered table-hover">
 	<tr>
 
 		<th>
@@ -44,11 +44,6 @@
 		pulse2
 		</th>		
 		
-		<!--
-		<th>
-		cr_timestamp
-		</th>	
-		-->
 		<th>Action</th>
 
 	</tr>
@@ -64,7 +59,7 @@
 				<?php echo $result->identify ; ?>
 		</td>
 
-<td>
+		<td>
 				<?php echo $result->pulse ; ?>
 		</td>
 
@@ -92,12 +87,7 @@
 				<?php echo $result->pulse2 ; ?>
 		</td>
 
-		
-<!--
-		<td>
-				<?php echo $result->cr_timestamp ; ?>
-		</td>
-		-->
+
 		<td><a  class ="edit_btn" href="<?php echo base_url('forms/core_journal_form2_edit/').'/'.$result->id  ?>" >Edit</a></td>
 
 
@@ -114,13 +104,8 @@
 	<?php } ?>
 	</table>
 
-<a href="<?php echo base_url('forms/core_journal_form3') ?>" >Add Core Journal</a>
+	<a href="<?php echo base_url('forms/core_journal_form3') ?>" >Add Core Journal</a>
+	</div>
 </div>
-</div>
-
-
-
-
-
 
 <?php include('footer.php');

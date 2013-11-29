@@ -1,16 +1,14 @@
 <?php include('header.php'); ?>
 
-					<style>
-.main-container {height: 950px;!important}
-</style>
-    			<div class="journal-entries" >
+		
+  <div class="journal-entries" >
     			
 
 	<div style="height:100%; " id="mainForm" >
 
 
 		<!-- begin form -->
-		 <?php echo form_open_multipart($this->config->item('admin_folder').'forms/core_journal_form2'); ?>
+	<?php echo form_open_multipart($this->config->item('admin_folder').'forms/core_journal_form2'); ?>
       <ul id="mainForm_11" class="mainForm">
 
       			
@@ -34,12 +32,12 @@
 					<label class="formFieldQuestion">Date:&nbsp;*</label>
                    
  <?php
-			$data	= array('id' => 'datepicker', 'name'=>'coredate', 'value'=>set_value('coredate', ''), 'class'=>'mainForm','style'=>'border-image:initial; height:20px; color:#000000; border:1px solid #000000;');
+			$data	= array('id' => 'datepicker', 'name'=>'coredate', 'value'=>set_value('coredate', ''), 'class'=>'mainForm');
 			echo form_input($data); ?>
 				<li id="fieldBox_94" class="mainForm">
 					<label class="formFieldQuestion">Renewal:&nbsp;*</label>
                      <?php
-			$data	= array('name'=>'renewal', 'value'=>set_value('renewal', ''), 'class'=>'mainForm','style'=>'border-image:initial; height:20px; color:#000000; border:1px solid #000000;');
+			$data	= array('id' => 'renewal', 'name'=>'renewal', 'value'=>set_value('renewal', ''), 'class'=>'mainForm');
 			echo form_input($data); ?>
                     </li>
 
@@ -47,7 +45,7 @@
 					<label class="formFieldQuestion">T-MeD Plan#:&nbsp;*</label>
                     
                       <?php
-			$data	= array('name'=>'plan', 'value'=>set_value('plan', ''), 'class'=>'mainForm','style'=>'border-image:initial; height:20px; color:#000000; border:1px solid #000000;');
+			$data	= array('name'=>'plan', 'value'=>set_value('plan', ''), 'class'=>'mainForm');
 			echo form_input($data); ?>
                     </li>
 
@@ -56,7 +54,7 @@
                     
 
 <?php
-				$data	= array('name'=>'goal',  'value'=>set_value('goal', ''),'style'=>'border-image:initial; height:100px; color:#000000; border:1px solid #000000;');
+				$data	= array('name'=>'goal',  'value'=>set_value('goal', ''));
 				echo form_textarea($data);
 				?>
 </li>
@@ -65,7 +63,7 @@
 					<label class="formFieldQuestion">Step I:&nbsp;*</label>
                     
                     <?php
-				$data	= array('name'=>'step1',  'value'=>set_value('step1', ''),'style'=>'border-image:initial; height:100px; color:#000000; border:1px solid #000000;');
+				$data	= array('name'=>'step1',  'value'=>set_value('step1', ''));
 				echo form_textarea($data);
 				?>
                    </li>
@@ -74,7 +72,7 @@
 					<label class="formFieldQuestion">Step II:&nbsp;*</label>
                     
  <?php
-				$data	= array('name'=>'step2',  'value'=>set_value('step2', ''),'style'=>'border-image:initial; height:100px; color:#000000; border:1px solid #000000;');
+				$data	= array('name'=>'step2',  'value'=>set_value('step2', ''));
 				echo form_textarea($data);
 				?>
 </li>
@@ -82,7 +80,7 @@
 				<li id="fieldBox_99" class="mainForm">
 					<label class="formFieldQuestion">Step III:&nbsp;*</label>
                      <?php
-				$data	= array('name'=>'step3',  'value'=>set_value('step3', ''),'style'=>'border-image:initial; height:100px; color:#000000; border:1px solid #000000;');
+				$data	= array('name'=>'step3',  'value'=>set_value('step3', ''));
 				echo form_textarea($data);
 				?>
                     </li>
@@ -91,7 +89,7 @@
 					<label class="formFieldQuestion">Target Dates &amp; Concentration:&nbsp;*</label>
 
  <?php
-				$data	= array('name'=>'target',  'value'=>set_value('target', ''),'style'=>'border-image:initial; height:100px; color:#000000; border:1px solid #000000;');
+				$data	= array('name'=>'target',  'value'=>set_value('target', ''));
 				echo form_textarea($data);
 				?>
 </li>

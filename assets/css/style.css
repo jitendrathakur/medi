@@ -1838,3 +1838,10 @@ float: right;
 	border-bottom-width: 0;
 
 }
+
+input, select, textarea { color:#000;}
+
+table.ui-timepicker .ui-state-default {
+    text-align: left;
+    width: 30px;
+}

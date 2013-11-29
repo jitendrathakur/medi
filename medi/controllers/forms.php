@@ -1437,7 +1437,7 @@ class Forms extends Admin_Controller {
 		$this->auth->check_access('Therapists',true);
 		$this->load->model('Core3_model');
 		$data['uri']=$this->uri->segment(2);
-			$data['page_title']		= "Core Journal-3";
+		$data['page_title']		= "Core Journal-3";
 			
 			
 		$data['admin_session'] = $this->admin_session->userdata('admin');
@@ -1457,7 +1457,7 @@ class Forms extends Admin_Controller {
 		$data['identify']		= "";
 		$data['is_present']			= "";
 		$data['is_service']= "";	
-			$data['pulse']			= "";
+		$data['pulse']			= "";
 		$data['relatiopnship']			= "";
 		$data['supporter']			= "";
 		$data['visits']			= "";
@@ -1496,25 +1496,17 @@ class Forms extends Admin_Controller {
 			
 			}
 			
-		
-			
 		}
 	
 		$this->form_validation->set_rules('zip', 'lang:name', 'trim|required');
-		
-		
-		
-		
-			
+				
 		// validate the form
 		if ($this->form_validation->run() == FALSE)
-		{
-		
+		{		
 			$this->load->view($this->config->item('admin_folder').'/core_journal_form3', $data);
 		}
 		else
-		{
-			
+		{			
 						
 			$save['user_id']			= $user_id;
 			//$save['id']					= $id;
@@ -1539,10 +1531,10 @@ class Forms extends Admin_Controller {
 			$save['pulse']		= $this->input->post('pulse');
 			$save['relatiopnship']		= $this->input->post('relatiopnship');
 			$save['supporter']		= $this->input->post('supporter');
-				foreach ($this->input->post('visits') as $visits)
-				{
+			foreach ($this->input->post('visits') as $visits)
+			{
 				$visits_data .=  $visits.',';
-				}
+			}
 
 			$save['visits'] = $visits_data;
 			$save['medicine']		= $this->input->post('medicine');
@@ -1551,7 +1543,7 @@ class Forms extends Admin_Controller {
 			
 			$core3_id	= $this->Core3_model->save($save);
 			$this->session->set_flashdata('message', lang('message_core3_saved'));
-			redirect($this->config->item('admin_folder').'/forms/core_journal_form3');
+			redirect($this->config->item('admin_folder').'/forms/core3_list');
 		}
 		
 	}
