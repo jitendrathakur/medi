@@ -349,4 +349,47 @@ class Auth
 			return 'The admin could not be found.';
 		}
 	}
+
+	function validate_sms_code($userId, $code) {
+
+		$this->CI->db->select('*');	                
+		
+	    $this->CI->db->where('id', $userId);
+	    $this->CI->db->where('sms_code',  $code);	
+	
+		$this->CI->db->limit(1);
+		$result = $this->CI->db->get('admin');
+		$result	= $result->row_array();
+		
+		if (sizeof($result) > 0)
+		{
+			if (!empty($result['id'])) {
+				return true;
+			} 
+		}
+		return false;
+
+	}//end validate_sms_code
+
+
+	function validate_email_mobile($userId) {
+
+		$this->CI->db->select('*');	                
+		
+	    $this->CI->db->where('id', $userId);	    
+	
+		$this->CI->db->limit(1);
+		$result = $this->CI->db->get('admin');
+		$result	= $result->row_array();
+		
+		if (sizeof($result) > 0)
+		{
+			if (empty($result['email']) || empty($result['mobile'])) {
+				return false;
+			} else {
+				return true;
+			}
+		}	
+
+	}//end validate_sms_code
 }

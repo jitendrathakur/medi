@@ -22,15 +22,11 @@ class Login extends CI_Controller {
 		
 		if (!empty($_GET['openid_ext1_value_firstname']) && !empty($_GET['openid_ext1_value_lastname']) && !empty($_GET['openid_ext1_value_email'])) {  
 
-
 		    $username = $_GET['openid_ext1_value_firstname'] .' '. $_GET['openid_ext1_value_lastname'];
 		    $email_google = $_GET['openid_ext1_value_email'];
           
-			$google = true;
-			
+			$google = true;			
 		}
-
-
 	
 		//we check if they are logged in, generally this would be done in the constructor, but we want to allow customers to log out still
 		//or still be able to either retrieve their password or anything else this controller may be extended to do
@@ -40,19 +36,21 @@ class Login extends CI_Controller {
 		{
 			if($this->auth->check_access('Normal'))
 			{
-				redirect($this->config->item('admin_folder').'/forms/wellness_form');
-			 }
-			  if($this->auth->check_access('Therapists'))
-			 {
-				 $redirect = $this->config->item('admin_folder').'/forms/core1_list';
+				//redirect($this->config->item('admin_folder').'/forms/wellness_form');
+			}
+			if($this->auth->check_access('Therapists'))
+			{
+				//$redirect = $this->config->item('admin_folder').'/forms/core1_list';
 			 					 
-			 }
-			 if($this->auth->check_access('supert'))
-			 {
-				 $redirect = $this->config->item('admin_folder').'/supert/';
+			}
+			if($this->auth->check_access('supert'))
+			{
+				//$redirect = $this->config->item('admin_folder').'/supert/';
 			 					 
-			 }
+			}
+			$redirect = $this->config->item('admin_folder').'/login/sms';
 		}
+
 		
 		
 		$this->load->helper('form');
@@ -70,39 +68,49 @@ class Login extends CI_Controller {
 				$password = '';
 			}
 
-			$login		= $this->auth->login_admin($email, $password, $remember, $google);
+			$login = $this->auth->login_admin($email, $password, $remember, $google);
 
-			if ($login)
+			
+
+			if ($login && $flag)
 			{
-				
-				 if($this->auth->check_access('Normal'))
-				 {
-						if ($redirect == '')
-						{
-							$redirect = $this->config->item('admin_folder').'/forms/wellness_form';
-						}
-					
-				 }
-				 
-				  
-				  if($this->auth->check_access('Therapists'))
-				 {
-						if ($redirect == '')
-						{
-							$redirect = $this->config->item('admin_folder').'/forms/core1_list';
-						}
-					
-				 }
 
-				  if($this->auth->check_access('supert'))
-				 {
-						if ($redirect == '')
-						{
-							$redirect = $this->config->item('admin_folder').'/supert/';
-						}
-					
-				 }
+				$admin = $this->admin_session->userdata('admin');
+	    		$userId = $admin['id'];
+
+	    		$flag = false;
+
+				if ($this->auth->validate_email_mobile($userId)) {
+	              $flag = true;
+				} else {
+					$redirect = $this->config->item('admin_folder').'/login/critical_info';
+					redirect($redirect);
+				}				
 				 
+
+				$admin = $this->admin_session->userdata('admin');
+
+				$code = $this->randomChars(4);
+
+	            $save['id']              = $admin['id'];
+				$save['sms_code']		 = $code;
+				$save['is_sms_verified'] = '0';
+	 			$this->auth->save($save);
+	 			$this->load->library('twilio');
+
+				$from = '+19892624964';
+				$to = '+919713485910';
+				$message = 'Please enter the code to login:'.$code;
+
+				$response = $this->twilio->sms($from, $to, $message);
+
+
+				//if($response->IsError)
+					//echo 'Error: ' . $response->ErrorMessage;
+				//else
+					//echo 'Sent message to ' . $to;
+
+				$redirect = $this->config->item('admin_folder').'/login/sms';
 				redirect($redirect);
 			}
 			else
@@ -115,6 +123,63 @@ class Login extends CI_Controller {
 		}
 		$this->load->view($this->config->item('admin_folder').'/login', $data);
 	}
+
+	function sms() {
+		$data = array();
+		$this->load->helper('form');
+
+		$sms = @$this->input->post('sms');
+
+		if (!empty($sms)) {
+			$admin = $this->admin_session->userdata('admin');
+	        $userId = $admin['id'];
+
+	        $result = $this->auth->validate_sms_code($userId, $sms);
+	       
+	        if ($result) {
+
+	        	$save['id']              = $userId;
+				$save['is_sms_verified'] = '1';
+	 			$this->auth->save($save);
+	        	
+	        	if($this->auth->check_access('Normal'))
+				{					
+					$redirect = $this->config->item('admin_folder').'/forms/wellness_form';				
+				}			 
+				  
+				if($this->auth->check_access('Therapists'))
+				{					
+					$redirect = $this->config->item('admin_folder').'/forms/core1_list';					
+				}
+
+				if($this->auth->check_access('supert'))
+				{
+					$redirect = $this->config->item('admin_folder').'/supert/';										
+				}                
+				redirect($redirect);
+	        } else {
+	        	$this->session->set_flashdata('error', "Incorect code");
+	        }
+		}
+		$this->load->view($this->config->item('admin_folder').'/sms', $data);
+	}
+
+
+	  /**
+	   * Method used to generate random password string
+	   *
+	   * @return string
+	   */
+	  function randomChars($lenghts=null) {
+	    $characters = '0123456789abcdefghijklmnopqrstuvwxyz';
+	    $string = null;
+	    for ($p = 0; $p < $lenghts; $p++) {
+	      $string .= $characters[mt_rand(0, strlen($characters)-1)];
+	    }
+	    return $string;
+
+	  }//end randomChars()
+
 	
 	function logout()
 	{
