@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="wrapper">
-	<div class="wrapper_lft">
+	<div class="wrapper_lft  ">
     	<?php echo form_open($this->config->item('admin_folder').'/login/critical_info') ?>
     	<div class="logo"> <img src="<?php echo base_url('assets/img/mainlogo.png') ?>" alt=" Logo"> </div>
         <br /> <br /> <br /><br />
@@ -37,9 +37,9 @@
         	Email<br>
            <?php echo form_input(array('name'=>'email',  'placeholder'=>'User Name')); ?>
         </label> 
-        <label> 
-        	Mobile<br>
-           <?php echo form_input(array('name'=>'mobile',  'placeholder'=>'User Name')); ?>
+        <label style="font-size:11px;"> 
+        	Mobile (Please include your country code like : +1)<br>
+           <?php echo form_input(array('name'=>'mobile',  'placeholder'=>'Mobile')); ?>
         </label>
                                
             <input type="submit" class="log_but" value="Submit">
