@@ -72,7 +72,7 @@ class Login extends CI_Controller {
 
 			
 
-			if ($login && $flag)
+			if ($login)
 			{
 
 				$admin = $this->admin_session->userdata('admin');
@@ -103,12 +103,6 @@ class Login extends CI_Controller {
 				$message = 'Please enter the code to login:'.$code;
 
 				$response = $this->twilio->sms($from, $to, $message);
-
-
-				//if($response->IsError)
-					//echo 'Error: ' . $response->ErrorMessage;
-				//else
-					//echo 'Sent message to ' . $to;
 
 				$redirect = $this->config->item('admin_folder').'/login/sms';
 				redirect($redirect);
@@ -162,6 +156,44 @@ class Login extends CI_Controller {
 	        }
 		}
 		$this->load->view($this->config->item('admin_folder').'/sms', $data);
+	}
+
+
+
+	function critical_info() {
+		$data = array();
+		$this->load->helper('form');
+
+		$mobile = @$this->input->post('mobile');
+		$email = @$this->input->post('email');
+
+		if (!empty($mobile) && !empty($email)) {
+			$admin = $this->admin_session->userdata('admin');
+	        $userId = $admin['id'];
+
+        	$save['id']              = $userId;
+			$save['mobile'] = $mobile;
+			$save['email'] = $email;	 		
+
+ 			$code = $this->randomChars(4);
+          
+			$save['sms_code']		 = $code;
+			$save['is_sms_verified'] = '0';
+ 			$this->auth->save($save);
+ 			$this->load->library('twilio');
+
+			$from = '+19892624964';
+			$to = $mobile;
+			$message = 'Please enter the code to login:'.$code;
+
+			$response = $this->twilio->sms($from, $to, $message);
+
+			$redirect = $this->config->item('admin_folder').'/login/sms';
+			redirect($redirect);       
+			
+	      
+		}
+		$this->load->view($this->config->item('admin_folder').'/critical_info', $data);
 	}
 
 
