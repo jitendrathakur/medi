@@ -88,7 +88,20 @@
 		</td>
 
 
-		<td><a  class ="edit_btn" href="<?php echo base_url('forms/core_journal_form2_edit/').'/'.$result->id  ?>" >Edit</a></td>
+		<td>
+
+		<?php if ($result->close) {
+            echo "closed";
+            } else {
+
+              ?>
+              <a  class ="edit_btn" href="<?php echo base_url('forms/core_journal_form3_edit/').'/'.$result->id  ?>" >Edit</a>
+             
+              <?php
+            }
+        ?>	
+		
+		</td>
 
 
 	</tr>

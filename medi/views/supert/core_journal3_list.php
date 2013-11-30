@@ -51,11 +51,12 @@
                 <td><?php echo $row->concentration; ?></td>
                 <td><?php echo $row->pulse2; ?></td>
                 <td>
-                    <a class="btn btn-info btn-sm" href="<?php echo base_url('supert/core_journal3_edit/')."/".$user_id."/".$row->id ?>" >Edit</a>
+                    
                     <?php if ($row->close) {
                       echo "closed";
                     } else {
                       ?>
+                      <a class="btn btn-info btn-sm" href="<?php echo base_url('supert/core_journal3_edit/')."/".$user_id."/".$row->id ?>" >Edit</a>
                       <a class="btn btn-danger btn-sm" href="<?php echo base_url('supert/core_journal3_list/')."/".$user_id."/".$row->id."/closed" ?>" >Close</a></td>
 
                       <?php
