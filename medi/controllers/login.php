@@ -11,9 +11,17 @@ class Login extends CI_Controller {
 		
 		$this->load->library('Auth');		
 		$this->lang->load('login');
+
+		$this->_ci =& get_instance();
+
+		//load config
+		$this->_ci->load->config('twilio', TRUE);
+		
+		$this->number      = $this->_ci->config->item('number', 'twilio');
 		
 
 	}
+
 
 	function index()
 	{
@@ -94,7 +102,7 @@ class Login extends CI_Controller {
 	 			$this->auth->save($save);
 	 			$this->load->library('twilio');
 
-				$from = '+19892624964';
+				$from = $this->number;
 				$to = $admin['mobile'];
 				$message = 'Please enter the code to login:'.$code;
 
@@ -178,14 +186,14 @@ class Login extends CI_Controller {
  			$this->auth->save($save);
  			$this->load->library('twilio');
 
-			$from = '+19892624964';
+			$from = $this->number;
 			$to = $mobile;
-		    	$message = 'Please enter the code to login:'.$code;
+		    $message = 'Please enter the code to login:'.$code;
 
 			$response = $this->twilio->sms($from, $to, $message);
 
 			$redirect = $this->config->item('admin_folder').'/login/sms';
-			redirect($redirect);       
+			redirect($redirect);
 			
 	      
 		}
