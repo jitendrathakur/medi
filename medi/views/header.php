@@ -181,14 +181,22 @@ body.custom-background {
 <li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-33" ><a href="http://tmed3000.org/referral/" >Referral</a></li>
 <li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-31" ><a href="http://tmed3000.org/newsletter/" >Newsletter</a></li>
 <li id="menu-item-28" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-28" ><a href="http://tmed3000.org/events/" >Events</a></li>
-<li id="menu-item-28" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-28" ><a href="<?php echo base_url('login/logout') ?>" >Logout</a></li>
-<li><?php 
+
+
+<?php
 
 $admin = $this->admin_session->userdata('admin');
 
-echo 'Hi '.$admin['firstname'];
+if ($admin['access'] == 'Normal') { ?> 
+<li  id="menu-item-28" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-28"><a href="javascript:;">Alert <span class='badge'><?php echo @$total_read_count; ?></span></a></li>
+<?php } ?>
 
- ?></li>
+<li id="menu-item-28" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-28" ><a href="<?php echo base_url('login/logout') ?>" >Logout</a></li>
+<li><?php 
+	echo 'Hi '.$admin['firstname'];
+ ?>
+</li>
+ 
 </ul></div>		</div><!-- #access -->
 
 

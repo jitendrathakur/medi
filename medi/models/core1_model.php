@@ -136,5 +136,12 @@ Class Core1_model extends CI_Model
 		
 	}
 
+	function read_core1_count($patientId = null)
+	{
+
+		$this->db->where('patient_id', $patientId);
+		return $this->db->where('is_read', false)->count_all_results('core1');
+	}
+
 	
 }

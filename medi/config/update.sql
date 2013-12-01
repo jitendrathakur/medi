@@ -19,3 +19,7 @@ ALTER TABLE  `med_admin` ADD  `sms_code` VARCHAR( 64 ) NULL AFTER  `email`;
 ALTER TABLE  `med_admin` ADD  `is_sms_verified` TINYINT NOT NULL AFTER  `sms_code`;
 
 ALTER TABLE  `med_admin` ADD  `mobile` VARCHAR( 12 ) NULL AFTER  `email`;
+
+ALTER TABLE `med_core1` ADD `is_read` TINYINT NOT NULL DEFAULT '0' AFTER `close` ;
+ALTER TABLE `med_core2` ADD `is_read` TINYINT NOT NULL DEFAULT '0' AFTER `close` ;
+ALTER TABLE `med_core3` ADD `is_read` TINYINT NOT NULL DEFAULT '0' AFTER `close` ;

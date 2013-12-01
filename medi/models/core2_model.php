@@ -76,6 +76,12 @@ Class Core2_model extends CI_Model
 		}
 		
 	}	
+
+	function read_core2_count($patientId = null)
+	{
+		$this->db->where('patient_id', $patientId);
+		return $this->db->where('is_read', false)->count_all_results('core2');
+	}
 	
 
 }

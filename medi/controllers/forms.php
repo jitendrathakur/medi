@@ -66,6 +66,14 @@ class Forms extends Admin_Controller {
 		$data['uri']=$this->uri->segment(2);
 		$data['admin_session'] = $this->admin_session->userdata('admin');
 		$user_id = $data['admin_session']['id'];
+
+		$this->load->model('Core1_model');
+		$this->load->model('Core2_model');
+		$this->load->model('Core3_model');
+		$core1_read_count = $this->Core1_model->read_core1_count($user_id);
+		$core2_read_count = $this->Core2_model->read_core2_count();
+		$core3_read_count = $this->Core3_model->read_core3_count();
+		$data['total_read_count'] = $core1_read_count + $core2_read_count + $core3_read_count;
 		$id="";
 		$this->load->helper('form');
 		$this->load->library('form_validation');
@@ -159,6 +167,14 @@ class Forms extends Admin_Controller {
 		$data['uri']=$this->uri->segment(2);
 		$data['admin_session'] = $this->admin_session->userdata('admin');
 		$user_id = $data['admin_session']['id'];
+
+		$this->load->model('Core1_model');
+		$this->load->model('Core2_model');
+		$this->load->model('Core3_model');
+		$core1_read_count = $this->Core1_model->read_core1_count($user_id);
+		$core2_read_count = $this->Core2_model->read_core2_count();
+		$core3_read_count = $this->Core3_model->read_core3_count();
+		$data['total_read_count'] = $core1_read_count + $core2_read_count + $core3_read_count;
 		$id="";
 		$this->load->helper('form');
 		$this->load->library('form_validation');
@@ -250,6 +266,14 @@ class Forms extends Admin_Controller {
 		$data['uri']=$this->uri->segment(2);
 		$data['admin_session'] = $this->admin_session->userdata('admin');
 		$user_id = $data['admin_session']['id'];
+
+		$this->load->model('Core1_model');
+		$this->load->model('Core2_model');
+		$this->load->model('Core3_model');
+		$core1_read_count = $this->Core1_model->read_core1_count($user_id);
+		$core2_read_count = $this->Core2_model->read_core2_count();
+		$core3_read_count = $this->Core3_model->read_core3_count();
+		$data['total_read_count'] = $core1_read_count + $core2_read_count + $core3_read_count;
 		$id="";
 		$this->load->helper('form');
 		$this->load->library('form_validation');
@@ -274,37 +298,7 @@ class Forms extends Admin_Controller {
 			$data['arrest']			= "";
 			$data['incarceration']			= "";
 			$data['pulse']			= "";
-		
-	
-		/*if ($user_id)
-		{	
-			$forensic		= $this->Forensic_model->get_forensic($user_id);
 			
-			
-			//if the forensic does not exist, redirect them to the forensic list with an error
-			if ($forensic)
-			{
-			$id 					= $forensic->id;
-			$data['id']				= $forensic->id;
-			$data['user_id']		= $forensic->user_id;			
-			$data['is_parole']		= $forensic->is_parole;
-			$data['is_month']		= $forensic->is_month;
-			$data['is_charge']		= $forensic->is_charge;
-			$data['is_fines']		= $forensic->is_fines;	
-			$data['is_week']		= $forensic->is_week;
-			$data['is_residence']	= $forensic->is_residence;
-			$data['is_criminal']	= $forensic->is_criminal;
-			$data['is_friends']		= $forensic->is_friends;
-			$data['is_family']		= $forensic->is_family;
-			$data['is_volunteer']	= $forensic->is_volunteer;
-			$data['arrest']			= $forensic->arrest;
-			$data['incarceration']	= $forensic->incarceration;
-			$data['pulse']			= $forensic->pulse;
-			}
-			
-		
-			
-		}*/
 	
 		$this->form_validation->set_rules('is_parole', 'lang:name', 'trim|required');		
 		$this->form_validation->set_rules('pulse', 'lang:name', 'trim');
@@ -354,6 +348,14 @@ class Forms extends Admin_Controller {
 		$data['uri']=$this->uri->segment(2);
 		$data['admin_session'] = $this->admin_session->userdata('admin');
 		$user_id = $data['admin_session']['id'];
+
+		$this->load->model('Core1_model');
+		$this->load->model('Core2_model');
+		$this->load->model('Core3_model');
+		$core1_read_count = $this->Core1_model->read_core1_count($user_id);
+		$core2_read_count = $this->Core2_model->read_core2_count();
+		$core3_read_count = $this->Core3_model->read_core3_count();
+		$data['total_read_count'] = $core1_read_count + $core2_read_count + $core3_read_count;
 		$id="";
 		$this->load->helper('form');
 		$this->load->library('form_validation');
@@ -459,6 +461,14 @@ class Forms extends Admin_Controller {
 		$data['uri']=$this->uri->segment(2);
 		$data['admin_session'] = $this->admin_session->userdata('admin');
 		$user_id = $data['admin_session']['id'];
+
+		$this->load->model('Core1_model');
+		$this->load->model('Core2_model');
+		$this->load->model('Core3_model');
+		$core1_read_count = $this->Core1_model->read_core1_count($user_id);
+		$core2_read_count = $this->Core2_model->read_core2_count();
+		$core3_read_count = $this->Core3_model->read_core3_count();
+		$data['total_read_count'] = $core1_read_count + $core2_read_count + $core3_read_count;
 		$id="";
 		$this->load->helper('form');
 		$this->load->library('form_validation');
@@ -484,33 +494,6 @@ class Forms extends Admin_Controller {
 			$data['last_drugs']			= "";
 			$data['pulse']			= "";
 	
-		/*if ($user_id)
-		{	
-			$cooccurring		= $this->Cooccurring_model->get_cooccurring($user_id);
-			//if the cooccurring does not exist, redirect them to the cooccurring list with an error
-			if ($cooccurring)
-			{
-				$id 					= $cooccurring->id;
-			$data['id']				= $cooccurring->id;
-			$data['user_id']		= $cooccurring->user_id;			
-			$data['is_drug']			= $cooccurring->is_drug;
-			$data['is_drug_week']		=$cooccurring->is_drug_week;
-			$data['is_alcohol']			= $cooccurring->is_alcohol;
-			$data['is_alcohol_week']= $cooccurring->is_alcohol_week;	
-			$data['is_alcohol_friend']			= $cooccurring->is_alcohol_friend;
-			$data['is_alcohol_family']			= $cooccurring->is_alcohol_family;
-			$data['is_cravings']			= $cooccurring->is_cravings;
-			$data['is_dreams']			= $cooccurring->is_dreams;
-			$data['is_triggers']			= $cooccurring->is_triggers;
-			$data['is_plans']			= $cooccurring->is_plans;
-			$data['last_alcohol']			= $cooccurring->last_alcohol;
-			$data['last_drugs']			= $cooccurring->last_drugs;
-			$data['pulse']			= $cooccurring->pulse;
-			}
-			
-		
-			
-		}*/
 	
 		$this->form_validation->set_rules('is_drug', 'lang:name', 'trim|required');
 		
@@ -553,11 +536,19 @@ class Forms extends Admin_Controller {
 
 	function cooccurring_form_edit()
 	{
-			$this->auth->check_access('Normal',true);
+		$this->auth->check_access('Normal',true);
 		$this->load->model('Cooccurring_model');
 		$data['uri']=$this->uri->segment(2);
 		$data['admin_session'] = $this->admin_session->userdata('admin');
 		$user_id = $data['admin_session']['id'];
+
+		$this->load->model('Core1_model');
+		$this->load->model('Core2_model');
+		$this->load->model('Core3_model');
+		$core1_read_count = $this->Core1_model->read_core1_count($user_id);
+		$core2_read_count = $this->Core2_model->read_core2_count();
+		$core3_read_count = $this->Core3_model->read_core3_count();
+		$data['total_read_count'] = $core1_read_count + $core2_read_count + $core3_read_count;
 		$id="";
 		$this->load->helper('form');
 		$this->load->library('form_validation');
@@ -659,6 +650,14 @@ class Forms extends Admin_Controller {
 		$data['uri']=$this->uri->segment(2);
 		$data['admin_session'] = $this->admin_session->userdata('admin');
 		$user_id = $data['admin_session']['id'];
+
+		$this->load->model('Core1_model');
+		$this->load->model('Core2_model');
+		$this->load->model('Core3_model');
+		$core1_read_count = $this->Core1_model->read_core1_count($user_id);
+		$core2_read_count = $this->Core2_model->read_core2_count();
+		$core3_read_count = $this->Core3_model->read_core3_count();
+		$data['total_read_count'] = $core1_read_count + $core2_read_count + $core3_read_count;
 		$id="";
 		$this->load->helper('form');
 		$this->load->library('form_validation');
@@ -760,6 +759,14 @@ class Forms extends Admin_Controller {
 		$data['uri']=$this->uri->segment(2);
 		$data['admin_session'] = $this->admin_session->userdata('admin');
 		$user_id = $data['admin_session']['id'];
+
+		$this->load->model('Core1_model');
+		$this->load->model('Core2_model');
+		$this->load->model('Core3_model');
+		$core1_read_count = $this->Core1_model->read_core1_count($user_id);
+		$core2_read_count = $this->Core2_model->read_core2_count();
+		$core3_read_count = $this->Core3_model->read_core3_count();
+		$data['total_read_count'] = $core1_read_count + $core2_read_count + $core3_read_count;
 		$id="";
 		$this->load->helper('form');
 		$this->load->library('form_validation');
@@ -816,10 +823,6 @@ class Forms extends Admin_Controller {
 	
 		$this->form_validation->set_rules('is_std', 'lang:name', 'trim|required');
 		
-		
-		
-		
-			
 		// validate the form
 		if ($this->form_validation->run() == FALSE)
 		{
@@ -827,8 +830,7 @@ class Forms extends Admin_Controller {
 			$this->load->view($this->config->item('admin_folder').'/physicalhealth_form', $data);
 		}
 		else
-		{
-			
+		{			
 						
 			$save['user_id']			= $user_id;
 			$save['id']					= $id;
@@ -860,11 +862,19 @@ class Forms extends Admin_Controller {
 
 	function physicalhealth_form_edit()
 	{
-			$this->auth->check_access('Normal',true);
+		$this->auth->check_access('Normal',true);
 		$this->load->model('Physicalhealth_model');
 		$data['uri']=$this->uri->segment(2);
 		$data['admin_session'] = $this->admin_session->userdata('admin');
 		$user_id = $data['admin_session']['id'];
+
+		$this->load->model('Core1_model');
+		$this->load->model('Core2_model');
+		$this->load->model('Core3_model');
+		$core1_read_count = $this->Core1_model->read_core1_count($user_id);
+		$core2_read_count = $this->Core2_model->read_core2_count();
+		$core3_read_count = $this->Core3_model->read_core3_count();
+		$data['total_read_count'] = $core1_read_count + $core2_read_count + $core3_read_count;
 		$id="";
 		$this->load->helper('form');
 		$this->load->library('form_validation');
@@ -914,17 +924,10 @@ class Forms extends Admin_Controller {
 			$data['is_happy']			= $physicalhealth->is_happy;
 			$data['is_pain']			= $physicalhealth->is_pain;
 			}
-			
-		
-			
 		}
 	
 		$this->form_validation->set_rules('is_std', 'lang:name', 'trim|required');
 		
-		
-		
-		
-			
 		// validate the form
 		if ($this->form_validation->run() == FALSE)
 		{
@@ -965,11 +968,19 @@ class Forms extends Admin_Controller {
 	
 	function tmed_form()
 	{
-			$this->auth->check_access('Normal',true);
+		$this->auth->check_access('Normal',true);
 		$this->load->model('Tmed_model');
 		$data['uri']=$this->uri->segment(2);
 		$data['admin_session'] = $this->admin_session->userdata('admin');
 		$user_id = $data['admin_session']['id'];
+
+		$this->load->model('Core1_model');
+		$this->load->model('Core2_model');
+		$this->load->model('Core3_model');
+		$core1_read_count = $this->Core1_model->read_core1_count($user_id);
+		$core2_read_count = $this->Core2_model->read_core2_count();
+		$core3_read_count = $this->Core3_model->read_core3_count();
+		$data['total_read_count'] = $core1_read_count + $core2_read_count + $core3_read_count;
 		$id="";
 		$this->load->helper('form');
 		$this->load->library('form_validation');
@@ -979,16 +990,16 @@ class Forms extends Admin_Controller {
 		$data['page_title']		= "tmed";
 		
 		//default values are empty if the customer is new
-			$data['id']				= "";
-			$data['user_id']		= "";			
-			$data['category']			= "";
-			$data['is_medicine']		= "";
-			$data['is_psychiatric']			= "";
-			$data['is_question_medicine']= "";	
-			$data['is_question_psychiatric']			= "";
-			$data['pulse']			= "";
-			
-			$category_data ="";
+		$data['id']				= "";
+		$data['user_id']		= "";			
+		$data['category']			= "";
+		$data['is_medicine']		= "";
+		$data['is_psychiatric']			= "";
+		$data['is_question_medicine']= "";	
+		$data['is_question_psychiatric']			= "";
+		$data['pulse']			= "";
+		
+		$category_data ="";
 			
 	
 		if ($user_id)
@@ -1007,18 +1018,12 @@ class Forms extends Admin_Controller {
 			$data['is_question_psychiatric']= $tmed->is_question_psychiatric;
 			$data['pulse']			= $tmed->pulse;
 			
-			}
-			
-		
+			}		
 			
 		}
 	
 		$this->form_validation->set_rules('is_medicine', 'lang:name', 'trim|required');
-		
-		
-		
-		
-			
+					
 		// validate the form
 		if ($this->form_validation->run() == FALSE)
 		{
@@ -1061,6 +1066,8 @@ class Forms extends Admin_Controller {
 
 		$data['admin_session'] = $this->admin_session->userdata('admin');
 		$user_id = $data['admin_session']['id'];
+
+		
 		$id="";
 		$this->load->helper('form');
 		$this->load->library('form_validation');
