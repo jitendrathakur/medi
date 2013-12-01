@@ -232,13 +232,15 @@ if (array_key_exists("login", $_GET)) {
 <div id="buttons">
 
 <?php
+/*
 if ($admin['google'] == '0') {
 ?>
   <a href="?login&oauth_provider=google"><img src="<?php echo base_url('assets/img/google-login-button.png'); ?>"></a><br/>
     <br />
 
 <?php
-}
+
+}*/
 ?>
     
   

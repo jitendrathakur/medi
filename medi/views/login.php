@@ -32,7 +32,7 @@
 				<?php echo $error;?>
 			</div>
 		<?php endif;?>
-        	<label> 
+        	<label>
             	User Name<br>
                <?php echo form_input(array('name'=>'email',  'placeholder'=>'User Name')); ?>
             </label> 
@@ -62,6 +62,7 @@
 </div>
 
 <?php
+/*
 //Always place this code at the top of the Page
 session_start();
 if (isset($_SESSION['id'])) {
@@ -104,4 +105,6 @@ if (array_key_exists("login", $_GET)) {
     <br />
     
 </div>
+
+*/?>
 

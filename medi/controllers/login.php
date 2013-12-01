@@ -68,14 +68,13 @@ class Login extends CI_Controller {
 				$password = '';
 			}
 
-			$login = $this->auth->login_admin($email, $password, $remember, $google);
-
-			
+			$login = $this->auth->login_admin($email, $password, $remember, $google);			
 
 			if ($login)
 			{
 
 				$admin = $this->admin_session->userdata('admin');
+				
 	    		$userId = $admin['id'];
 
 	    		$flag = false;
@@ -85,10 +84,7 @@ class Login extends CI_Controller {
 				} else {
 					$redirect = $this->config->item('admin_folder').'/login/critical_info';
 					redirect($redirect);
-				}				
-				 
-
-				$admin = $this->admin_session->userdata('admin');
+				}				 
 
 				$code = $this->randomChars(4);
 
@@ -99,7 +95,7 @@ class Login extends CI_Controller {
 	 			$this->load->library('twilio');
 
 				$from = '+19892624964';
-				$to = '+919713485910';
+				$to = $admin['mobile'];
 				$message = 'Please enter the code to login:'.$code;
 
 				$response = $this->twilio->sms($from, $to, $message);
@@ -184,7 +180,7 @@ class Login extends CI_Controller {
 
 			$from = '+19892624964';
 			$to = $mobile;
-			$message = 'Please enter the code to login:'.$code;
+		    	$message = 'Please enter the code to login:'.$code;
 
 			$response = $this->twilio->sms($from, $to, $message);
 

@@ -165,13 +165,16 @@ class Auth
 		if (sizeof($result) > 0)
 		{
 			$admin = array();
-			$admin['admin']			= array();
-			$admin['admin']['id']		= $result['id'];
-			$admin['admin']['access'] 	= $result['access'];
-			$admin['admin']['firstname']	= $result['firstname'];
+			$admin['admin']	= array();
+			$admin['admin']['id'] = $result['id'];
+			$admin['admin']['access'] = $result['access'];
+			$admin['admin']['firstname'] = $result['firstname'];
 			$admin['admin']['lastname']	= $result['lastname'];
-			$admin['admin']['email']	= $result['email'];
-			$admin['admin']['google']	= $result['google'];
+			$admin['admin']['email'] = $result['email'];
+			$admin['admin']['mobile'] = $result['mobile'];
+			$admin['admin']['sms_code']	= $result['sms_code'];
+			$admin['admin']['is_sms_verified'] = $result['is_sms_verified'];
+			$admin['admin']['google'] = $result['google'];
 			
 			if(!$remember)
 			{
