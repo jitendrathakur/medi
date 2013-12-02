@@ -7,7 +7,7 @@ class Forms extends Admin_Controller {
 		ini_set('display_errors',1);
 		ini_set('display_startup_errors',1);
 		
-		 error_reporting(E_ALL); 
+		error_reporting(E_ALL); 
 		parent::__construct();
 		
 		remove_ssl();
@@ -65,15 +65,8 @@ class Forms extends Admin_Controller {
 		$this->load->model('Wellness_model');
 		$data['uri']=$this->uri->segment(2);
 		$data['admin_session'] = $this->admin_session->userdata('admin');
-		$user_id = $data['admin_session']['id'];
-
-		$this->load->model('Core1_model');
-		$this->load->model('Core2_model');
-		$this->load->model('Core3_model');
-		$core1_read_count = $this->Core1_model->read_core1_count($user_id);
-		$core2_read_count = $this->Core2_model->read_core2_count();
-		$core3_read_count = $this->Core3_model->read_core3_count();
-		$data['total_read_count'] = $core1_read_count + $core2_read_count + $core3_read_count;
+		$user_id = $data['admin_session']['id'];		
+		$data['total_read_count'] = $this->__patientAlert($user_id);
 		$id="";
 		$this->load->helper('form');
 		$this->load->library('form_validation');
@@ -92,42 +85,15 @@ class Forms extends Admin_Controller {
 		$data['pulse']			= '';
 		$apply_data = "";
 		//create the photos array for later use
-		$data['photos']		= array();
-	
-		/*if ($user_id)
-		{	
-			$wellness		= $this->Wellness_model->get_wellness($user_id);
+		$data['photos']		= array();	
 			
-			
-
-			//if the wellness does not exist, redirect them to the wellness list with an error
-			if ($wellness)
-			{
-			$data['id']				= $wellness->id;
-			$id 					= $wellness->id;
-			$data['user_id']		= $wellness->user_id;			
-			$data['feel']			= $wellness->feel;
-			$data['wellness']		= $wellness->wellness;
-			$data['apply']			= $wellness->apply;
-			$data['hospitalization']= $wellness->hospitalization;	
-			$data['crisis']			= $wellness->crisis;
-			$data['pulse']			= $wellness->pulse;
-			}
-			
-		
-			
-		}*/
-	
 		$this->form_validation->set_rules('feel', 'lang:name', 'trim|required|max_length[64]');
 		
-		$this->form_validation->set_rules('pulse', 'lang:description', 'trim');
-		
-		
+		$this->form_validation->set_rules('pulse', 'lang:description', 'trim');	
 			
 		// validate the form
 		if ($this->form_validation->run() == FALSE)
-		{
-		
+		{		
 			$this->load->view($this->config->item('admin_folder').'/wellness_form', $data);
 		}
 		else
@@ -168,13 +134,7 @@ class Forms extends Admin_Controller {
 		$data['admin_session'] = $this->admin_session->userdata('admin');
 		$user_id = $data['admin_session']['id'];
 
-		$this->load->model('Core1_model');
-		$this->load->model('Core2_model');
-		$this->load->model('Core3_model');
-		$core1_read_count = $this->Core1_model->read_core1_count($user_id);
-		$core2_read_count = $this->Core2_model->read_core2_count();
-		$core3_read_count = $this->Core3_model->read_core3_count();
-		$data['total_read_count'] = $core1_read_count + $core2_read_count + $core3_read_count;
+		$data['total_read_count'] = $this->__patientAlert($user_id);
 		$id="";
 		$this->load->helper('form');
 		$this->load->library('form_validation');
@@ -267,13 +227,7 @@ class Forms extends Admin_Controller {
 		$data['admin_session'] = $this->admin_session->userdata('admin');
 		$user_id = $data['admin_session']['id'];
 
-		$this->load->model('Core1_model');
-		$this->load->model('Core2_model');
-		$this->load->model('Core3_model');
-		$core1_read_count = $this->Core1_model->read_core1_count($user_id);
-		$core2_read_count = $this->Core2_model->read_core2_count();
-		$core3_read_count = $this->Core3_model->read_core3_count();
-		$data['total_read_count'] = $core1_read_count + $core2_read_count + $core3_read_count;
+		$data['total_read_count'] = $this->__patientAlert($user_id);
 		$id="";
 		$this->load->helper('form');
 		$this->load->library('form_validation');
@@ -349,13 +303,7 @@ class Forms extends Admin_Controller {
 		$data['admin_session'] = $this->admin_session->userdata('admin');
 		$user_id = $data['admin_session']['id'];
 
-		$this->load->model('Core1_model');
-		$this->load->model('Core2_model');
-		$this->load->model('Core3_model');
-		$core1_read_count = $this->Core1_model->read_core1_count($user_id);
-		$core2_read_count = $this->Core2_model->read_core2_count();
-		$core3_read_count = $this->Core3_model->read_core3_count();
-		$data['total_read_count'] = $core1_read_count + $core2_read_count + $core3_read_count;
+		$data['total_read_count'] = $this->__patientAlert($user_id);
 		$id="";
 		$this->load->helper('form');
 		$this->load->library('form_validation');
@@ -462,13 +410,7 @@ class Forms extends Admin_Controller {
 		$data['admin_session'] = $this->admin_session->userdata('admin');
 		$user_id = $data['admin_session']['id'];
 
-		$this->load->model('Core1_model');
-		$this->load->model('Core2_model');
-		$this->load->model('Core3_model');
-		$core1_read_count = $this->Core1_model->read_core1_count($user_id);
-		$core2_read_count = $this->Core2_model->read_core2_count();
-		$core3_read_count = $this->Core3_model->read_core3_count();
-		$data['total_read_count'] = $core1_read_count + $core2_read_count + $core3_read_count;
+		$data['total_read_count'] = $this->__patientAlert($user_id);
 		$id="";
 		$this->load->helper('form');
 		$this->load->library('form_validation');
@@ -542,13 +484,7 @@ class Forms extends Admin_Controller {
 		$data['admin_session'] = $this->admin_session->userdata('admin');
 		$user_id = $data['admin_session']['id'];
 
-		$this->load->model('Core1_model');
-		$this->load->model('Core2_model');
-		$this->load->model('Core3_model');
-		$core1_read_count = $this->Core1_model->read_core1_count($user_id);
-		$core2_read_count = $this->Core2_model->read_core2_count();
-		$core3_read_count = $this->Core3_model->read_core3_count();
-		$data['total_read_count'] = $core1_read_count + $core2_read_count + $core3_read_count;
+		$data['total_read_count'] = $this->__patientAlert($user_id);
 		$id="";
 		$this->load->helper('form');
 		$this->load->library('form_validation');
@@ -596,8 +532,7 @@ class Forms extends Admin_Controller {
 			$data['last_alcohol']			= $cooccurring->last_alcohol;
 			$data['last_drugs']			= $cooccurring->last_drugs;
 			$data['pulse']			= $cooccurring->pulse;
-			}
-			
+			}		
 		
 			
 		}
@@ -651,13 +586,7 @@ class Forms extends Admin_Controller {
 		$data['admin_session'] = $this->admin_session->userdata('admin');
 		$user_id = $data['admin_session']['id'];
 
-		$this->load->model('Core1_model');
-		$this->load->model('Core2_model');
-		$this->load->model('Core3_model');
-		$core1_read_count = $this->Core1_model->read_core1_count($user_id);
-		$core2_read_count = $this->Core2_model->read_core2_count();
-		$core3_read_count = $this->Core3_model->read_core3_count();
-		$data['total_read_count'] = $core1_read_count + $core2_read_count + $core3_read_count;
+		$data['total_read_count'] = $this->__patientAlert($user_id);
 		$id="";
 		$this->load->helper('form');
 		$this->load->library('form_validation');
@@ -754,19 +683,13 @@ class Forms extends Admin_Controller {
 	
 	function physicalhealth_form()
 	{
-			$this->auth->check_access('Normal',true);
+		$this->auth->check_access('Normal',true);
 		$this->load->model('Physicalhealth_model');
 		$data['uri']=$this->uri->segment(2);
 		$data['admin_session'] = $this->admin_session->userdata('admin');
 		$user_id = $data['admin_session']['id'];
 
-		$this->load->model('Core1_model');
-		$this->load->model('Core2_model');
-		$this->load->model('Core3_model');
-		$core1_read_count = $this->Core1_model->read_core1_count($user_id);
-		$core2_read_count = $this->Core2_model->read_core2_count();
-		$core3_read_count = $this->Core3_model->read_core3_count();
-		$data['total_read_count'] = $core1_read_count + $core2_read_count + $core3_read_count;
+		$data['total_read_count'] = $this->__patientAlert($user_id);
 		$id="";
 		$this->load->helper('form');
 		$this->load->library('form_validation');
@@ -868,13 +791,7 @@ class Forms extends Admin_Controller {
 		$data['admin_session'] = $this->admin_session->userdata('admin');
 		$user_id = $data['admin_session']['id'];
 
-		$this->load->model('Core1_model');
-		$this->load->model('Core2_model');
-		$this->load->model('Core3_model');
-		$core1_read_count = $this->Core1_model->read_core1_count($user_id);
-		$core2_read_count = $this->Core2_model->read_core2_count();
-		$core3_read_count = $this->Core3_model->read_core3_count();
-		$data['total_read_count'] = $core1_read_count + $core2_read_count + $core3_read_count;
+		$data['total_read_count'] = $this->__patientAlert($user_id);
 		$id="";
 		$this->load->helper('form');
 		$this->load->library('form_validation');
@@ -974,13 +891,7 @@ class Forms extends Admin_Controller {
 		$data['admin_session'] = $this->admin_session->userdata('admin');
 		$user_id = $data['admin_session']['id'];
 
-		$this->load->model('Core1_model');
-		$this->load->model('Core2_model');
-		$this->load->model('Core3_model');
-		$core1_read_count = $this->Core1_model->read_core1_count($user_id);
-		$core2_read_count = $this->Core2_model->read_core2_count();
-		$core3_read_count = $this->Core3_model->read_core3_count();
-		$data['total_read_count'] = $core1_read_count + $core2_read_count + $core3_read_count;
+		$data['total_read_count'] = $this->__patientAlert($user_id);
 		$id="";
 		$this->load->helper('form');
 		$this->load->library('form_validation');
@@ -1066,7 +977,6 @@ class Forms extends Admin_Controller {
 
 		$data['admin_session'] = $this->admin_session->userdata('admin');
 		$user_id = $data['admin_session']['id'];
-
 		
 		$id="";
 		$this->load->helper('form');
@@ -1667,6 +1577,53 @@ class Forms extends Admin_Controller {
 		}
 		
 	}
+
+    /* Patient alert count */
+	function __patientAlert($userId = null) {
+
+		$this->load->model('Core1_model');
+		$this->load->model('Core2_model');
+		$this->load->model('Core3_model');
+		$core1_read_count = $this->Core1_model->read_core1_count($userId);
+		$core2_read_count = $this->Core2_model->read_core2_count($userId);
+		$core3_read_count = $this->Core3_model->read_core3_count($userId);
+		$sum = $core1_read_count + $core2_read_count + $core3_read_count;
+
+		return $sum;
+
+	}//end __patientAlert()	
+
+	function patient_alert_list() {
+
+		$data['admin_session'] = $this->admin_session->userdata('admin');
+		$userId = $data['admin_session']['id'];
+
+		$this->load->model('Core1_model');
+		$this->load->model('Core2_model');
+		$this->load->model('Core3_model');
+		$data['results']['core1'] = $this->Core1_model->read_core1_list($userId);
+		$data['results']['core2']= $this->Core2_model->read_core2_list($userId);
+		$data['results']['core3'] = $this->Core3_model->read_core3_list($userId);	
+
+		$this->load->view($this->config->item('admin_folder').'/patient_alert_list', $data);
+
+	}//end patient_alert_list()
+
+
+	function alert_read() {
+
+		$data['admin_session'] = $this->admin_session->userdata('admin');
+		$userId = $data['admin_session']['id'];
+
+		$this->load->model('Core1_model');
+		$this->load->model('Core2_model');
+		$this->load->model('Core3_model');
+		$this->Core1_model->read_core1($userId);
+		$this->Core2_model->read_core2($userId);
+		$this->Core3_model->read_core3($userId);
+
+		return true;	
+
+	}
 	
-	
-}
+}//end class

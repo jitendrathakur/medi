@@ -168,6 +168,48 @@ body.custom-background {
                         <?php
 				 }
 				 ?>
+
+
+	<header class="navbar navbar-inverse bs-docs-nav" role="banner">
+	  <div class="container">	    
+	    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+	      <ul class="nav navbar-nav">
+	        <li>
+	          <a href="http://tmed3000.org/inter-active">Inter-Active</a>
+	        </li>
+	        <li>
+	          <a href="http://tmed3000.org/inter-active/video-blog/">Video Blog</a>
+	        </li>
+	        <li class="active">
+	          <a href="http://tmed3000.org/inter-active/survey/">Survey</a>
+	        </li>
+	        <li>
+	          <a href="http://tmed3000.org/inter-active/iq-center/">IQ Center</a>
+	        </li>
+	        <li>
+	          <a href="http://tmed3000.org/inter-active/recovery-chat/">Recovery Chat</a>
+	        </li>
+	         <li>
+	          <a href="http://tmed3000.org/about-us/">Contact Us</a>
+	        </li>
+	         <li>
+	          <a href="http://tmed3000.org/partners/">Partners</a>
+	        </li>
+	         <li>
+	          <a href="http://tmed3000.org/referral/">Referral</a>
+	        </li>
+	         <li>
+	          <a href="http://tmed3000.org/newsletter/">Newsletter</a>
+	        </li>
+	         <li>
+	          <a href="http://tmed3000.org/events/">Events</a>
+	        </li>
+	      </ul>	      
+	    </nav>
+	  </div>
+	</header>
+	<!-- Above -->
+
 <li id="menu-item-30" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-30" ><a href="http://tmed3000.org/inter-active/" >Inter-Active</a>
 <ul class="sub-menu" >
 	<li id="menu-item-177" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-177" ><a href="http://tmed3000.org/inter-active/video-blog/" >Video Blog</a></li>
@@ -188,13 +230,14 @@ body.custom-background {
 $admin = $this->admin_session->userdata('admin');
 
 if ($admin['access'] == 'Normal') { ?> 
-<li  id="menu-item-28" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-28"><a href="javascript:;">Alert <span class='badge'><?php echo @$total_read_count; ?></span></a></li>
+<li  id="menu-item-28" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-28"><a href="<?php echo base_url('forms/patient_alert_list') ?>">Alert <span class='badge'><?php echo @$total_read_count; ?></span></a></li>
 <?php } ?>
 
 <li id="menu-item-28" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-28" ><a href="<?php echo base_url('login/logout') ?>" >Logout</a></li>
-<li><?php 
+<li><span style="color:#fff;font-weight:bold;"><?php 
 	echo 'Hi '.$admin['firstname'];
  ?>
+ </span>
 </li>
  
 </ul></div>		</div><!-- #access -->

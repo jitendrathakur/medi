@@ -82,6 +82,26 @@ Class Core2_model extends CI_Model
 		$this->db->where('patient_id', $patientId);
 		return $this->db->where('is_read', false)->count_all_results('core2');
 	}
-	
+
+	function read_core2_list($patientId = null)
+	{
+
+		$this->db->select('core2.*, admin.firstname, admin.lastname');
+		$this->db->join('admin', 'core2.patient_id=admin.id');
+		$this->db->where('patient_id', $patientId);	
+		$this->db->where('is_read', false);		
+		$result	= $this->db->get('core2');		
+		$result = $result->result();		
+		return $result;
+	}//end read_core2_list()	
+
+
+	function read_core2($patientId = null)
+	{	
+		$this->db->where('patient_id', $patientId);		
+		$data['is_read'] = true;
+		$this->db->update('core2', $data);
+		return true;		
+	}//end read_core2()
 
 }

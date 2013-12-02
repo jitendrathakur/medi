@@ -68,5 +68,27 @@ Class Core3_model extends CI_Model
 		$this->db->where('patient_id', $patientId);
 		return $this->db->where('is_read', false)->count_all_results('core3');
 	}
+
+
+	function read_core3_list($patientId = null)
+	{
+
+		$this->db->select('core3.*, admin.firstname, admin.lastname');
+		$this->db->join('admin', 'core3.patient_id=admin.id');
+		$this->db->where('patient_id', $patientId);	
+		$this->db->where('is_read', false);		
+		$result	= $this->db->get('core3');		
+		$result = $result->result();		
+		return $result;
+	}//end read_core3_list()
+
+
+	function read_core3($patientId = null)
+	{	
+		$this->db->where('patient_id', $patientId);		
+		$data['is_read'] = true;
+		$this->db->update('core3', $data);
+		return true;		
+	}//end read_core3()
 		
 }
