@@ -1596,6 +1596,7 @@ class Forms extends Admin_Controller {
 	function patient_alert_list() {
 
 		$data['admin_session'] = $this->admin_session->userdata('admin');
+		$data['uri']=$this->uri->segment(2);
 		$userId = $data['admin_session']['id'];
 
 		$this->load->model('Core1_model');
@@ -1622,7 +1623,7 @@ class Forms extends Admin_Controller {
 		$this->Core2_model->read_core2($userId);
 		$this->Core3_model->read_core3($userId);
 
-		return true;	
+		echo 'true';	
 
 	}
 	

@@ -87,7 +87,7 @@ Class Core2_model extends CI_Model
 	{
 
 		$this->db->select('core2.*, admin.firstname, admin.lastname');
-		$this->db->join('admin', 'core2.patient_id=admin.id');
+		$this->db->join('admin', 'core2.user_id=admin.id');
 		$this->db->where('patient_id', $patientId);	
 		$this->db->where('is_read', false);		
 		$result	= $this->db->get('core2');		

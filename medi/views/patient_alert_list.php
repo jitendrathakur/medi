@@ -7,15 +7,14 @@
 		
 	<table class='table table-bordered table-condensed table-hover table-striped'>
 	<tr>
-		<th>Patient</th>		
+		<th>Therapist</th>		
 		<th>coredate</th>		
 		<th>starttime</th>
 		<th>endtime</th>		
 		<th>goal</th>		
 		<th>fif</th>		
 		<th>visit</th>		
-		<th>followup</th>			
-		<th>Action</th>
+		<th>followup</th>	
 	</tr>
 	</hr>
 
@@ -54,7 +53,7 @@
 		
 	<table class='table table-bordered table-condensed table-hover table-striped'>
 	<tr>
-		<th>Patient</th>		
+		<th>Therapist</th>		
 		<th>coredate</th>		
 		<th>renewal</th>
 		<th>plan</th>		
@@ -101,7 +100,7 @@
 		
 	<table class='table table-bordered table-condensed table-hover table-striped'>
 	<tr>
-		<th>Patient</th>		
+		<th>Therapist</th>		
 		<th>zip</th>		
 		<th>identify</th>
 		<th>is_present</th>		
