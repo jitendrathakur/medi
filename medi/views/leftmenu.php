@@ -1,8 +1,8 @@
 <? if($this->auth->check_access('Normal'))
 				 { ?>
-<div class="side-menu-class span2" >
-       				 <ul id="side-menu" >
-         			   <li style="margin-top:2px; font-size:150%; background-color:#FFFFFF; color:#02306F; " >Daily Journals</li>
+<div class="bs-sidebar hidden-print affix col-md-2 well" >
+       				 <ul class="nav bs-sidenav" >
+         			   <li style="background-color:#FFFFFF; color:#02306F; " >Daily Journals</li>
           			   <li <? if($uri == "wellness_form"){ ?> style="background-color:#000000;" <? } ?> ><a href="<?php echo base_url('forms/wellness_form') ?>" >Wellness Journal</a></li>
           			   <li  <? if($uri == "forensic_form"){ ?> style="background-color:#000000;" <? } ?>><a href="<?php echo base_url('forms/forensic_form') ?>" >Forensic Journal</a></li>
           			   <li  <? if($uri == "cooccurring_form"){ ?> style="background-color:#000000;" <? } ?>><a href="<?php echo base_url('forms/cooccurring_form') ?>" >Co-Occurring Journal</a></li>

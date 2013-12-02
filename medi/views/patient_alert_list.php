@@ -1,9 +1,9 @@
 <?php include('header.php'); ?>
 
-<div id="alert_list" class="journal-entries" >	
+<div id="alert_list" class="col-md-9 pull-right well" >	
 
     <h3>Core 1 Journal</h3>
-	<div style="height:100%;margin-left:-90px;border:0px solid; " id="mainForm" >
+	<div>
 		
 	<table class='table table-bordered table-condensed table-hover table-striped'>
 	<tr>
@@ -46,10 +46,10 @@
 </div>
 
 
-<div class="journal-entries" >		
+<div class="col-md-9 pull-right well" >		
 
     <h3>Core 2 Journal</h3>
-	<div style="height:100%;margin-left:-90px;border:0px solid; " id="mainForm" >
+	<div>
 		
 	<table class='table table-bordered table-condensed table-hover table-striped'>
 	<tr>
@@ -93,10 +93,10 @@
 </div>
 </div>
 
-<div class="journal-entries" >		
+<div class="col-md-9 pull-right well" >		
 
 <h3>Core 3 Journal</h3>
-	<div style="height:100%;margin-left:-90px;border:0px solid; " id="mainForm" >
+	<div>
 		
 	<table class='table table-bordered table-condensed table-hover table-striped'>
 	<tr>

@@ -195,12 +195,12 @@ if (array_key_exists("login", $_GET)) {
     <!--[if lte IE 8]><style>.main{display:none;} .support-note .note-ie{display:block;}</style><![endif]-->
 
 <div id="content-container" class="container" >
-  <div id="content" role="main" class="well" >
+  <div id="content" role="main" class="" >
 
   
-    <div id="post-9" class="post-9 page type-page status-publish hentry" >
+    <div id="" class="" >
 
-        <div class=""  >
+        <div class="row col-md-12"  >
         <?php include('leftmenu.php'); ?>
           <?php
   //lets have the flashdata overright "$message" if it exists
