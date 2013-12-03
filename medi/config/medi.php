@@ -89,3 +89,5 @@ $config['max_height'] = '76800000';
 
 //change the name of the admin controller folder 
 $config['supert']		= 'supert';
+
+$config['email']		= 'email';

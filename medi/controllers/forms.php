@@ -22,21 +22,26 @@ class Forms extends Admin_Controller {
       'protocol' => 'smtp',
       'smtp_host' => 'ssl://smtp.googlemail.com',
       'smtp_port' => 465,
-      'smtp_user' => 'xxx@gmail.com', // change it to yours
-      'smtp_pass' => 'xxx', // change it to yours
+      'smtp_user' => 'transformative.medicine@gmail.com', // change it to yours
+      'smtp_pass' => '!@#$1234asdf', // change it to yours
       'mailtype' => 'html',
       'charset' => 'iso-8859-1',
       'wordwrap' => TRUE
     );
 
-    $option['from'] = $config['smtp_user'];
-    
+    $option['from'] = "service@skytempest.com";
+
     $this->load->library('email', $config);
     $this->email->set_newline("\r\n");
     $this->email->from($option['from']); // change it to yours
     $this->email->to($option['to']);// change it to yours
     $this->email->subject($option['subject']);
-    $message = $this->load->view($option['view'], @$option['data'], true);
+    if ($option['template']) {
+      $message = $this->load->view($option['view'], @$option['data'], true);  
+    } else {
+      $message = $option['message'];
+    }
+    
     $this->email->message($message);
     if($this->email->send())
     {
@@ -91,8 +96,6 @@ class Forms extends Admin_Controller {
   
   function wellness_form()
   {
-
-
     $this->auth->check_access('Normal',true);
     
     $this->lang->load('wellness');
@@ -153,12 +156,21 @@ class Forms extends Admin_Controller {
 
       $option = array(
         'to' => $therapist['email'],
-        'subject' => 'Patient '.$admin['firstname'],
-        'view' => 'patient sent you wellness details'
+        'subject' => 'Patient: '.$data['admin_session']['firstname'],
+        'message' => 'patient sent you wellness details',
+        'template' => true,
+        'view' => $this->config->item('email').'/wellness_form',
+        'data' => $save
       );
+
+      $haystack = $save['pulse'];
+      $needle = 'suicide';
+
+      if (strpos($haystack,$needle) !== false) {
+        $option['subject'] = 'HIGH ALERT Patient: '.$data['admin_session']['firstname'];
+      }
+
       $this->__sendEmail($option);
-      
-  
       
       $this->session->set_flashdata('message', lang('message_wellness_saved'));
       
