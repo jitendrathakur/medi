@@ -394,5 +394,26 @@ class Auth
 			}
 		}	
 
-	}//end validate_sms_code
+	}//end validate_email_mobile()
+
+
+	function getTherapist($patientId = null) {
+		
+		$this->CI->db->select('admin.*, patient_therapist.*');
+		$this->CI->db->join('admin', 'patient_therapist.therapist_id=admin.id');              
+		
+	    $this->CI->db->where('patient_id', $patientId);	    
+	
+		$this->CI->db->limit(1);
+		$result = $this->CI->db->get('patient_therapist');
+		$result	= $result->row_array();
+		
+		if (sizeof($result) > 0)
+		{		
+			return $result;			
+		} else {
+			return false;
+		}
+
+	}//end getTherapist()
 }
