@@ -66,7 +66,7 @@ Class Recoveryvitals_model extends CI_Model
 	
 	function save($recoveryvitals)
 	{
-			if ($recoveryvitals['id'])
+			if (!empty($recoveryvitals['id']))
 			{
 				$this->db->where('user_id', $recoveryvitals['user_id']);
 				$this->db->where('id', $recoveryvitals['id']);

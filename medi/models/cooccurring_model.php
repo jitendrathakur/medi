@@ -129,7 +129,7 @@ Class Cooccurring_model extends CI_Model
 	
 	function save($cooccurring)
 	{
-		if ($cooccurring['id'])
+		if (!empty($cooccurring['id']))
 		{
 			$this->db->where('user_id', $cooccurring['user_id']);
 			$this->db->where('id', $cooccurring['id']);

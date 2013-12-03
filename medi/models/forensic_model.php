@@ -129,7 +129,7 @@ Class Forensic_model extends CI_Model
 	
 	function save($forensic)
 	{
-		if ($forensic['id'])
+		if (!empty($forensic['id']))
 		{
 			$this->db->where('user_id', $forensic['user_id']);
 			$this->db->where('id', $forensic['id']);

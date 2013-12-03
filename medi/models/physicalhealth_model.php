@@ -66,7 +66,7 @@ Class Physicalhealth_model extends CI_Model
 	
 	function save($physicalhealth)
 	{
-			if ($physicalhealth['id'])
+			if (!empty($physicalhealth['id']))
 			{
 				$this->db->where('user_id', $physicalhealth['user_id']);
 				$this->db->where('id', $physicalhealth['id']);

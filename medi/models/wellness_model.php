@@ -129,7 +129,7 @@ Class Wellness_model extends CI_Model
 	
 	function save($wellness)
 	{
-		if ($wellness['id'])
+		if (!empty($wellness['id']))
 		{
 			$this->db->where('user_id', $wellness['user_id']);
 			$this->db->where('id', $wellness['id']);

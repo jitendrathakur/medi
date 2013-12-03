@@ -66,18 +66,18 @@ Class Tmed_model extends CI_Model
 	
 	function save($tmed)
 	{
-			if ($tmed['id'])
-			{
-				$this->db->where('user_id', $tmed['user_id']);
-				$this->db->where('id', $tmed['id']);
-				$this->db->update('tmed', $tmed);
-				return $tmed['id'];
-			}
-			else
-			{
-				$this->db->insert('tmed', $tmed);			
-				return $this->db->insert_id();
-			}
+		if (!empty($tmed['id']))
+		{
+			$this->db->where('user_id', $tmed['user_id']);
+			$this->db->where('id', $tmed['id']);
+			$this->db->update('tmed', $tmed);
+			return $tmed['id'];
+		}
+		else
+		{
+			$this->db->insert('tmed', $tmed);			
+			return $this->db->insert_id();
+		}
 		
 	}
 	
