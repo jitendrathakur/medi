@@ -1,5 +1,5 @@
 <?php
-Class Patient extends CI_Model
+Class Patient_model extends CI_Model
 {
 	
 	function core1_comment($data)

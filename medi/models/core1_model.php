@@ -149,7 +149,9 @@ Class Core1_model extends CI_Model
 		$this->db->select('core1.*, admin.firstname, admin.lastname');
 		$this->db->join('admin', 'core1.user_id=admin.id');
 		$this->db->where('patient_id', $patientId);	
-		$this->db->where('is_read', false);		
+		$this->db->order_by('is_read', 'ASC');
+		$this->db->limit(5); 
+		//$this->db->where('is_read', false);		
 		$result	= $this->db->get('core1');		
 		$result = $result->result();		
 		return $result;

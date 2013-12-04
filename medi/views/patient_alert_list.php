@@ -30,7 +30,7 @@
 		<td><?php echo $result->fif ; ?></td>
 		<td><?php echo $result->visit ; ?></td>
 		<td><?php echo $result->followup ; ?></td>
-		<td><a  class ="btn btn-sm btn-primary reply" data-toggle="modal" data-target="#myModal" href="<?php echo base_url('patient/core1_reply/').'/'.$result->id  ?>" >Reply</a></td>		
+		<td><a  class ="btn btn-sm btn-primary reply" data-toggle="modal" data-target="#myModal" href="javascript:;" url="<?php echo base_url('patient/core1_reply/').'/'.$result->id  ?>" >Reply</a></td>		
 	</tr>
 	<?php } ?>
 
@@ -80,7 +80,7 @@
 		<td><?php echo $result->step2 ; ?></td>
 		<td><?php echo $result->step3 ; ?></td>
 		<td><?php echo $result->target ; ?></td>
-		<td><a class ="btn btn-sm btn-primary reply" data-toggle="modal" data-target="#myModal" href="<?php echo base_url('patient/core2_reply/').'/'.$result->id  ?>" >Reply</a></td>
+		<td><a class ="btn btn-sm btn-primary reply" data-toggle="modal" data-target="#myModal" href="javascript:;" url="<?php echo base_url('patient/core2_reply/').'/'.$result->id  ?>" >Reply</a></td>
 	</tr>
 	<?php } ?>
 
@@ -135,7 +135,7 @@
 		<td><?php echo $result->medicine ; ?></td>
 		<td><?php echo $result->concentration ; ?></td>
 		<td><?php echo $result->pulse2 ; ?></td>
-		<td><a  class ="btn btn-sm btn-primary reply" data-toggle="modal" data-target="#myModal" href="<?php echo base_url('patient/core2_reply/').'/'.$result->id  ?>" >Reply</a></td>
+		<td><a  class ="btn btn-sm btn-primary reply" data-toggle="modal" data-target="#myModal" href="javascript:;" url="<?php echo base_url('patient/core2_reply/').'/'.$result->id  ?>" >Reply</a></td>
 	</tr>
 	<?php } ?>
 
@@ -161,9 +161,9 @@
       </div>
       <div class="modal-body">
 
-     	<?php echo form_open_multipart(''); 
-
-      	$data	= array('name'=>'comment', 'id' => 'journal_comment', 'class' => 'form-control', 'rows' => '3'));
+     	<form id="comment" method="post" action="">
+        <?php
+      	$data	= array('name'=>'comment', 'id' => 'journal_comment', 'class' => 'form-control', 'rows' => '3');
 		echo form_textarea($data);
 		?>
 

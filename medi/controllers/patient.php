@@ -18,14 +18,20 @@ class Patient extends CI_Controller
 
     	$comment = $this->input->post('comment');
 
-    	$this->load->model('Patient');
+    	//echo $comment;
+
+    	//echo "hello";
+
+    	//exit;
+
+    	$this->load->model('Patient_model');
     	$data = array(
 			'core1_id' => $id,
 			'patient_id' => $user['id'],
 			'comment' => $comment
 		);
 
-		$this->Patient->core1_comment($data);
+		$this->Patient_model->core1_comment($data);
 
 		echo "true";
     }//end core1_reply()
@@ -39,14 +45,14 @@ class Patient extends CI_Controller
 
     	$comment = $this->input->post('comment');
 
-    	$this->load->model('Patient');
+    	$this->load->model('Patient_model');
 		$data = array(
 			'core2_id' => $id,
 			'patient_id' => $user['id'],
 			'comment' => $comment
 		);
 
-		$this->Patient->core2_comment($data);
+		$this->Patient_model->core2_comment($data);
 
 		echo "true";
     }//ene core2_reply()
@@ -60,14 +66,14 @@ class Patient extends CI_Controller
 
     	$comment = $this->input->post('comment');
 
-    	$this->load->model('Patient');
+    	$this->load->model('Patient_model');
 		$data = array(
 			'core3_id' => $id,
 			'patient_id' => $user['id'],
 			'comment' => $comment
 		);
 
-		$this->Patient->core3_comment($data);
+		$this->Patient_model->core3_comment($data);
 
 		echo "true";
 

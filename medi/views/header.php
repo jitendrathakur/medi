@@ -57,9 +57,132 @@
 <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css') ?>" type="text/css" />
 <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap-responsive.min.css') ?>" type="text/css" />
 
+ <style type="text/css" >
+#access ul {
+
+  font-family: "Helvetica Neue", Arial, Helvetica, "Nimbus Sans L", sans-serif;
+
+  font-size: 13px;
+
+  font-weight: bold;
+
+  list-style: none;
+
+  margin: 0;
+
+  padding-left: 0px;
+
+  text-transform: uppercase;
+
+}
+
+#access li {
+
+  float: left;
+
+  position: relative;
+
+  padding-left: 10px;
+
+  
+
+}
+
+#access a {
+
+  color: #FFF;
+
+  display: block;
+
+  line-height: 2em;
+
+  margin: 0 1px 0 0;
+
+  padding: 0.25em 1em 0;
+
+  text-decoration: none;
+
+  border: 2px solid #FFFFFF;
+
+}
+
+#access ul ul {
+
+  -moz-box-shadow: 0 3px 3px rgba(0,0,0,0.2);
+
+  -webkit-box-shadow: 0 3px 3px rgba(0,0,0,0.2);
+
+  box-shadow: 0 3px 3px rgba(0,0,0,0.2);
+
+  display: none;
+
+  float: left;
+
+  font-weight: normal;
+
+  position: absolute;
+
+  top: 29px;
+
+  left: 0;
+
+  text-transform: none;
+
+  z-index: 99999;
+
+  width: 180px;
+
+}
+
+#access ul ul ul {
+
+  left: 100%;
+
+  top: 0;
+
+}
+
+#access ul ul a {
+
+  background: #000;
+  color: #eee;
+
+  line-height: 1em;
+
+  margin: 0;
+
+  padding: .66em .5em .5em 1em;
+
+  min-width: 180px;
+
+  height: auto;
+
+}
+
+#access li:hover > a,
+
+#access ul ul :hover > a {
+
+  background: #000;
+
+  color: #fff;
+
+}
+
+#access ul ul a:hover {
+
+  background: #222;
+
+}
+
+#access ul li:hover > ul {
+
+  display: block;
+
+}
 
 
-  <style type="text/css" >
+ 
 #site-title a, #site-description {
   color:#02306F;
 }
@@ -78,85 +201,106 @@ body.custom-background {
 <body class="page page-id-9 page-template page-template-home-page-php custom-background no-sidebars color-blue" style="" >
 
 
-  <div id="header" ><a href="http://tmed3000.org" >
-    <img style="width:65%; padding-left:16%; " src="<?php echo base_url('assets/img/mainlogo.png') ?>" ></a>
+      <div id="container" class="hfeed contain" >
+
+
+
+  <div id="header" ><a href="http://tmed3000.org" ><img style="width:65%; padding-left:16%; " src="<?php echo base_url('assets/img/mainlogo.png') ?>" ></a>
+
+
 
     <div id="masthead" role="banner" >
-  </div><!-- #masthead -->
 
 
-  <header class="navbar navbar-inverse bs-docs-nav" role="banner">
-        <div class="container">     
-          <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
-            <ul class="nav navbar-nav">
-              <li class="active">
-                <? if($this->auth->check_access('Normal')) { 
-                  $href = base_url('forms/wellness_form');
-                } else if ($this->auth->check_access('Therapists')) {
-                  $href = base_url('forms/core_journal_form');
-                } ?>
-                <a href="<?php echo $href; ?>">Home</a>
-              </li>
-              <li>
-                <a href="http://tmed3000.org/inter-active">Inter-Active</a>
-              </li>
-              
-                <a href="http://tmed3000.org/about-us/">Contact Us</a>
-              </li>
-              <li>
-                <a href="http://tmed3000.org/partners/">Partners</a>
-              </li>
-              
-              <!-- Split button -->
-              <li class="btn-group">                
-                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-                                  Services
-                                   <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu" role="menu">
-                  <li>
-                    <a href="http://tmed3000.org/inter-active/video-blog/">Video Blog</a>
-                  </li>
-                  <li>
-                    <a href="http://tmed3000.org/inter-active/survey/">Survey</a>
-                  </li>
-                  <li>
-                    <a href="http://tmed3000.org/inter-active/iq-center/">IQ Center</a>
-                  </li>
-                  <li>
-                    <a href="http://tmed3000.org/inter-active/recovery-chat/">Recovery Chat</a>
-                  </li>
-                  <li>
-                    <a href="http://tmed3000.org/referral/">Referral</a>
-                  </li>
-                  <li>
-                    <a href="http://tmed3000.org/newsletter/">Newsletter</a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a href="http://tmed3000.org/events/">Events</a>
-              </li>
-              <?php
-              $admin = $this->admin_session->userdata('admin');
-              if ($admin['access'] == 'Normal') { ?> 
-              <li  id="menu-item-28" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-28"><a href="<?php echo base_url('forms/patient_alert_list') ?>">Alert <span class='badge'><?php echo @$total_read_count; ?></span></a></li>
-              <?php } ?>
 
-              <li id="menu-item-28" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-28" ><a href="<?php echo base_url('login/logout') ?>" >Logout</a></li>
-              <li><span style="font-weight: bold; width: 100px;position:absolute;"><?php 
+            
+
+
+
+    </div><!-- #masthead -->
+
+
+
+
+
+
+
+    <div id="access" role="navigation" >
+
+
+
+            <div class="skip-link screen-reader-text" ><a href="#content" title="Skip to content" >Skip to content</a></div>
+
+<? if($this->auth->check_access('Normal'))
+
+         { ?>
+
+            <div class="menu-header" ><ul id="menu-primarynav" class="menu" ><li id="menu-item-26" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-9 current_page_item  menu-item-26" ><a href="<?php echo base_url('forms/wellness_form') ?>" >Access</a></li>
+
+                        <?php
+
+         }
+
+         ?>
+
+                        
+
+                        <? if($this->auth->check_access('Therapists'))
+
+         { ?>
+
+            <div class="menu-header" ><ul id="menu-primarynav" class="menu" ><li id="menu-item-26" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-9 current_page_item  menu-item-26" ><a href="<?php echo base_url('forms/core_journal_form') ?>" >Access</a></li>
+
+                        <?php
+
+         }
+
+         ?>
+
+<li id="menu-item-30" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-30" ><a href="http://tmed3000.org/inter-active/" >Inter-Active</a>
+
+<ul class="sub-menu" >
+
+  <li id="menu-item-177" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-177" ><a href="http://tmed3000.org/inter-active/video-blog/" >Video Blog</a></li>
+
+  <li id="menu-item-178" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-178" ><a href="http://tmed3000.org/inter-active/survey/" >Survey</a></li>
+
+  <li id="menu-item-179" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-179" ><a href="http://tmed3000.org/inter-active/iq-center/" >IQ Center</a></li>
+
+  <li id="menu-item-180" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-180" ><a href="http://tmed3000.org/inter-active/recovery-chat/" >Recovery Chat</a></li>
+
+</ul>
+
+</li>
+
+<li id="menu-item-27" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27" ><a href="http://tmed3000.org/about-us/" >Contact Us</a></li>
+
+<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-32" ><a href="http://tmed3000.org/partners/" >Partners</a></li>
+
+<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-33" ><a href="http://tmed3000.org/referral/" >Referral</a></li>
+
+<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-31" ><a href="http://tmed3000.org/newsletter/" >Newsletter</a></li>
+
+<li id="menu-item-28" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-28" ><a href="http://tmed3000.org/events/" >Events</a></li>
+
+<li id="menu-item-28" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-28" ><a href="<?php echo base_url('login/logout') ?>" >Logout</a></li>
+
+ <?php
+  $admin = $this->admin_session->userdata('admin');
+  if ($admin['access'] == 'Normal') { ?>
+<li id="menu-item-28" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-28"><a href="<?php echo base_url('forms/patient_alert_list') ?>">Alert <span class='badge'><?php echo @$total_read_count; ?></span></a></li>
+<?php } ?>
+
+<li id="menu-item-28" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-28" ><a href="<?php echo base_url('login/logout') ?>" >Logout</a></li>
+<li><span style="color:#fff;font-weight: bold; width: 100px;position:absolute;"><?php
                 echo 'Hi '.$admin['firstname'];
                ?>
-               </span>
-              </li>
+</span>
+</li>
 
-            </ul>       
-          </nav>
-        </div>
-      </header>
-  <!-- Above -->
+</ul></div>    </div><!-- #access -->
 
-  <div id="container" class="hfeed contain" >
+  <div id="container" class="hfeed contain" style="height:20px;" >
 
     
 

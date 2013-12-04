@@ -897,12 +897,12 @@ class Forms extends Admin_Controller {
         'data' => $save
       );
 
-      $haystack = $save['pulse'];
+     /* $haystack = $save['pulse'];
       $needle = 'suicide';
 
       if (strpos($haystack,$needle) !== false) {
         $option['subject'] = 'HIGH ALERT Patient: '.$data['admin_session']['firstname'];
-      }
+      }*/
 
       $this->__sendEmail($option);
 
@@ -1748,6 +1748,9 @@ class Forms extends Admin_Controller {
 
     $data['admin_session'] = $this->admin_session->userdata('admin');
     $data['uri']=$this->uri->segment(2);
+
+    $this->load->helper('form');
+
     $userId = $data['admin_session']['id'];
 
     $this->load->model('Core1_model');

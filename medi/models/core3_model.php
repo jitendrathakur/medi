@@ -76,8 +76,9 @@ Class Core3_model extends CI_Model
 		$this->db->select('core3.*, admin.firstname, admin.lastname');
 		$this->db->join('admin', 'core3.user_id=admin.id');
 		$this->db->where('patient_id', $patientId);	
-		$this->db->where('is_read', false);		
-		$result	= $this->db->get('core3');		
+		$this->db->order_by('is_read', 'ASC');
+		$this->db->limit(5); 	
+		$result	= $this->db->get('core3');
 		$result = $result->result();		
 		return $result;
 	}//end read_core3_list()

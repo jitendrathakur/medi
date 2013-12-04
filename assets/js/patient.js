@@ -1,33 +1,37 @@
-$(function() {
-
-	$('#myModal').modal();
+$(function() {	
 
 	commentReplyUrl = '';
 
-	$("#reply").click(function() {
+	$(".reply").click(function() {
 
-		commentReplyUrl = $(this).attr('href');
+		commentReplyUrl = $(this).attr('url');
+
+		$("#journal_comment").val('');
+		
 	});
 
-	$("#submit_reply").click(function() {
+	$(document).on('click', '#submit_reply', function() {
 
-		var dataPost = $("#journal_comment").val();
+		var dataPost = $("form#comment").serialize();
 
-		if (dataPost == '') {
+		var comment = $("#journal_comment").val();
+		
+		if (comment == '') {
 			alert("please enter any comment");
 			return false;
-		}
+		} else {
+			$.ajax({
+		        type: "POST",
+		        url: commentReplyUrl,   
+		        cache: false,
+		        dataType: "json",
+		        data: dataPost,
+		        success: function(response) {	          
+		            $('#myModal').modal('hide');
+		        }
+		    });
 
-		$.ajax({
-	        type: "POST",
-	        url: commentReplyUrl,   
-	        cache: true,
-	        dataType: "json",
-	        data: dataPost,
-	        success: function(response) {	          
-	            $('#myModal').modal('hide');
-	        }
-	    });
+		}		
 	});
 
 });
