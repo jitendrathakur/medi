@@ -56,7 +56,7 @@ class Forms extends Admin_Controller {
 
 
   function core1_list()
-  {     
+  {
 
     $this->load->model('Core1_model');
     $data['uri']=$this->uri->segment(2);
@@ -214,8 +214,7 @@ class Forms extends Admin_Controller {
     if ($user_id)
     { 
       $wellness   = $this->Wellness_model->get_wellness($user_id);
-      
-      
+           
 
       //if the wellness does not exist, redirect them to the wellness list with an error
       if ($wellness)
@@ -282,6 +281,7 @@ class Forms extends Admin_Controller {
     $data['uri']=$this->uri->segment(2);
     $data['admin_session'] = $this->admin_session->userdata('admin');
     $user_id = $data['admin_session']['id'];
+    $therapist = $this->auth->getTherapist($user_id);
 
     $data['total_read_count'] = $this->__patientAlert($user_id);
     $id="";
@@ -293,21 +293,21 @@ class Forms extends Admin_Controller {
     $data['page_title']   = "forensic";
     
     //default values are empty if the customer is new
-      $data['id']       = "";
-      $data['user_id']    = "";     
-      $data['is_parole']      = "";
-      $data['is_month']   = "";
-      $data['is_charge']      = "";
-      $data['is_fines']= "";  
-      $data['is_week']      = "";
-      $data['is_residence']     = "";
-      $data['is_criminal']      = "";
-      $data['is_friends']     = "";
-      $data['is_family']      = "";
-      $data['is_volunteer']     = "";
-      $data['arrest']     = "";
-      $data['incarceration']      = "";
-      $data['pulse']      = "";
+    $data['id']       = "";
+    $data['user_id']    = "";     
+    $data['is_parole']      = "";
+    $data['is_month']   = "";
+    $data['is_charge']      = "";
+    $data['is_fines']= "";  
+    $data['is_week']      = "";
+    $data['is_residence']     = "";
+    $data['is_criminal']      = "";
+    $data['is_friends']     = "";
+    $data['is_family']      = "";
+    $data['is_volunteer']     = "";
+    $data['arrest']     = "";
+    $data['incarceration']      = "";
+    $data['pulse']      = "";
       
   
     $this->form_validation->set_rules('is_parole', 'lang:name', 'trim|required');   
@@ -339,9 +339,27 @@ class Forms extends Admin_Controller {
       $save['is_volunteer'] = $this->input->post('is_volunteer');
       $save['arrest']     = $this->input->post('arrest');
       $save['incarceration']  = $this->input->post('incarceration');
-      
-      
+            
       $forensic_id      = $this->Forensic_model->save($save);
+
+      $option = array(
+        'to' => $therapist['email'],
+        'subject' => 'Patient: '.$data['admin_session']['firstname'],
+        'message' => 'patient sent you forensic details',
+        'template' => true,
+        'view' => $this->config->item('email').'/forensic_form',
+        'data' => $save
+      );
+
+      $haystack = $save['pulse'];
+      $needle = 'suicide';
+
+      if (strpos($haystack,$needle) !== false) {
+        $option['subject'] = 'HIGH ALERT Patient: '.$data['admin_session']['firstname'];
+      }
+
+      $this->__sendEmail($option);
+
       $this->session->set_flashdata('message', lang('message_forensic_saved'));
       
       //go back to the forensic list
@@ -460,11 +478,13 @@ class Forms extends Admin_Controller {
   
   function cooccurring_form()
   {
-      $this->auth->check_access('Normal',true);
+    $this->auth->check_access('Normal',true);
     $this->load->model('Cooccurring_model');
     $data['uri']=$this->uri->segment(2);
     $data['admin_session'] = $this->admin_session->userdata('admin');
     $user_id = $data['admin_session']['id'];
+
+    $therapist = $this->auth->getTherapist($user_id);
 
     $data['total_read_count'] = $this->__patientAlert($user_id);
     $id="";
@@ -476,29 +496,26 @@ class Forms extends Admin_Controller {
     $data['page_title']   = "cooccurring";
     
     //default values are empty if the customer is new
-      $data['id']       = "";
-      $data['user_id']    = "";     
-      $data['is_drug']      = "";
-      $data['is_drug_week']   = "";
-      $data['is_alcohol']     = "";
-      $data['is_alcohol_week']= ""; 
-      $data['is_alcohol_friend']      = "";
-      $data['is_alcohol_family']      = "";
-      $data['is_cravings']      = "";
-      $data['is_dreams']      = "";
-      $data['is_triggers']      = "";
-      $data['is_plans']     = "";
-      $data['last_alcohol']     = "";
-      $data['last_drugs']     = "";
-      $data['pulse']      = "";
-  
-  
+    $data['id']       = "";
+    $data['user_id']    = "";     
+    $data['is_drug']      = "";
+    $data['is_drug_week']   = "";
+    $data['is_alcohol']     = "";
+    $data['is_alcohol_week']= ""; 
+    $data['is_alcohol_friend']      = "";
+    $data['is_alcohol_family']      = "";
+    $data['is_cravings']      = "";
+    $data['is_dreams']      = "";
+    $data['is_triggers']      = "";
+    $data['is_plans']     = "";
+    $data['last_alcohol']     = "";
+    $data['last_drugs']     = "";
+    $data['pulse']      = "";
+    
     $this->form_validation->set_rules('is_drug', 'lang:name', 'trim|required');
     
     $this->form_validation->set_rules('pulse', 'lang:description', 'trim');
     
-    
-      
     // validate the form
     if ($this->form_validation->run() == FALSE)
     {
@@ -506,8 +523,7 @@ class Forms extends Admin_Controller {
       $this->load->view($this->config->item('admin_folder').'/cooccurring_form', $data);
     }
     else
-    {
-      
+    {      
             
       $save['user_id']        = $user_id;
       //$save['id']       = $id;
@@ -525,6 +541,25 @@ class Forms extends Admin_Controller {
       $save['last_drugs']     = $this->input->post('last_drugs');
       $save['pulse']  = $this->input->post('pulse');
       $cooccurring_id = $this->Cooccurring_model->save($save);
+
+      $option = array(
+        'to' => $therapist['email'],
+        'subject' => 'Patient: '.$data['admin_session']['firstname'],
+        'message' => 'patient sent you Cooccurring details',
+        'template' => true,
+        'view' => $this->config->item('email').'/cooccurring_form',
+        'data' => $save
+      );
+
+      $haystack = $save['pulse'];
+      $needle = 'suicide';
+
+      if (strpos($haystack,$needle) !== false) {
+        $option['subject'] = 'HIGH ALERT Patient: '.$data['admin_session']['firstname'];
+      }
+
+      $this->__sendEmail($option);
+
       $this->session->set_flashdata('message', lang('message_cooccurring_saved'));
       //go back to the cooccurring list
       redirect($this->config->item('admin_folder').'/forms/recoveryvitals_form');     
@@ -597,17 +632,13 @@ class Forms extends Admin_Controller {
     
     $this->form_validation->set_rules('pulse', 'lang:description', 'trim');
     
-    
-      
     // validate the form
     if ($this->form_validation->run() == FALSE)
-    {
-    
+    {    
       $this->load->view($this->config->item('admin_folder').'/cooccurring_form', $data);
     }
     else
-    {
-      
+    {     
             
       $save['user_id']        = $user_id;
       $save['id']       = $id;
@@ -641,6 +672,8 @@ class Forms extends Admin_Controller {
     $data['uri']=$this->uri->segment(2);
     $data['admin_session'] = $this->admin_session->userdata('admin');
     $user_id = $data['admin_session']['id'];
+
+    $therapist = $this->auth->getTherapist($user_id);
 
     $data['total_read_count'] = $this->__patientAlert($user_id);
     $id="";
@@ -728,6 +761,25 @@ class Forms extends Admin_Controller {
       $save['is_life']      = $this->input->post('is_life');
       $save['pulse']  = $this->input->post('pulse');
       $recoveryvitals_id  = $this->Recoveryvitals_model->save($save);
+
+      $option = array(
+        'to' => $therapist['email'],
+        'subject' => 'Patient: '.$data['admin_session']['firstname'],
+        'message' => 'patient sent you recovery vitals details',
+        'template' => true,
+        'view' => $this->config->item('email').'/recoveryvitals_form',
+        'data' => $save
+      );
+
+      $haystack = $save['pulse'];
+      $needle = 'suicide';
+
+      if (strpos($haystack,$needle) !== false) {
+        $option['subject'] = 'HIGH ALERT Patient: '.$data['admin_session']['firstname'];
+      }
+
+      $this->__sendEmail($option);
+
       $this->session->set_flashdata('message', lang('message_recoveryvitals_saved'));
       //go back to the recoveryvitals list
       redirect($this->config->item('admin_folder').'/forms/physicalhealth_form');
@@ -744,6 +796,8 @@ class Forms extends Admin_Controller {
     $data['uri']=$this->uri->segment(2);
     $data['admin_session'] = $this->admin_session->userdata('admin');
     $user_id = $data['admin_session']['id'];
+
+    $therapist = $this->auth->getTherapist($user_id);
 
     $data['total_read_count'] = $this->__patientAlert($user_id);
     $id="";
@@ -833,6 +887,26 @@ class Forms extends Admin_Controller {
         }
       $save['treatment']  = $treatment_data;
       $physicalhealth_id  = $this->Physicalhealth_model->save($save);
+
+      $option = array(
+        'to' => $therapist['email'],
+        'subject' => 'Patient: '.$data['admin_session']['firstname'],
+        'message' => 'patient sent you physical health details',
+        'template' => true,
+        'view' => $this->config->item('email').'/physicalhealth_form',
+        'data' => $save
+      );
+
+      $haystack = $save['pulse'];
+      $needle = 'suicide';
+
+      if (strpos($haystack,$needle) !== false) {
+        $option['subject'] = 'HIGH ALERT Patient: '.$data['admin_session']['firstname'];
+      }
+
+      $this->__sendEmail($option);
+
+
       $this->session->set_flashdata('message', lang('message_physicalhealth_saved'));
       redirect($this->config->item('admin_folder').'/forms/tmed_form');     
     }
@@ -947,6 +1021,8 @@ class Forms extends Admin_Controller {
     $data['admin_session'] = $this->admin_session->userdata('admin');
     $user_id = $data['admin_session']['id'];
 
+    $therapist = $this->auth->getTherapist($user_id);
+
     $data['total_read_count'] = $this->__patientAlert($user_id);
     $id="";
     $this->load->helper('form');
@@ -1016,6 +1092,25 @@ class Forms extends Admin_Controller {
       $save['category'] = $category_data;
       $save['pulse']    = $this->input->post('pulse');
       $tmed_id  = $this->Tmed_model->save($save);
+
+      $option = array(
+        'to' => $therapist['email'],
+        'subject' => 'Patient: '.$data['admin_session']['firstname'],
+        'message' => 'patient sent you tmed details',
+        'template' => true,
+        'view' => $this->config->item('email').'/tmed_form',
+        'data' => $save
+      );
+
+      $haystack = $save['pulse'];
+      $needle = 'suicide';
+
+      if (strpos($haystack,$needle) !== false) {
+        $option['subject'] = 'HIGH ALERT Patient: '.$data['admin_session']['firstname'];
+      }
+
+      $this->__sendEmail($option);
+
       $this->session->set_flashdata('message', lang('message_tmed_saved'));
       redirect($this->config->item('admin_folder').'/forms/tmed_form');
     }

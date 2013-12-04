@@ -85,6 +85,11 @@ class Login extends CI_Controller {
 				
 	    		$userId = $admin['id'];
 
+	    		if ($this->config->item('sms_feature') == false) {
+	    			$redirect = $this->__roleRedirect();				
+					redirect($redirect);
+	    		}
+
 	    		$flag = false;
 
 				if ($this->auth->validate_email_mobile($userId)) {
@@ -92,7 +97,7 @@ class Login extends CI_Controller {
 				} else {
 					$redirect = $this->config->item('admin_folder').'/login/critical_info';
 					redirect($redirect);
-				}				 
+				}	
 
 				$code = $this->randomChars(4);
 
@@ -138,22 +143,10 @@ class Login extends CI_Controller {
 
 	        	$save['id']              = $userId;
 				$save['is_sms_verified'] = '1';
-	 			$this->auth->save($save);
-	        	
-	        	if($this->auth->check_access('Normal'))
-				{					
-					$redirect = $this->config->item('admin_folder').'/forms/wellness_form';				
-				}			 
-				  
-				if($this->auth->check_access('Therapists'))
-				{					
-					$redirect = $this->config->item('admin_folder').'/forms/core1_list';					
-				}
+	 			$this->auth->save($save);	        	
+	        	   
+				$redirect = $this->__roleRedirect();
 
-				if($this->auth->check_access('supert'))
-				{
-					$redirect = $this->config->item('admin_folder').'/supert/';										
-				}                
 				redirect($redirect);
 	        } else {
 	        	$this->session->set_flashdata('error', "Incorect code");
@@ -161,6 +154,27 @@ class Login extends CI_Controller {
 		}
 		$this->load->view($this->config->item('admin_folder').'/sms', $data);
 	}
+
+	function __roleRedirect() {
+
+		if($this->auth->check_access('Normal'))
+		{					
+			$redirect = $this->config->item('admin_folder').'/forms/wellness_form';				
+		}			 
+		  
+		if($this->auth->check_access('Therapists'))
+		{					
+			$redirect = $this->config->item('admin_folder').'/forms/core1_list';					
+		}
+
+		if($this->auth->check_access('supert'))
+		{
+			$redirect = $this->config->item('admin_folder').'/supert/';										
+		}
+
+		return $redirect;
+
+	}//end __roleRedirect
 
 
 

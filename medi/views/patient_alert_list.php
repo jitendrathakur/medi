@@ -15,6 +15,7 @@
 		<th>fif</th>		
 		<th>visit</th>		
 		<th>followup</th>	
+		<th>Action</th>
 	</tr>
 	</hr>
 
@@ -29,6 +30,7 @@
 		<td><?php echo $result->fif ; ?></td>
 		<td><?php echo $result->visit ; ?></td>
 		<td><?php echo $result->followup ; ?></td>
+		<td><a  class ="btn btn-sm btn-primary reply" data-toggle="modal" data-target="#myModal" href="<?php echo base_url('patient/core1_reply/').'/'.$result->id  ?>" >Reply</a></td>		
 	</tr>
 	<?php } ?>
 
@@ -62,6 +64,7 @@
 		<th>step2</th>		
 		<th>step3</th>			
 		<th>target</th>
+		<th>Action</th>		
 	</tr>
 	</hr>
 
@@ -77,6 +80,7 @@
 		<td><?php echo $result->step2 ; ?></td>
 		<td><?php echo $result->step3 ; ?></td>
 		<td><?php echo $result->target ; ?></td>
+		<td><a class ="btn btn-sm btn-primary reply" data-toggle="modal" data-target="#myModal" href="<?php echo base_url('patient/core2_reply/').'/'.$result->id  ?>" >Reply</a></td>
 	</tr>
 	<?php } ?>
 
@@ -112,6 +116,7 @@
 		<th>medicine</th>
 		<th>concentration</th>
 		<th>pulse2</th>
+		<th>Action</th>		
 	</tr>
 	</hr>
 
@@ -130,6 +135,7 @@
 		<td><?php echo $result->medicine ; ?></td>
 		<td><?php echo $result->concentration ; ?></td>
 		<td><?php echo $result->pulse2 ; ?></td>
+		<td><a  class ="btn btn-sm btn-primary reply" data-toggle="modal" data-target="#myModal" href="<?php echo base_url('patient/core2_reply/').'/'.$result->id  ?>" >Reply</a></td>
 	</tr>
 	<?php } ?>
 
@@ -145,5 +151,31 @@
 
 </div>
 </div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Make reply</h4>
+      </div>
+      <div class="modal-body">
+
+     	<?php echo form_open_multipart(''); 
+
+      	$data	= array('name'=>'comment', 'id' => 'journal_comment', 'class' => 'form-control', 'rows' => '3'));
+		echo form_textarea($data);
+		?>
+
+		</form>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="submit_reply" type="button" class="btn btn-primary">Submit</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 <?php include('footer.php');

@@ -91,3 +91,5 @@ $config['max_height'] = '76800000';
 $config['supert']		= 'supert';
 
 $config['email']		= 'email';
+
+$config['sms_feature']	= false;

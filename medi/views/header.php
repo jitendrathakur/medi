@@ -33,8 +33,7 @@
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 <script src="<?php echo base_url('assets/js/therapist.js') ?>"></script>
-
-
+<script src="<?php echo base_url('assets/js/patient.js') ?>"></script>
 
 <link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://tmed3000.org/xmlrpc.php?rsd" >
 <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://tmed3000.org/wp-includes/wlwmanifest.xml" > 
