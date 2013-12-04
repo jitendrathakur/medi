@@ -25,7 +25,7 @@ class Supert extends CI_Controller
 
 		$data['uri']=$this->uri->segment(2);
 
-        $option = array('access' => 'Therapists');        
+		$option = array('access' => 'Therapists');        
 		$result= $this->Supert_model->get_therapist_list($option);
 		//echo "<pre>";
 		//print_r($result);
@@ -500,6 +500,179 @@ class Supert extends CI_Controller
 		}
 		
 	}
+	
+	
+	
+	function patient_therapist_list()
+	{
+
+		$this->auth->check_access('supert',true);
+
+		$this->load->model('Supert_model');
+		
+		$data['uri']=$this->uri->segment(2);
+		
+		$results = $this->Supert_model->get_patient_therapist_list();
+		
+		//print_r($results);
+		//die;
+		if(!empty($results)){
+			foreach($results as $result){
+				
+				$therapist_arr = $this->Supert_model->get_admin_read_single($result->therapist_id);
+				$patient_arr 	= $this->Supert_model->get_admin_read_single($result->patient_id);
+				
+				//print_r($therapist_arr);
+				//die;
+			
+				$result->therapist_name	= $therapist_arr->firstname.' '.$therapist_arr->lastname;
+				$result->patient_name	= $patient_arr->firstname.' '.$patient_arr->lastname;
+					
+				$result_arr[] = $result;
+			}
+		}
+		else {
+			$result_arr = '';
+		}
+		 
+		$data['view'] 			= 'patient_therapist_list';
+		$data['results'] 		= $result_arr;
+		//$data['therapist'] 	= $result['therapist'];
+        
+     
+		$this->load->view($this->config->item('supert').'/layout', $data);
+		
+	}
+	//==================== patient_therapist_list =====================
+	
+	
+	function patient_therapist_remove($id)
+	{
+
+		$this->auth->check_access('supert',true);
+
+		$this->load->model('Supert_model');
+		
+		$data['uri']=$this->uri->segment(2);
+		
+		//print_r($id);
+		//die;
+		if(!empty($id)){
+			$result = $this->Supert_model->patient_therapist_remove($id);	
+		
+			if($result){
+				redirect($this->config->item('supert').'/patient_therapist_list');	
+			}else{
+				redirect($this->config->item('supert').'/patient_therapist_list');
+			}
+			
+		}else{
+			redirect($this->config->item('supert').'/patient_therapist_list');
+		}
+		
+	}
+	//==================== patient_therapist_remove =====================
+	
+	
+	function patient_therapist_create()
+	{
+
+		$this->auth->check_access('supert',true);
+
+		$this->load->model('Supert_model');
+		
+		$data['uri']=$this->uri->segment(2);
+		
+		$option = array('access' => 'Therapists');        
+		$data['therapists']	= $this->Supert_model->get_therapist_list($option);
+
+		$option = array('access' => 'Normal');        
+		$data['patients']	= $this->Supert_model->get_therapist_list($option);
+		
+		
+		if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+			
+			
+			$therapist_id 	= $this->input->post('therapist_id');
+			$patient_id 	= $this->input->post('patient_id');
+			
+			//print_r($id);
+			//die;
+			
+			$option = array( 'therapist_id'=>$therapist_id, 'patient_id'=>$patient_id	);
+			
+			$id	= $this->Supert_model->patient_therapist_create($option);
+			if($id){
+				//echo "insert hua";
+				//die;
+				redirect($this->config->item('supert').'/patient_therapist_list');
+			}else{
+				//echo "insert nahi hua";
+				//die;
+				redirect($this->config->item('supert').'/patient_therapist_list');
+			}
+			
+		}
+		
+		$data['view'] 			= 'patient_therapist_create';
+		
+		
+		$this->load->view($this->config->item('supert').'/layout', $data);
+	}
+	//==================== patient_therapist_create =====================
+	
+	
+	function patient_therapist_edit($id)
+	{
+
+		$this->auth->check_access('supert',true);
+
+		$this->load->model('Supert_model');
+		
+		$data['uri']=$this->uri->segment(2);
+		
+		//print_r($id);
+		//die;
+		
+		$result = $this->Supert_model->get_patient_therapist_read_single($id);
+		
+		$option = array('access' => 'Therapists');        
+		$data['therapists']	= $this->Supert_model->get_therapist_list($option);
+
+		$option = array('access' => 'Normal');        
+		$data['patients']	= $this->Supert_model->get_therapist_list($option);
+		
+		
+		if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+			
+			$id 			= $this->input->post('id');
+			$therapist_id 	= $this->input->post('therapist_id');
+			$patient_id 	= $this->input->post('patient_id');
+			
+			//print_r($id);
+			//die;
+			
+			$option = array( 'therapist_id'=>$therapist_id, 'patient_id'=>$patient_id	);
+			
+			$result	= $this->Supert_model->patient_therapist_edit($id, $option);
+			if($result){
+				//echo "update hua";
+				//die;
+				redirect($this->config->item('supert').'/patient_therapist_list');
+			}else{
+				//echo "update nahi hua";
+				//die;
+				redirect($this->config->item('supert').'/patient_therapist_list');
+			}
+			
+		}
+		
+		$data['view'] 			= 'patient_therapist_edit';
+		$data['result'] 		= $result;
+		
+		$this->load->view($this->config->item('supert').'/layout', $data);
+	}
+	//==================== patient_therapist_edit =====================
 	
 
 

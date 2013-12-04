@@ -44,6 +44,9 @@
             <li>
               <a href="javascript:;" class="navbar-brand">Super therapist</a>
             </li>
+            <li>
+              <a href="<?php echo base_url('supert/patient_therapist_list') ?>" class="btn btn-success">Assign Patient</a>
+            </li>
             <li class="dropdown">
               <a href="<?php echo base_url('login/logout') ?>" >Logout</a>             
             </li>  

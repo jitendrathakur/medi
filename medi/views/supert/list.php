@@ -1,12 +1,13 @@
 <ul class="breadcrumb" style="margin-bottom: 5px;">
-  <li class="active"><a href='<?php echo base_url('supert/details/')."/".$user_id."/".$row->id ?>'>Home</a></li> 
+  <li class="active">
+    <a href='<?php //echo base_url('supert/details/')."/".$user_id."/".$row->id ?>'>Home</a></li> 
 </ul>
 <div class="bs-docs-section">
 
   <div class="row">
     <div class="col-lg-12">
       <div class="page-header">
-        <h1 id="tables">List of therapist</h1>
+          <h1 id="tables">List of therapist</h1>
       </div>
 
       <div class="bs-example table-responsive">
