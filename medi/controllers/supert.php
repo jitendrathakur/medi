@@ -583,12 +583,13 @@ class Supert extends CI_Controller
 		
 		$data['uri']=$this->uri->segment(2);
 		
-		$option = array('access' => 'Therapists');        
-		$data['therapists']	= $this->Supert_model->get_therapist_list($option);
+		$column = 'therapist_id';
+		$filter = 'Therapists';
+		$data['therapists']	= $this->Supert_model->get_patient_therapist_list_filter($column, $filter);
 
-		$option = array('access' => 'Normal');        
-		$data['patients']	= $this->Supert_model->get_therapist_list($option);
-		
+		$column = 'patient_id';
+		$filter = 'Normal';
+		$data['patients']	= $this->Supert_model->get_patient_therapist_list_filter($column, $filter);
 		
 		if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 			
@@ -636,11 +637,20 @@ class Supert extends CI_Controller
 		
 		$result = $this->Supert_model->get_patient_therapist_read_single($id);
 		
-		$option = array('access' => 'Therapists');        
-		$data['therapists']	= $this->Supert_model->get_therapist_list($option);
+		//$option = array('access' => 'Therapists');        
+		//$data['therapists']	= $this->Supert_model->get_therapist_list($option);
+		//$option = array('access' => 'Normal');        
+		//$data['patients']	= $this->Supert_model->get_therapist_list($option);
+		$edit_id = $result->therapist_id;
+		$column = 'therapist_id';
+		$filter = 'Therapists';
+		$data['therapists']	= $this->Supert_model->get_patient_therapist_list_filter($column, $filter, $edit_id);
 
-		$option = array('access' => 'Normal');        
-		$data['patients']	= $this->Supert_model->get_therapist_list($option);
+		$edit_id = $result->patient_id;
+		$column = 'patient_id';
+		$filter = 'Normal';
+		$data['patients']	= $this->Supert_model->get_patient_therapist_list_filter($column, $filter, $edit_id);
+		
 		
 		
 		if ($_SERVER['REQUEST_METHOD'] === 'POST') {

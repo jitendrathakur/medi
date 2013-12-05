@@ -140,6 +140,44 @@ Class Supert_model extends CI_Model
 	}//end get_patient_therapist_list
 	
 	
+	function get_patient_therapist_list_filter($column, $filter, $edit_id='')
+	{
+		$this->db->select($column);
+		$results	= $this->db->get('patient_therapist')->result();
+		
+		$ids = array();
+		if(!empty($results)){
+			foreach($results as $result){
+				$ids[] = $result->$column;
+			}
+		}
+		
+		if(!empty($edit_id)){
+			$ids = array_diff($ids, array($edit_id));
+		}
+		
+		$this->db->select('*');
+		if(!empty($result)){
+			$this->db->where_not_in('id', $ids);
+			$this->db->where('access', $filter);
+		}
+		
+		$result	= $this->db->get('admin')->result();
+		
+		//print_r($this->db->last_query());
+		//print_r($result);
+		//die;
+		if(!empty($result)){
+			return $result;	
+		}else{
+			return false;
+		}
+
+		
+	}//end get_patient_therapist_list
+	
+	
+	
 	function get_admin_read_single($id)
 	{
 		$this->db->select('*');
@@ -251,6 +289,8 @@ Class Supert_model extends CI_Model
 		
 	}
 	//patient_therapist_create
+	
+	
 	
 	
 		
