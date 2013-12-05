@@ -1,83 +1,100 @@
 <?php
 class Patient extends CI_Controller
 {
-	//these are used when editing, adding or deleting an admin	
-	function __construct()
-	{
-		parent::__construct();
-				
-		//load the admin language file in
-		$this->lang->load('admin');		
-	}
+  //these are used when editing, adding or deleting an admin  
+  function __construct()
+  {
+    parent::__construct();
+        
+    //load the admin language file in
+    $this->lang->load('admin');   
+  }
 
-	function core1_reply($id = null) {
+  function core1_reply($id = null) {
 
-    	$this->auth->check_access('Normal',true);
+      $this->auth->check_access('Normal',true);
 
-    	$user = $this->admin_session->userdata('admin');
+      $user = $this->admin_session->userdata('admin');
 
-    	$comment = $this->input->post('comment');
+      $comment = $this->input->post('comment');     
 
-    	//echo $comment;
+      $this->load->model('Patient_model');
+      $data = array(
+      'core1_id' => $id,
+      'patient_id' => $user['id'],
+      'comment' => $comment
+    );
 
-    	//echo "hello";
+    $this->Patient_model->core1_comment($data);
 
-    	//exit;
-
-    	$this->load->model('Patient_model');
-    	$data = array(
-			'core1_id' => $id,
-			'patient_id' => $user['id'],
-			'comment' => $comment
-		);
-
-		$this->Patient_model->core1_comment($data);
-
-		echo "true";
+    echo "true";
     }//end core1_reply()
 
 
     function core2_reply($id = null) {
 
-    	$this->auth->check_access('Normal',true);
+      $this->auth->check_access('Normal',true);
 
-    	$user = $this->admin_session->userdata('admin');
+      $user = $this->admin_session->userdata('admin');
 
-    	$comment = $this->input->post('comment');
+      $comment = $this->input->post('comment');
 
-    	$this->load->model('Patient_model');
-		$data = array(
-			'core2_id' => $id,
-			'patient_id' => $user['id'],
-			'comment' => $comment
-		);
+      $this->load->model('Patient_model');
+    $data = array(
+      'core2_id' => $id,
+      'patient_id' => $user['id'],
+      'comment' => $comment
+    );
 
-		$this->Patient_model->core2_comment($data);
+    $this->Patient_model->core2_comment($data);
 
-		echo "true";
+    echo "true";
     }//ene core2_reply()
 
 
     function core3_reply($id = null) {
 
-    	$this->auth->check_access('Normal',true);
+      $this->auth->check_access('Normal',true);
 
-    	$user = $this->admin_session->userdata('admin');
+      $user = $this->admin_session->userdata('admin');
 
-    	$comment = $this->input->post('comment');
+      $comment = $this->input->post('comment');
 
-    	$this->load->model('Patient_model');
-		$data = array(
-			'core3_id' => $id,
-			'patient_id' => $user['id'],
-			'comment' => $comment
-		);
+      $this->load->model('Patient_model');
+      $data = array(
+        'core3_id' => $id,
+        'patient_id' => $user['id'],
+        'comment' => $comment
+      );
 
-		$this->Patient_model->core3_comment($data);
+      $this->Patient_model->core3_comment($data);
 
-		echo "true";
+      echo "true";
 
     }//end core3_reply()
+
+
+    function wellness_list()
+    {
+      $this->auth->check_access('Normal',true);
+      
+      $this->lang->load('wellness');
+      $this->load->model('Wellness_model');
+      $data['uri']=$this->uri->segment(2);
+      $data['admin_session'] = $this->admin_session->userdata('admin');
+      $user_id = $data['admin_session']['id'];    
+      $therapist = $this->auth->getTherapist($user_id);      
+      
+      //$data['total_read_count'] = $this->__patientAlert($user_id);
+
+      $data['result'] = $this->Wellness_model->getWellnessList($user_id);  
+
+      $data['view'] = 'wellness_list';
+
+      $this->load->view($this->config->item('patient').'/layout', $data);
+        
+      
+    }
     
     
 

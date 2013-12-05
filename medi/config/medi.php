@@ -92,4 +92,6 @@ $config['supert']		= 'supert';
 
 $config['email']		= 'email';
 
+$config['patient']		= 'patient';
+
 $config['sms_feature']	= false;

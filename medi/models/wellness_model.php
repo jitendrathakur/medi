@@ -163,4 +163,27 @@ Class Wellness_model extends CI_Model
 	{
 		return $this->db->select('product_id')->from('category_products')->join('products', 'category_products.product_id=products.id')->where(array('category_id'=>$id, 'enabled'=>1))->count_all_results();
 	}
+
+	function getWellnessList($userId = false,$limit = NULL,$offset = NULL)
+	{
+		if (!empty($limit)) {
+			$this->db->limit($limit,$offset); 
+		}
+		if ($userId !== false)
+		{
+			$this->db->where('user_id', $userId);
+		}
+	
+		$query	= $this->db->get('wellness');
+ 
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $data[] = $row;
+            }
+            return $data;
+        }
+        return false;	
+		
+	}
+
 }
