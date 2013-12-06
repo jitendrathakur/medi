@@ -82,12 +82,10 @@ body {
 #container {
 	clear: both;
 	margin: 0 auto;
+	margin:10px;
+	width:100%;
 }
-body.no-sidebars #container,
-.full-width #container,
-.attachment #container {
-	max-width: 990px;
-}
+
 #content-container {
 	width: 100%;
 }
@@ -1739,7 +1737,7 @@ position: absolute;
 
 .journal-entries {
 position: relative;
-width: 75%;
+width: 80%;
 float: right;
 }
 

@@ -181,6 +181,13 @@
 
 }
 
+table {
+  table-layout: fixed;
+  word-wrap:break-word;
+}
+
+#content-box, #header, #content-container, #content {width:100%;}
+
 
  
 #site-title a, #site-description {

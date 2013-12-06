@@ -129,7 +129,7 @@
 		</td>
 
 		<td>
-			<a  class ="edit_btn" href="<?php echo base_url('patient/cooccurring_edit/').'/'.$result->id  ?>" >Edit</a>	       
+			<a  class ="edit_btn btn" href="<?php echo base_url('patient/cooccurring_edit/').'/'.$result->id  ?>" >Edit</a>	       
 		</td>
 
 	</tr>

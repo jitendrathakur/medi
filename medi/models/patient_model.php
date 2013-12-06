@@ -31,7 +31,12 @@ Class Patient_model extends CI_Model
 	
 		$result	= $this->db->get($model)->row();
 
-		return (date('Y-m-d',  strtotime($result->cr_timestamp))  >= date('Y-m-d'));
+		if (isset($result->cr_timestamp) && !empty($result->cr_timestamp)) {
+			return (date('Y-m-d',  strtotime($result->cr_timestamp))  >= date('Y-m-d'));	
+		} else {
+			return false;
+		}
+		
 		
 	}//end __checkPatientSubmission()
 
