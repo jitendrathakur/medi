@@ -34,5 +34,28 @@ Class Patient_model extends CI_Model
 		return (date('Y-m-d',  strtotime($result->cr_timestamp))  >= date('Y-m-d'));
 		
 	}//end __checkPatientSubmission()
+
+
+	function getModelList($userId = false,$limit = NULL,$offset = NULL, $model)
+	{
+		if (!empty($limit)) {
+			$this->db->limit($limit,$offset); 
+		}
+		if ($userId !== false)
+		{
+			$this->db->where('user_id', $userId);
+		}
+	
+		$query	= $this->db->get($model);
+ 
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $data[] = $row;
+            }
+            return $data;
+        }
+        return false;	
+		
+	}
 		
 }//end class
