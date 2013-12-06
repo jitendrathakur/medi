@@ -201,29 +201,13 @@ body.custom-background {
 <body class="page page-id-9 page-template page-template-home-page-php custom-background no-sidebars color-blue" style="" >
 
 
-      <div id="container" class="hfeed contain" >
-
-
+  <div id="container" class="hfeed contain" >
 
   <div id="header" ><a href="http://tmed3000.org" ><img style="width:65%; padding-left:16%; " src="<?php echo base_url('assets/img/mainlogo.png') ?>" ></a>
 
-
-
     <div id="masthead" role="banner" >
 
-
-
-            
-
-
-
     </div><!-- #masthead -->
-
-
-
-
-
-
 
     <div id="access" role="navigation" >
 
@@ -282,8 +266,6 @@ body.custom-background {
 <li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-31" ><a href="http://tmed3000.org/newsletter/" >Newsletter</a></li>
 
 <li id="menu-item-28" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-28" ><a href="http://tmed3000.org/events/" >Events</a></li>
-
-<li id="menu-item-28" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-28" ><a href="<?php echo base_url('login/logout') ?>" >Logout</a></li>
 
  <?php
   $admin = $this->admin_session->userdata('admin');

@@ -157,7 +157,7 @@ Class Supert_model extends CI_Model
 		}
 		
 		$this->db->select('*');
-		if(!empty($result)){
+		if(!empty($result) && !empty($ids)){
 			$this->db->where_not_in('id', $ids);
 			$this->db->where('access', $filter);
 		}

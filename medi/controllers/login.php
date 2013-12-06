@@ -159,8 +159,8 @@ class Login extends CI_Controller {
 
 		if($this->auth->check_access('Normal'))
 		{					
-			$redirect = $this->config->item('admin_folder').'/forms/wellness_form';				
-		}			 
+			$redirect = $this->config->item('patient').'/wellness_list';				
+		}
 		  
 		if($this->auth->check_access('Therapists'))
 		{					

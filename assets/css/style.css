@@ -1784,3 +1784,5 @@ table.ui-timepicker .ui-state-default {
     text-align: left;
     width: 30px;
 }
+
+table th { font-weight:bold;}

@@ -585,7 +585,11 @@ class Supert extends CI_Controller
 		
 		$column = 'therapist_id';
 		$filter = 'Therapists';
-		$data['therapists']	= $this->Supert_model->get_patient_therapist_list_filter($column, $filter);
+
+		$option = array('access' => 'Therapists');        
+		$data['therapists']	= $this->Supert_model->get_therapist_list($option);
+
+		//$data['therapists']	= $this->Supert_model->get_patient_therapist_list_filter($column, $filter);
 
 		$column = 'patient_id';
 		$filter = 'Normal';
@@ -644,7 +648,9 @@ class Supert extends CI_Controller
 		$edit_id = $result->therapist_id;
 		$column = 'therapist_id';
 		$filter = 'Therapists';
-		$data['therapists']	= $this->Supert_model->get_patient_therapist_list_filter($column, $filter, $edit_id);
+		//$data['therapists']	= $this->Supert_model->get_patient_therapist_list_filter($column, $filter, $edit_id);
+		$option = array('access' => 'Therapists');        
+		$data['therapists']	= $this->Supert_model->get_therapist_list($option);
 
 		$edit_id = $result->patient_id;
 		$column = 'patient_id';
