@@ -64,3 +64,17 @@ CREATE TABLE IF NOT EXISTS `med_core3_reply` (
   `created` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+
+ALTER TABLE `med_recoveryvitals` ADD `is_read` TINYINT NOT NULL AFTER `pulse` ;
+
+ALTER TABLE `med_tmed` ADD `is_read` TINYINT NOT NULL AFTER `pulse` ;
+
+ALTER TABLE `med_wellness` ADD `is_read` TINYINT NOT NULL AFTER `pulse` ;
+
+ALTER TABLE `med_physicalhealth` ADD `is_read` TINYINT NOT NULL AFTER `pulse` ;
+
+ALTER TABLE `med_forensic` ADD `is_read` TINYINT NOT NULL AFTER `pulse` ;
+
+ALTER TABLE `med_cooccurring` ADD `is_read` TINYINT NOT NULL AFTER `pulse` ;
+

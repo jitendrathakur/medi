@@ -1,7 +1,4 @@
-<div class="journal-entries well" >
-	<?php if ($done == false) : ?>
-	<a class="btn btn-danger" href="<?php echo base_url('forms/wellness_form') ?>" >Add Wellness</a>
-	<?php endif; ?>
+<div class="journal-entries well" >	
 	<table class='table table-bordered table-condensed table-hover table-striped'>
 	<tr>
 

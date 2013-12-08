@@ -12,21 +12,21 @@ class Therapist extends CI_Controller
  
     function wellness_list()
     {
-      $this->auth->check_access('Therapist',true);
+
+      $this->auth->check_access('Therapists',true);
       
       $this->lang->load('wellness');      
       $data['uri']=$this->uri->segment(2);
       
       $data['admin_session'] = $this->admin_session->userdata('admin');
       $user_id = $data['admin_session']['id'];    
-      $therapist = $this->auth->getTherapist($user_id);   
+      //$therapist = $this->auth->getTherapist($user_id);   
 
       $this->load->model('Patient_model');
-      $data['done'] = $this->Patient_model->__checkPatientSubmission($user_id, 'wellness');
-          
-      $data['total_read_count'] = $this->__patientAlert($user_id);
+      
+      $data['total_read_count'] = $this->__therapistAlert($user_id);
 
-      $data['results'] = $this->Patient_model->getModelList($user_id, null, null, 'wellness');
+      //$data['results'] = $this->Patient_model->getModelList($user_id, null, null, 'wellness');
     
       $data['view'] = 'wellness_list';
 
@@ -147,15 +147,11 @@ class Therapist extends CI_Controller
 
 
     /* Patient alert count */
-    function __patientAlert($userId = null) {
-
-      $this->load->model('Core1_model');
-      $this->load->model('Core2_model');
-      $this->load->model('Core3_model');
-      $core1_read_count = $this->Core1_model->read_core1_count($userId);
-      $core2_read_count = $this->Core2_model->read_core2_count($userId);
-      $core3_read_count = $this->Core3_model->read_core3_count($userId);
-      $sum = $core1_read_count + $core2_read_count + $core3_read_count;
+    function __therapistAlert($userId = null) {
+      
+      $sum = 0;
+      $this->load->model('Therapist_model');
+      $sum = $this->Therapist_model->read_count($userId);
 
       return $sum;
 

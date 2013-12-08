@@ -278,7 +278,10 @@ body.custom-background {
   $admin = $this->admin_session->userdata('admin');
   if ($admin['access'] == 'Normal') { ?>
 <li id="menu-item-28" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-28"><a href="<?php echo base_url('forms/patient_alert_list') ?>">Alert <span class='badge'><?php echo @$total_read_count; ?></span></a></li>
-<?php } ?>
+<?php } elseif($admin['access'] == 'Therapists') { ?>
+
+  <li id="menu-item-28" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-28"><a href="<?php echo base_url('therapist/alert_list') ?>">Alert <span class='badge'><?php echo @$total_read_count; ?></span></a></li>
+  <?php } ?>
 
 <li id="menu-item-28" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-28" ><a href="<?php echo base_url('login/logout') ?>" >Logout</a></li>
 <li><span style="color:#fff;font-weight: bold; width: 100px;position:absolute;"><?php
