@@ -280,7 +280,7 @@ body.custom-background {
 <li id="menu-item-28" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-28"><a href="<?php echo base_url('forms/patient_alert_list') ?>">Alert <span class='badge'><?php echo @$total_read_count; ?></span></a></li>
 <?php } elseif($admin['access'] == 'Therapists') { ?>
 
-  <li id="menu-item-28" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-28"><a href="<?php echo base_url('therapist/alert_list') ?>">Alert <span class='badge'><?php echo @$total_read_count; ?></span></a></li>
+  <li id="menu-item-28" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-28"><a href="<?php echo base_url('therapist/wellness_list') ?>">Alert <span class='badge'><?php echo @$total_read_count; ?></span></a></li>
   <?php } ?>
 
 <li id="menu-item-28" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-28" ><a href="<?php echo base_url('login/logout') ?>" >Logout</a></li>

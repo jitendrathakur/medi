@@ -72,7 +72,7 @@ ALTER TABLE `med_tmed` ADD `is_read` TINYINT NOT NULL AFTER `pulse` ;
 
 ALTER TABLE `med_wellness` ADD `is_read` TINYINT NOT NULL AFTER `pulse` ;
 
-ALTER TABLE `med_physicalhealth` ADD `is_read` TINYINT NOT NULL AFTER `pulse` ;
+ALTER TABLE `med_physicalhealth` ADD `is_read` TINYINT NOT NULL AFTER `is_pain` ;
 
 ALTER TABLE `med_forensic` ADD `is_read` TINYINT NOT NULL AFTER `pulse` ;
 

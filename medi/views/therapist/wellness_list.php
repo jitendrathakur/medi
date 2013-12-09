@@ -1,4 +1,7 @@
 <div class="journal-entries well" >	
+
+	<?php include('alert_tabs.php'); ?>
+
 	<table class='table table-bordered table-condensed table-hover table-striped'>
 	<tr>
 

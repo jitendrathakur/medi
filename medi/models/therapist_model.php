@@ -1,29 +1,37 @@
 <?php
 Class Therapist_model extends CI_Model
-{
+{	
 	
-	
-	// function getModelList($userId = false,$limit = NULL,$offset = NULL, $model)
-	// {
-	// 	if (!empty($limit)) {
-	// 		$this->db->limit($limit,$offset); 
-	// 	}
-	// 	if ($userId !== false)
-	// 	{
-	// 		$this->db->where('user_id', $userId);
-	// 	}
-	
-	// 	$query	= $this->db->get($model);
- 
- //        if ($query->num_rows() > 0) {
- //            foreach ($query->result() as $row) {
- //                $data[] = $row;
- //            }
- //            return $data;
- //        }
- //        return false;	
+	function getModelList($userId = false,$limit = NULL,$offset = NULL, $model)
+	{
+
+		$patientId = $this->__getPatientByTherapist($userId);
+
+		$this->db->select($model.'.*, admin.firstname, admin.lastname');
+
+		$this->db->join('admin', $model.'.user_id=admin.id');
+
+		if (!empty($limit)) {
+			$this->db->limit($limit,$offset); 
+		}
+		if ($userId !== false)
+		{			
+			$this->db->where_in('user_id', $patientId);
+		}		
 		
-	// }
+		$this->db->order_by('is_read', 'ASC');		
+			
+		$query	= $this->db->get($model);
+ 
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $data[] = $row;
+            }
+            return $data;
+        }
+        return false;	
+		
+	}
 
 
 	function read_count($therapistId = null) {
