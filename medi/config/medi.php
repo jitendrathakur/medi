@@ -94,6 +94,10 @@ $config['email']		= 'email';
 
 $config['patient']		= 'patient';
 
-$config['sms_feature']	= false;
+$config['sms_feature']	= true;
+
+$config['sms_group']	= array('Therapists', 'supert');
 
 $config['therapist']	= 'therapist';
+
+$config['admin']	= 'admin';

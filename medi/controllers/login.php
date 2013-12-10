@@ -41,25 +41,9 @@ class Login extends CI_Controller {
 		$redirect	= $this->auth->is_logged_in(false, false);
 		//if they are logged in, we send them back to the dashboard by default, if they are not logging in
 		if ($redirect)
-		{
-			if($this->auth->check_access('Normal'))
-			{
-				//redirect($this->config->item('admin_folder').'/forms/wellness_form');
-			}
-			if($this->auth->check_access('Therapists'))
-			{
-				//$redirect = $this->config->item('admin_folder').'/forms/core1_list';
-			 					 
-			}
-			if($this->auth->check_access('supert'))
-			{
-				//$redirect = $this->config->item('admin_folder').'/supert/';
-			 					 
-			}
+		{			
 			$redirect = $this->config->item('admin_folder').'/login/sms';
-		}
-
-		
+		}		
 		
 		$this->load->helper('form');
 		$data['redirect']	= $this->session->flashdata('redirect');
@@ -88,6 +72,11 @@ class Login extends CI_Controller {
 	    		if ($this->config->item('sms_feature') == false) {
 	    			$redirect = $this->__roleRedirect();				
 					redirect($redirect);
+	    		} else {
+	    			if (!in_array($admin['access'], $this->config->item('sms_group'))) {
+	    				$redirect = $this->__roleRedirect();				
+						redirect($redirect);
+	    			}
 	    		}
 
 	    		$flag = false;

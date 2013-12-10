@@ -19,10 +19,13 @@ class Admin extends Admin_Controller
 	{
 		//die('inside');
 		$data['page_title']	= lang('admins');
-		$data['admins']		= $this->auth->get_admin_list();
+		$data['results']		= $this->auth->get_admin_list();
 
-		$this->load->view($this->config->item('admin_folder').'/admins', $data);
+		$data['view'] = 'list';
+
+		$this->load->view($this->config->item('admin').'/layout', $data);
 	}
+
 	function getNormalUser(){
 
 		$this->db->select('id, firstname,  lastname');
@@ -60,10 +63,10 @@ class Admin extends Admin_Controller
 		$this->session->set_flashdata('message', lang('message_user_deleted'));
 		redirect($this->config->item('admin_folder').'/admin');
 	}
-	function form($id = false)
+
+	function add($id = false)
 	{
-		force_ssl();
-		
+				
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
@@ -74,9 +77,11 @@ class Admin extends Admin_Controller
 		$data['id']		= '';
 		$data['firstname']	= '';
 		$data['lastname']	= '';
+		$data['username']	= '';
 		$data['email']		= '';
 		$data['access']		= '';
-		
+		$data['mobile']		= '';
+				
 		if ($id)
 		{	
 			$this->admin_id		= $id;
@@ -85,20 +90,24 @@ class Admin extends Admin_Controller
 			if (!$admin)
 			{
 				$this->session->set_flashdata('message', lang('admin_not_found'));
-				redirect($this->config->item('admin_folder').'/admin');
+				redirect($this->config->item('adminr').'/list');
 			}
 			//set values to db values
 			$data['id']			= $admin->id;
 			$data['firstname']	= $admin->firstname;
 			$data['lastname']	= $admin->lastname;
+			$data['email']		= $admin->user;
 			$data['email']		= $admin->email;
 			$data['access']		= $admin->access;
+			$data['mobile']		= $admin->mobile;
 		}
 		
 		$this->form_validation->set_rules('firstname', 'lang:firstname', 'trim|max_length[32]');
 		$this->form_validation->set_rules('lastname', 'lang:lastname', 'trim|max_length[32]');
+		$this->form_validation->set_rules('user', 'lang:user', 'trim|max_length[32]');
 		$this->form_validation->set_rules('email', 'lang:email', 'trim|required|valid_email|max_length[128]|callback_check_email');
 		$this->form_validation->set_rules('access', 'lang:access', 'trim|required');
+		$this->form_validation->set_rules('mobile', 'lang:mobile', 'trim|max_length[32]');
 		
 		//if this is a new account require a password, or if they have entered either a password or a password confirmation
 		if ($this->input->post('password') != '' || $this->input->post('confirm') != '' || !$id)
@@ -109,15 +118,17 @@ class Admin extends Admin_Controller
 		
 		if ($this->form_validation->run() == FALSE)
 		{
-			$this->load->view($this->config->item('admin_folder').'/admin_form', $data);
+			$this->load->view($this->config->item('admin').'/add', $data);
 		}
 		else
 		{
 			$save['id']		= $id;
 			$save['firstname']	= $this->input->post('firstname');
 			$save['lastname']	= $this->input->post('lastname');
+			$save['user']		= $this->input->post('user');
 			$save['email']		= $this->input->post('email');
 			$save['access']		= $this->input->post('access');
+			$save['mobile']		= $this->input->post('mobile');
 			
 			if ($this->input->post('password') != '' || !$id)
 			{
@@ -129,9 +140,10 @@ class Admin extends Admin_Controller
 			$this->session->set_flashdata('message', lang('message_user_saved'));
 			
 			//go back to the customer list
-			redirect($this->config->item('admin_folder').'/admin');
+			redirect($this->config->item('admin').'/list');
 		}
 	}
+
 	
 	function check_email($str)
 	{
