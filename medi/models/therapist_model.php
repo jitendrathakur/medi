@@ -64,5 +64,23 @@ Class Therapist_model extends CI_Model
         return false;	
 
 	}
+
+
+	function setModelAlert($therapistId, $model) {
+
+		$patientId = $this->__getPatientByTherapist($therapistId);
+
+
+		if (!empty($patientId))
+		{			
+			//$this->db->where('user_id', $core1['user_id']);
+			$this->db->where_in('user_id', $patientId);
+			$data = array('is_read' => true);
+			$this->db->update($model, $data);			
+		}
+
+		return true;
+
+	}//end setModelAlert()
 		
 }//end class

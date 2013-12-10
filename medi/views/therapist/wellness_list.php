@@ -37,8 +37,6 @@
 		Created
 		</th>
 	
-		<th>Action</th>
-
 	</tr>
 	</hr>
 
@@ -74,10 +72,6 @@
 
 		<td>
 			<?php echo $result->cr_timestamp; ?>
-		</td>
-
-		<td>
-			<a  class ="edit_btn btn" href="<?php echo base_url('patient/wellness_edit/').'/'.$result->id  ?>" >Edit</a>	       
 		</td>
 
 	</tr>

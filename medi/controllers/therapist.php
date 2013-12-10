@@ -41,8 +41,7 @@ class Therapist extends CI_Controller
       $data['uri']=$this->uri->segment(2);
       $data['admin_session'] = $this->admin_session->userdata('admin');
       $user_id = $data['admin_session']['id'];    
-      $therapist = $this->auth->getTherapist($user_id);   
-
+      
       $this->load->model('Therapist_model');
                 
       $data['total_read_count'] = $this->__therapistAlert($user_id);
@@ -62,8 +61,7 @@ class Therapist extends CI_Controller
       $data['uri']=$this->uri->segment(2);
       $data['admin_session'] = $this->admin_session->userdata('admin');
       $user_id = $data['admin_session']['id'];    
-      $therapist = $this->auth->getTherapist($user_id);   
-
+      
       $this->load->model('Therapist_model');
                 
       $data['total_read_count'] = $this->__therapistAlert($user_id);
@@ -83,8 +81,7 @@ class Therapist extends CI_Controller
       $data['uri']=$this->uri->segment(2);
       $data['admin_session'] = $this->admin_session->userdata('admin');
       $user_id = $data['admin_session']['id'];    
-      $therapist = $this->auth->getTherapist($user_id);   
-
+      
       $this->load->model('Therapist_model');
                 
       $data['total_read_count'] = $this->__therapistAlert($user_id);
@@ -104,8 +101,7 @@ class Therapist extends CI_Controller
       $data['uri']=$this->uri->segment(2);
       $data['admin_session'] = $this->admin_session->userdata('admin');
       $user_id = $data['admin_session']['id'];    
-      $therapist = $this->auth->getTherapist($user_id);   
-
+      
       $this->load->model('Therapist_model');
                 
       $data['total_read_count'] = $this->__therapistAlert($user_id);
@@ -125,8 +121,7 @@ class Therapist extends CI_Controller
       $data['uri']=$this->uri->segment(2);
       $data['admin_session'] = $this->admin_session->userdata('admin');
       $user_id = $data['admin_session']['id'];    
-      $therapist = $this->auth->getTherapist($user_id);   
-
+     
       $this->load->model('Therapist_model');
                 
       $data['total_read_count'] = $this->__therapistAlert($user_id);
@@ -150,6 +145,21 @@ class Therapist extends CI_Controller
       return $sum;
 
     }//end __patientAlert() 
+
+
+    function alert_read($model = null) {    
+
+      $this->auth->check_access('Therapists', true);
+      $this->load->model('Therapist_model');
+
+      $data['admin_session'] = $this->admin_session->userdata('admin');
+      $user_id = $data['admin_session']['id'];
+
+      $this->Therapist_model->setModelAlert($user_id, $model);
+
+      echo "true";
+
+    }//end alert_read()
       
     
 }//end class

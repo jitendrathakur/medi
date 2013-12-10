@@ -1,11 +1,10 @@
 <?php include('header.php'); ?>
 
-<div class="journal-entries" >
-		
+<div class="journal-entries well" >		
 
-	<div style="height:100%;margin-left:-90px;border:0px solid; " id="mainForm" >
+	<div style="" id="" >
 		
-	<table border="0" cellpadding="10" cellspacing="0" width="50%">
+	<table class='table table-bordered table-condensed table-hover table-striped'>
 	<tr>
 
 		<th>

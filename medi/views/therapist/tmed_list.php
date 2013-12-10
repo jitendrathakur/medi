@@ -1,4 +1,7 @@
 <div class="journal-entries well" >	
+	
+	<?php include('alert_tabs.php'); ?>
+
 	<table class='table table-bordered table-condensed table-hover table-striped'>
 	<tr>		
 		<th>			
@@ -33,8 +36,6 @@
 		Created
 		</th>
 	
-		<th>Action</th>
-
 	</tr>
 	</hr>
 
@@ -70,10 +71,6 @@
 
 		<td>
 			<?php echo $result->cr_timestamp; ?>
-		</td>
-
-		<td>
-			<a  class ="edit_btn btn" href="<?php echo base_url('patient/tmed_edit/').'/'.$result->id  ?>" >Edit</a>	       
 		</td>
 
 	</tr>

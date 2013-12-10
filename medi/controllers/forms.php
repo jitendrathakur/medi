@@ -58,9 +58,17 @@ class Forms extends Admin_Controller {
   function core1_list()
   {
 
-    $this->load->model('Core1_model');
+    $this->auth->check_access('Therapists',true);
+              
     $data['uri']=$this->uri->segment(2);
+    $data['admin_session'] = $this->admin_session->userdata('admin');
+    $user_id = $data['admin_session']['id'];  
+
+    $this->load->model('Core1_model');
+    
     $result= $this->Core1_model->readAll();
+
+    $data['total_read_count'] = $this->__therapistAlert($user_id);
      
     $data['results'] = $result;
 
@@ -70,11 +78,19 @@ class Forms extends Admin_Controller {
 
   function core2_list()
   {     
-    $this->load->model('Core2_model');
+
+    $this->auth->check_access('Therapists',true);
+              
     $data['uri']=$this->uri->segment(2);
+    $data['admin_session'] = $this->admin_session->userdata('admin');
+    $user_id = $data['admin_session']['id'];  
+
+    $this->load->model('Core2_model');
+    
     $result= $this->Core2_model->readAll();
-    // print_r($result);
-    // die
+
+    $data['total_read_count'] = $this->__therapistAlert($user_id);
+    
     $data['results'] = $result; 
 
     $this->load->view($this->config->item('admin_folder').'/core2_list', $data);
@@ -83,11 +99,19 @@ class Forms extends Admin_Controller {
 
   function core3_list()
   {
-    $this->load->model('Core3_model');
+
+    $this->auth->check_access('Therapists',true);
+              
     $data['uri']=$this->uri->segment(2);
+    $data['admin_session'] = $this->admin_session->userdata('admin');
+    $user_id = $data['admin_session']['id'];  
+    
+    $this->load->model('Core3_model');
+    
     $result= $this->Core3_model->readAll();
-    // print_r($result);
-    // die
+
+    $data['total_read_count'] = $this->__therapistAlert($user_id);
+   
     $data['results'] = $result; 
 
     $this->load->view($this->config->item('admin_folder').'/core3_list', $data);
@@ -1781,4 +1805,17 @@ class Forms extends Admin_Controller {
 
   }
   
+
+ /* Patient alert count */
+  function __therapistAlert($userId = null) {
+    
+    $sum = 0;
+    $this->load->model('Therapist_model');
+    $sum = $this->Therapist_model->read_count($userId);
+
+    return $sum;
+
+  }//end __patientAlert() 
+
+
 }//end class

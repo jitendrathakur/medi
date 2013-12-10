@@ -1,9 +1,8 @@
 <?php include('header.php'); ?>
 
-<div class="journal-entries" >
-		
+<div class="journal-entries well" >		
 
-	<div style="height:100%;margin-left:-90px;border:0px solid; " id="mainForm" >
+	<div style="" id="" >
 		
 	<table class="table table-striped table-bordered table-hover">
 	<tr>
