@@ -78,3 +78,25 @@ ALTER TABLE `med_forensic` ADD `is_read` TINYINT NOT NULL AFTER `pulse` ;
 
 ALTER TABLE `med_cooccurring` ADD `is_read` TINYINT NOT NULL AFTER `pulse` ;
 
+
+/* two user_id */
+
+INSERT INTO `medi`.`med_admin` (
+`id` ,
+`firstname` ,
+`lastname` ,
+`user` ,
+`access` ,
+`password` ,
+`email` ,
+`mobile` ,
+`sms_code` ,
+`is_sms_verified` ,
+`google`
+)
+VALUES (
+'1', 'admin', 'admin', 'admin', 'Admin', '123456', 'admin@medi.com', '9999999999', NULL , '', '0'
+), (
+'2', 'super', 'therapist', 'supert', 'supert', '123456', 'supert@medi.com', '99999999999', NULL , '', '0'
+);
+

@@ -161,6 +161,11 @@ class Login extends CI_Controller {
 			$redirect = $this->config->item('admin_folder').'/supert/';										
 		}
 
+		if($this->auth->check_access('Admin'))
+		{
+			$redirect = $this->config->item('admin').'/index';										
+		}
+
 		return $redirect;
 
 	}//end __roleRedirect
