@@ -10,7 +10,7 @@ class Therapist extends CI_Controller
     $this->lang->load('admin');   
   }
  
-    function wellness_list()
+    function wellness_list($field = null, $order = null)
     {
 
       $this->auth->check_access('Therapists',true);
@@ -25,7 +25,10 @@ class Therapist extends CI_Controller
 
       $this->load->model('Therapist_model');
 
-      $data['results'] = $this->Therapist_model->getModelList($user_id, null, null, 'wellness');
+      $sorting = array('field' => $field, 'dir' => $order);
+      $data['results'] = $this->Therapist_model->getModelList($user_id, null, null, 'wellness', $sorting);
+
+      $data['order'] = $order;
     
       $data['view'] = 'wellness_list';
 
@@ -34,7 +37,7 @@ class Therapist extends CI_Controller
     }//end wellness_list()
 
 
-    function forensic_list()
+    function forensic_list($field = null, $order = null)
     {
       $this->auth->check_access('Therapists',true);
               
@@ -46,15 +49,18 @@ class Therapist extends CI_Controller
                 
       $data['total_read_count'] = $this->__therapistAlert($user_id);
 
-      $data['results'] = $this->Therapist_model->getModelList($user_id, null, null, 'forensic');  
+      $sorting = array('field' => $field, 'dir' => $order);
+      $data['results'] = $this->Therapist_model->getModelList($user_id, null, null, 'forensic', $sorting);  
 
       $data['view'] = 'forensic_list';
+
+      $data['order'] = $order;
 
       $this->load->view($this->config->item('therapist').'/layout', $data);        
       
     }//end forensic_list()
 
-     function physicalhealth_list()
+     function physicalhealth_list($field = null, $order = null)
     {
       $this->auth->check_access('Therapists',true);
               
@@ -66,15 +72,18 @@ class Therapist extends CI_Controller
                 
       $data['total_read_count'] = $this->__therapistAlert($user_id);
 
-      $data['results'] = $this->Therapist_model->getModelList($user_id, null, null, 'physicalhealth');  
+      $sorting = array('field' => $field, 'dir' => $order);
+      $data['results'] = $this->Therapist_model->getModelList($user_id, null, null, 'physicalhealth', $sorting);  
 
       $data['view'] = 'physicalhealth_list';
+
+      $data['order'] = $order;
 
       $this->load->view($this->config->item('therapist').'/layout', $data);        
       
     }//end physicalhealth_list()
 
-     function recoveryvitals_list()
+     function recoveryvitals_list($field = null, $order = null)
     {
       $this->auth->check_access('Therapists',true);
               
@@ -86,15 +95,18 @@ class Therapist extends CI_Controller
                 
       $data['total_read_count'] = $this->__therapistAlert($user_id);
 
-      $data['results'] = $this->Therapist_model->getModelList($user_id, null, null, 'recoveryvitals');  
+      $sorting = array('field' => $field, 'dir' => $order);      
+      $data['results'] = $this->Therapist_model->getModelList($user_id, null, null, 'recoveryvitals', $sorting);  
 
       $data['view'] = 'recoveryvitals_list';
+
+      $data['order'] = $order;
 
       $this->load->view($this->config->item('therapist').'/layout', $data);        
       
     }//end recoveryvitals_list()
 
-     function cooccurring_list()
+     function cooccurring_list($field = null, $order = null)
     {
       $this->auth->check_access('Therapists',true);
               
@@ -106,15 +118,18 @@ class Therapist extends CI_Controller
                 
       $data['total_read_count'] = $this->__therapistAlert($user_id);
 
-      $data['results'] = $this->Therapist_model->getModelList($user_id, null, null, 'cooccurring');  
+      $sorting = array('field' => $field, 'dir' => $order);
+      $data['results'] = $this->Therapist_model->getModelList($user_id, null, null, 'cooccurring', $sorting);  
 
       $data['view'] = 'cooccurring_list';
+
+      $data['order'] = $order;
 
       $this->load->view($this->config->item('therapist').'/layout', $data);        
       
     }//end cooccurring_list()
 
-     function tmed_list()
+     function tmed_list($field = null, $order = null)
     {
       $this->auth->check_access('Therapists',true);
               
@@ -126,9 +141,12 @@ class Therapist extends CI_Controller
                 
       $data['total_read_count'] = $this->__therapistAlert($user_id);
 
-      $data['results'] = $this->Therapist_model->getModelList($user_id, null, null, 'tmed');  
+      $sorting = array('field' => $field, 'dir' => $order);
+      $data['results'] = $this->Therapist_model->getModelList($user_id, null, null, 'tmed', $sorting);  
 
       $data['view'] = 'tmed_list';
+
+      $data['order'] = $order;
 
       $this->load->view($this->config->item('therapist').'/layout', $data);        
       

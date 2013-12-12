@@ -9,6 +9,16 @@
 		Id	
 		</th>
 
+		<th>	
+		<?php
+		
+        $sort = ($order == 'ASC') ? 'DESC' : 'ASC';
+
+		?>
+		 <a class ="" href="<?php echo base_url('therapist/wellness_list/').'/user_id/'.$sort  ?>" >Patient</a>	
+			
+		</th>
+
 		<th>			
 		Feel	
 		</th>
@@ -45,6 +55,9 @@
 	<tr>
 		<td>
 			<?php echo $result->id; ?>
+		</td>
+		<td>
+			<?php echo $result->firstname.' '.$result->lastname; ?>
 		</td>
 		<td>
 			<?php echo $result->feel; ?>

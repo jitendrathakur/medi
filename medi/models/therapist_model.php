@@ -2,7 +2,7 @@
 Class Therapist_model extends CI_Model
 {	
 	
-	function getModelList($userId = false,$limit = NULL,$offset = NULL, $model)
+	function getModelList($userId = false,$limit = NULL,$offset = NULL, $model, $order = array())
 	{
 
 		$patientId = $this->__getPatientByTherapist($userId);
@@ -17,9 +17,13 @@ Class Therapist_model extends CI_Model
 		if ($userId !== false)
 		{			
 			$this->db->where_in('user_id', $patientId);
-		}		
-		
-		$this->db->order_by('is_read', 'ASC');		
+		}	
+
+		if (!empty($order['field'])) {
+			$this->db->order_by($order['field'], $order['dir']);
+		} else {
+			$this->db->order_by('is_read', 'ASC');	
+		}	
 			
 		$query	= $this->db->get($model);
  
