@@ -20,10 +20,18 @@ Class Core2_model extends CI_Model
 		return $result;
 	}
 
-	function readAll(){
+	function readAll($userId, $order = array()){
 		$this->db->select('core2.*, admin.firstname, admin.lastname');
 		$this->db->join('admin', 'core2.patient_id=admin.id');
-		//$this->db->where('access','Normal');		
+		//$this->db->where('access','Normal');
+
+		$this->db->where('user_id', $userId);
+
+		if (!empty($order['field'])) {
+			$this->db->order_by($order['field'], $order['dir']);
+		} else {
+			$this->db->order_by('is_read', 'ASC');	
+		}		
 		
 		$result	= $this->db->get('core2');
 		

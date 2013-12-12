@@ -7,8 +7,14 @@
 	<table class='table table-bordered table-condensed table-hover table-striped'>
 	<tr>
 
-		<th>
-		Patient	
+		<th>	
+		<?php
+		
+        $sort = ($order == 'ASC') ? 'DESC' : 'ASC';
+
+		?>
+		 <a class ="" href="<?php echo base_url('forms/core2_list/').'/patient_id/'.$sort  ?>" >Patient</a>	
+			
 		</th>
 		
 		<th>
@@ -38,18 +44,17 @@
 		<th>
 		step3
 		</th>
-		
-		
 
 		<th>
 		target
 		</th>	
 
-		<!--
-		<th>
-		cr_timestamp
-		</th>	
-		-->
+		<th>	
+		<?php		
+        $sort = ($order == 'ASC') ? 'DESC' : 'ASC';
+		?>
+		<a class ="" href="<?php echo base_url('forms/core2_list/').'/cr_timestamp/'.$sort  ?>" >Created</a>
+		</th>
 		<th>Action</th>
 
 	</tr>
@@ -92,11 +97,9 @@
 		<td>
 				<?php echo $result->target ; ?>
 		</td>
-<!--
 		<td>
 				<?php echo $result->cr_timestamp ; ?>
 		</td>
-		-->
 		<td>
 			
 			<?php if ($result->close) {

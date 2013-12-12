@@ -64,8 +64,11 @@
 		Is pain
 		</th>
 
-		<th>
-		Created
+		<th>	
+		<?php		
+        $sort = ($order == 'ASC') ? 'DESC' : 'ASC';
+		?>
+		<a class ="" href="<?php echo base_url('therapist/physicalhealth_list/').'/cr_timestamp/'.$sort  ?>" >Created</a>
 		</th>
 	
 	</tr>

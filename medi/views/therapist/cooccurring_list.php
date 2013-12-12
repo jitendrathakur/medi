@@ -68,8 +68,11 @@
 		Pulse
 		</th>
 		
-		<th>
-		Created
+		<th>	
+		<?php		
+        $sort = ($order == 'ASC') ? 'DESC' : 'ASC';
+		?>
+		<a class ="" href="<?php echo base_url('therapist/cooccurring_list/').'/cr_timestamp/'.$sort  ?>" >Created</a>
 		</th>		
 
 	</tr>
@@ -102,6 +105,10 @@
 
 		<td>
 			<?php echo $result->is_alcohol_friend; ?>
+		</td>
+
+		<td>
+			<?php echo $result->is_alcohol_family; ?>
 		</td>
 
 		<td>

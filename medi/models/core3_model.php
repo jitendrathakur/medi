@@ -19,10 +19,17 @@ Class Core3_model extends CI_Model
 	}
 	
 
-	function readAll() {
-		$this->db->select('*');
-		//$this->db->join('admin', 'core3.patient_id=admin.id');
-		//$this->db->where('access','Normal');		
+	function readAll($userId, $order = array()) {
+		$this->db->select('core3.*, admin.firstname, admin.lastname');
+		$this->db->join('admin', 'core3.patient_id=admin.id');
+
+		$this->db->where('user_id', $userId);		
+
+		if (!empty($order['field'])) {
+			$this->db->order_by($order['field'], $order['dir']);
+		} else {
+			$this->db->order_by('is_read', 'ASC');	
+		}		
 		
 		$result	= $this->db->get('core3');
 		

@@ -7,6 +7,16 @@
 	<table class="table table-striped table-bordered table-hover">
 	<tr>
 
+		<th>	
+		<?php
+		
+        $sort = ($order == 'ASC') ? 'DESC' : 'ASC';
+
+		?>
+		 <a class ="" href="<?php echo base_url('forms/core3_list/').'/patient_id/'.$sort  ?>" >Patient</a>	
+			
+		</th>
+
 		<th>
 		Zip	
 		</th>
@@ -42,6 +52,13 @@
 		<th>
 		pulse2
 		</th>		
+
+		<th>	
+		<?php		
+        $sort = ($order == 'ASC') ? 'DESC' : 'ASC';
+		?>
+		<a class ="" href="<?php echo base_url('forms/core3_list/').'/cr_timestamp/'.$sort  ?>" >Created</a>
+		</th>
 		
 		<th>Action</th>
 
@@ -51,6 +68,9 @@
 	<?php if(!empty($results)){ ?>
 	<?php foreach($results as $result ){ ?>
 	<tr>
+		<td>
+				<?php echo $result->firstname. ' '.$result->lastname; ?>
+		</td>
 		<td>
 				<?php echo $result->zip; ?>
 		</td>
@@ -84,6 +104,10 @@
 
 		<td>
 				<?php echo $result->pulse2 ; ?>
+		</td>
+
+		<td>
+				<?php echo $result->cr_timestamp; ?>
 		</td>
 
 

@@ -55,7 +55,7 @@ class Forms extends Admin_Controller {
   }//end __sendEmail()
 
 
-  function core1_list()
+  function core1_list($field = null, $order = null)
   {
 
     $this->auth->check_access('Therapists',true);
@@ -66,17 +66,20 @@ class Forms extends Admin_Controller {
 
     $this->load->model('Core1_model');
     
-    $result= $this->Core1_model->readAll();
+    $sorting = array('field' => $field, 'dir' => $order);
+    $result= $this->Core1_model->readAll($user_id, $sorting);
 
     $data['total_read_count'] = $this->__therapistAlert($user_id);
      
     $data['results'] = $result;
 
+    $data['order'] = $order;
+
     $this->load->view($this->config->item('admin_folder').'/core1_list', $data);
   }
 
 
-  function core2_list()
+  function core2_list($field = null, $order = null)
   {     
 
     $this->auth->check_access('Therapists',true);
@@ -87,17 +90,20 @@ class Forms extends Admin_Controller {
 
     $this->load->model('Core2_model');
     
-    $result= $this->Core2_model->readAll();
+    $sorting = array('field' => $field, 'dir' => $order);
+    $result= $this->Core2_model->readAll($user_id, $sorting);
 
     $data['total_read_count'] = $this->__therapistAlert($user_id);
     
     $data['results'] = $result; 
 
+    $data['order'] = $order;
+
     $this->load->view($this->config->item('admin_folder').'/core2_list', $data);
   }
 
 
-  function core3_list()
+  function core3_list($field = null, $order = null)
   {
 
     $this->auth->check_access('Therapists',true);
@@ -108,11 +114,14 @@ class Forms extends Admin_Controller {
     
     $this->load->model('Core3_model');
     
-    $result= $this->Core3_model->readAll();
+    $sorting = array('field' => $field, 'dir' => $order);
+    $result= $this->Core3_model->readAll($user_id, $sorting);
 
     $data['total_read_count'] = $this->__therapistAlert($user_id);
    
     $data['results'] = $result; 
+
+    $data['order'] = $order;
 
     $this->load->view($this->config->item('admin_folder').'/core3_list', $data);
   }

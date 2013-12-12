@@ -64,10 +64,17 @@ Class Core1_model extends CI_Model
 		return $core1;
 	}
 	
-	function readAll(){
+	function readAll($userId, $order = array()){
 		$this->db->select('core1.*, admin.firstname, admin.lastname');
 		$this->db->join('admin', 'core1.patient_id=admin.id');
-		//$this->db->where('access','Normal');		
+		//$this->db->where('access','Normal');
+		$this->db->where('user_id', $userId);		
+
+		if (!empty($order['field'])) {
+			$this->db->order_by($order['field'], $order['dir']);
+		} else {
+			$this->db->order_by('is_read', 'ASC');	
+		}
 		
 		$result	= $this->db->get('core1');
 		

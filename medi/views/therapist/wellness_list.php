@@ -43,8 +43,11 @@
 		Pulse
 		</th>
 		
-		<th>
-		Created
+		<th>	
+		<?php		
+        $sort = ($order == 'ASC') ? 'DESC' : 'ASC';
+		?>
+		<a class ="" href="<?php echo base_url('therapist/wellness_list/').'/cr_timestamp/'.$sort  ?>" >Created</a>
 		</th>
 	
 	</tr>
