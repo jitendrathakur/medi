@@ -150,14 +150,14 @@ class Auth
 	{
 		$this->CI->db->select('*');
 		//$this->CI->db->where('email', $email);
-	//	$this->CI->db->where('password',  sha1($password));
+		//$this->CI->db->where('password',  sha1($password));
                 
 		if ($google == false) {
 		    $this->CI->db->where('user', $email);
-		    $this->CI->db->where('password',  $password);	
+		    $this->CI->db->where('password',  md5($password));
 		} else {
-                    $this->CI->db->where('email', $email);
-                }		
+            $this->CI->db->where('email', $email);
+        }		
 		$this->CI->db->limit(1);
 		$result = $this->CI->db->get('admin');
 		$result	= $result->row_array();

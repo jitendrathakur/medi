@@ -95,8 +95,8 @@ INSERT INTO `medi`.`med_admin` (
 `google`
 )
 VALUES (
-'1', 'admin', 'admin', 'admin', 'Admin', '123456', 'admin@medi.com', '9999999999', NULL , '', '0'
+'1', 'admin', 'admin', 'admin', 'Admin', 'e10adc3949ba59abbe56e057f20f883e', 'admin@medi.com', '9999999999', NULL , '', '0'
 ), (
-'2', 'super', 'therapist', 'supert', 'supert', '123456', 'supert@medi.com', '99999999999', NULL , '', '0'
+'2', 'super', 'therapist', 'supert', 'supert', 'e10adc3949ba59abbe56e057f20f883e', 'supert@medi.com', '99999999999', NULL , '', '0'
 );
 

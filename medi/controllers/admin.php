@@ -102,7 +102,7 @@ class Admin extends Admin_Controller
       $data['firstname']  = $admin->firstname;
       $data['lastname'] = $admin->lastname;
       $data['user']   = $admin->user;
-      $data['password'] = $admin->password;
+      $data['password'] = md5($admin->password);
       $data['email']    = $admin->email;
       $data['access']   = $admin->access;
       $data['mobile']   = $admin->mobile;
@@ -127,7 +127,7 @@ class Admin extends Admin_Controller
       
       if ($this->input->post('password') != '' || !$id)
       {
-        $save['password'] = $this->input->post('password');
+        $save['password'] = md5($this->input->post('password'));
       }
       
       $this->auth->save($save);

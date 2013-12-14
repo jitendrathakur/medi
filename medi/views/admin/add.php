@@ -32,11 +32,20 @@
                   $data = array('name'=>'user', 'value'=>set_value('user', $user), 'class'=>'form-control');
                   echo form_input($data); ?>
 
-                  <label class="formFieldQuestion">Password</label>
-                 
+                  <?php
+
+                  if (empty($password)) {
+                  ?>
+                  <label class="formFieldQuestion">Password</label>                 
                   <?php
                   $data = array('type' => 'password', 'name'=>'password', 'value'=>set_value('password', $password), 'class'=>'form-control');
                   echo form_input($data); ?>
+
+                  <?php
+                  }
+                  ?>
+
+                 
 
                   <label class="formFieldQuestion">Email</label>
                  
