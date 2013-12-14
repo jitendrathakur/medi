@@ -4,20 +4,18 @@
 .main-container {height: 1200px;!important}
 </style>
 					
-    			<div class="journal-entries" >
-    			
+    <div class="span8" style="margin-left:150px" >          
 
-	<div style="height:100%; " id="mainForm" >
-
+  		<div style="height:100%; " id="" class="well" >
 
 		<!-- begin form -->
 		 <?php echo form_open_multipart($this->config->item('admin_folder').'forms/core_journal_form3'); ?>
-    <ul id="mainForm_9" class="mainForm">
+    	<ul id="mainForm_9" class="mainForm">
 
 				
-				<ul id="mainForm_12" class="mainForm">
+			<ul id="mainForm_12" class="mainForm">
 
-<div align="center"><h3 style="position:relative; left:0; top:-4px; " color="#FFFFFF" <font=""><font color="#2869D6">T-MeD Compass Center </font></h3></div>
+			<div align="center"><h3 style="position:relative; left:0; top:-4px; " color="#FFFFFF" <font=""><font color="#2869D6">T-MeD Compass Center </font></h3></div>
 
 				<li id="pfieldBox_83" class="mainForm">
 					<label class="formFieldQuestion">Patient:&nbsp;*</label>
@@ -109,7 +107,7 @@
 							?>
 					</li>
 
-				<li style="height:184px; " id="fieldBox_105" class="mainForm">
+				<li id="fieldBox_105" class="mainForm">
 					<label class="formFieldQuestion">The "Pulse"&nbsp;*</label>
                     <?php
 					$data	= array('name'=>'pulse',  'value'=>set_value('pulse', ''));

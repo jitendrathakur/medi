@@ -59,7 +59,7 @@
 <div class="span8" style="margin-left:150px" >
           
 
-  <div style="height:100%; " id="" >
+  <div style="height:100%; " id="" class="well" >
 
 
     <!-- begin form -->

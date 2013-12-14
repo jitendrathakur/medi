@@ -100,3 +100,5 @@ VALUES (
 '2', 'super', 'therapist', 'supert', 'supert', 'e10adc3949ba59abbe56e057f20f883e', 'supert@medi.com', '99999999999', NULL , '', '0'
 );
 
+
+update set med_admin password = 'e10adc3949ba59abbe56e057f20f883e';
