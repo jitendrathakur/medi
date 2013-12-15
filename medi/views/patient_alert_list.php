@@ -1,6 +1,6 @@
 <?php include('header.php'); ?>
 
-<div id="alert_list" class="col-md-9 pull-right well" >	
+<div id="alert_list" class="journal-entries well" >	
 
     <h3>Core 1 Journal</h3>
 	<div>
@@ -48,7 +48,7 @@
 </div>
 
 
-<div class="col-md-9 pull-right well" >		
+<div class="journal-entries well" >		
 
     <h3>Core 2 Journal</h3>
 	<div>
@@ -97,7 +97,7 @@
 </div>
 </div>
 
-<div class="col-md-9 pull-right well" >		
+<div class="journal-entries well" >		
 
 <h3>Core 3 Journal</h3>
 	<div>

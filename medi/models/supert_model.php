@@ -273,7 +273,7 @@ Class Supert_model extends CI_Model
 		//print_r($this->db->last_query());
 		//die;
 		
-		if(empty($therapists) && empty($patients) ){
+		if(empty($patients) ){
 			//$this->db->where('id',$id); 
 			$this->db->insert('patient_therapist', $option);
 			$id = $this->db->insert_id();

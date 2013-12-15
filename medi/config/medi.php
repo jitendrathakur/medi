@@ -96,7 +96,7 @@ $config['patient']		= 'patient';
 
 $config['sms_feature']	= true;
 
-$config['sms_group']	= array('supert');
+$config['sms_group']	= array();
 
 $config['therapist']	= 'therapist';
 
