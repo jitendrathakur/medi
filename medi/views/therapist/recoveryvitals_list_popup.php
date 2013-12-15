@@ -1,5 +1,5 @@
 <h2> Recovery Vitals  List</h2>
-<div class="journal-entries well" >	
+<div style="width:700px" >	
 	
 	<?php //include('alert_tabs.php'); ?>
 	

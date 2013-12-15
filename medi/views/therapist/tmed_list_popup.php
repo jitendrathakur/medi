@@ -1,6 +1,6 @@
-<div class="journal-entries well" >	
 
-<div class="journal-entries well" >	
+<h2> Tmed List</h2>
+<div style="width:700px" >	
 	
 	<?php //include('alert_tabs.php'); ?>
 	
@@ -105,4 +105,4 @@
 	</table>
 
 </div>
-</div>
+
