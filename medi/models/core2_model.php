@@ -19,6 +19,28 @@ Class Core2_model extends CI_Model
 		
 		return $result;
 	}
+	
+	function get_core2_by_therapist($user_id, $start_date)
+	{
+		//$this->db->limit($limit,$offset); 
+		//$start_date
+		if(!empty($user_id)){
+			$this->db->where('user_id', $user_id);
+			$this->db->like('cr_timestamp', $start_date);
+			
+		}
+		$this->db->order_by('patient_id');
+		$results	= $this->db->get('core2')->result();
+		
+		//print_r($this->db->last_query());
+		//die;
+		if(!empty($results)){
+			return $results;
+		}else{
+			return false;
+		}
+	}
+	//===========================================
 
 	function readAll($userId, $order = array()){
 		$this->db->select('core2.*, admin.firstname, admin.lastname');

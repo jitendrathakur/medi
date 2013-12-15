@@ -1784,3 +1784,7 @@ table.ui-timepicker .ui-state-default {
 }
 
 table th { font-weight:bold;}
+
+.error{
+	color: #FF0000;
+}

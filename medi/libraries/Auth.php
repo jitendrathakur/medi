@@ -416,4 +416,23 @@ class Auth
 		}
 
 	}//end getTherapist()
+	
+	
+	function getPatientById($patientId) {
+		
+		$this->CI->db->select('firstname, lastname');
+		//$this->CI->db->join('admin', 'patient_therapist.therapist_id=admin.id');              
+		
+		$this->CI->db->where('id', $patientId);	    
+		$result = $this->CI->db->get('admin');
+		$result	= $result->row();
+		
+		if (sizeof($result) > 0)
+		{		
+			return $result;			
+		} else {
+			return false;
+		}
+
+	}//end getTherapist()
 }

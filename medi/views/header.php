@@ -35,6 +35,9 @@
 <script src="<?php echo base_url('assets/js/therapist.js') ?>"></script>
 <script src="<?php echo base_url('assets/js/patient.js') ?>"></script>
 
+<script src="<?php echo base_url('assets/lib/jquery.validate.min.js') ?>"></script>
+<script src="<?php echo base_url('assets/lib/additional-methods.min.js') ?>"></script>
+
 <link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://tmed3000.org/xmlrpc.php?rsd" >
 <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://tmed3000.org/wp-includes/wlwmanifest.xml" > 
 <link rel="prev" title="Inter-Active" href="http://tmed3000.org/inter-active/" >
@@ -54,7 +57,7 @@
 
 <script type="text/javascript" src="<?php echo base_url('assets/js/bootstrap.min.js') ?>"></script>
 
-<link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css') ?>" type="text/css" />
+<link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.css') ?>" type="text/css" />
 <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap-responsive.min.css') ?>" type="text/css" />
 
  <style type="text/css" >
@@ -222,9 +225,7 @@ body.custom-background {
 
             <div class="skip-link screen-reader-text" ><a href="#content" title="Skip to content" >Skip to content</a></div>
 
-<? if($this->auth->check_access('Normal'))
-
-         { ?>
+  <?php if($this->auth->check_access('Normal')) { ?>
 
             <div class="menu-header" ><ul id="menu-primarynav" class="menu" ><li id="menu-item-26" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-9 current_page_item  menu-item-26" ><a href="<?php echo base_url('forms/wellness_form') ?>" >Access</a></li>
 
@@ -236,7 +237,7 @@ body.custom-background {
 
                         
 
-                        <? if($this->auth->check_access('Therapists'))
+                        <?php if($this->auth->check_access('Therapists'))
 
          { ?>
 
@@ -312,7 +313,7 @@ if (array_key_exists("login", $_GET)) {
     } 
 }
 ?>
-<title>9lessons Google Openid Login</title>
+<title>Therapist</title>
 
 
 
@@ -353,4 +354,11 @@ if (array_key_exists("login", $_GET)) {
   {
     $error  = validation_errors();
   }
+  ?>
+  
+  <?php
+  //git status
+  //git add .
+  //git commit -m "any message"
+  //git push
   ?>

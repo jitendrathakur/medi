@@ -6,7 +6,7 @@ Class Core1_model extends CI_Model
 	{
 		if($limit)
 		{
-		$this->db->limit($limit,$offset); 
+			$this->db->limit($limit,$offset); 
 		}
 	
 		//{
@@ -16,11 +16,31 @@ Class Core1_model extends CI_Model
 	
 		$result	= $this->db->get('core1')->row();
 		
-		
 		return $result;
 	}
 	
 	
+	function get_core1_by_therapist($user_id, $start_date)
+	{
+		//$this->db->limit($limit,$offset); 
+		//$start_date
+		if(!empty($user_id)){
+			$this->db->where('user_id', $user_id);
+			$this->db->like('cr_timestamp', $start_date);
+		}
+		
+		$this->db->order_by('patient_id');
+		$results	= $this->db->get('core1')->result();
+		
+		//print_r($this->db->last_query());
+		//die;
+		if(!empty($results)){
+			return $results;
+		}else{
+			return false;
+		}
+	}
+	//===========================================
 		
 	
 	function count_all_core1()
