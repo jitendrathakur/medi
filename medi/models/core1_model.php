@@ -12,12 +12,35 @@ Class Core1_model extends CI_Model
 		//{
 			$this->db->where('id', $id);
 		//}
-
-	
 		$result	= $this->db->get('core1')->row();
-		
 		return $result;
 	}
+	//================= get_core1 ======================
+	
+	function getCommentsByPatient($patient_id, $id)
+	{
+		
+		$this->db->select('comment, created');
+		
+		if(!empty($patient_id) && !empty($id))
+		{
+			$this->db->where('patient_id', $patient_id);
+			$this->db->where('core1_id', $id);
+		}
+		
+		$result	= $this->db->get('core1_reply')->result();
+		
+		//print_r($result);
+		//die;
+	
+		if(!empty($result))	{
+			return $result;	
+		}else{
+			return false;
+		}
+		
+	}
+	//================= getCommentsByPatient ==============
 	
 	
 	function get_core1_by_therapist($user_id, $start_date)

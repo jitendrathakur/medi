@@ -58,25 +58,40 @@ class Forms extends Admin_Controller {
   function core1_list($field = null, $order = null)
   {
 
-    $this->auth->check_access('Therapists',true);
+     $this->auth->check_access('Therapists',true);
               
-    $data['uri']=$this->uri->segment(2);
-    $data['admin_session'] = $this->admin_session->userdata('admin');
-    $user_id = $data['admin_session']['id'];  
+     $data['uri']=$this->uri->segment(2);
+     $data['admin_session'] = $this->admin_session->userdata('admin');
+     $user_id = $data['admin_session']['id'];  
 
-    $this->load->model('Core1_model');
+     $this->load->model('Core1_model');
     
-    $sorting = array('field' => $field, 'dir' => $order);
-    $result= $this->Core1_model->readAll($user_id, $sorting);
+     $sorting = array('field' => $field, 'dir' => $order);
+     $results= $this->Core1_model->readAll($user_id, $sorting);
+    
+     //print_r($results);
+     //die;
+    
+     if(!empty($results)){
+          foreach($results as $result){
+               $result->comments = $this->Core1_model->getCommentsByPatient($result->patient_id, $result->id);
+               
+               
+          }
+     }
 
+     //print_r($results);
+     //die;
+    
     $data['total_read_count'] = $this->__therapistAlert($user_id);
      
-    $data['results'] = $result;
+    $data['results'] = $results;
 
     $data['order'] = $order;
 
     $this->load->view($this->config->item('admin_folder').'/core1_list', $data);
   }
+  //============================================
 
 
   function core2_list($field = null, $order = null)

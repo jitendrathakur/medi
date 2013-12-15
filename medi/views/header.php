@@ -55,7 +55,7 @@
 <script type="text/javascript" src="<?php echo base_url('assets/include/ui-1.10.0/jquery.ui.core.min.js') ?>"></script>   
 <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.ui.timepicker.js?v=0.3.3') ?>"></script>
 
-<script type="text/javascript" src="<?php echo base_url('assets/js/bootstrap.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/js/bootstrap.js') ?>"></script>
 
 <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.css') ?>" type="text/css" />
 <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap-responsive.min.css') ?>" type="text/css" />
@@ -361,4 +361,10 @@ if (array_key_exists("login", $_GET)) {
   //git add .
   //git commit -m "any message"
   //git push
+  
+  // branch
+  //git checkout -b vikas
+  // git branch
+  // git push origin vikas
+  
   ?>
