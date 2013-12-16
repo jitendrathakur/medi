@@ -126,9 +126,21 @@ Class Core1_model extends CI_Model
 		return $result;
 	}
 
-	function getNormalUser(){
+	function getNormalUser($therepistId = null){
+
+        $patientIds = array();
+		if (!empty($therepistId)) {
+			$CI =& get_instance();
+	        $CI->load->model('Therapist_model');
+	        $patientIds = $CI->Therapist_model->__getPatientByTherapist($therepistId);
+		}		
+
 		$this->db->select('id, firstname,  lastname');
-		$this->db->where('access','Normal');		
+		$this->db->where('access','Normal');
+
+		if (!empty($patientIds)) {
+			$this->db->where_in('id', $patientIds);
+		}
 		
 		$result	= $this->db->get('admin');
 		

@@ -101,4 +101,4 @@ VALUES (
 );
 
 
-update set med_admin password = 'e10adc3949ba59abbe56e057f20f883e';
+UPDATE med_admin SET PASSWORD =  'e10adc3949ba59abbe56e057f20f883e';

@@ -17,7 +17,7 @@
 
 <? if($this->auth->check_access('Therapists')) { ?>
                  
-  <div class="side-menu-class" >
+  <div class="col-md-2" >
   	<ul id="side-menu" >
 		<!--<li style="margin-top:2px; font-size:150%; background-color:#FFFFFF; color:#02306F; " >
 			<a href="<?php //echo base_url('therapist/therapist_to_patient_view') ?>" >
