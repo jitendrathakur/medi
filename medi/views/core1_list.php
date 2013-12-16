@@ -5,7 +5,11 @@
 		
 	});
 </script>
+
+
+
 <div class="journal-entries well" >
+	<a class="btn btn-success" href="<?php echo base_url('forms/core_journal_form') ?>" >Add Core Journal</a>
 	<div style="" id="" >
 		
 	<table class='table table-bordered table-condensed table-hover table-striped'>
@@ -78,8 +82,9 @@
 			  <a  class ="edit_btn" href="<?php echo base_url('forms/core_journal_form_edit/').'/'.$result->id  ?>" >Edit</a>
 			<?php } ?>
 			
-			<!-- Button trigger modal -->
-			<button class="btn btn-primary" data-toggle="modal" data-target="#comment_<?php echo $result->id; ?>">
+			<!-- Button trigger modal -->			
+			<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#comment_<?php echo $result->id; ?>">
+			  
 			  Comments
 			</button>
 			
@@ -130,7 +135,6 @@
 	<?php } ?>
 	</table>
 
-<a href="<?php echo base_url('forms/core_journal_form') ?>" >Add Core Journal</a>
 </div>
 </div>
 

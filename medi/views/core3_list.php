@@ -1,6 +1,7 @@
 <?php include('header.php'); ?>
 
-<div class="journal-entries well" >		
+<div class="journal-entries well" >	
+	<a class="btn btn-success" href="<?php echo base_url('forms/core_journal_form3') ?>" >Add Core Journal</a>	
 
 	<div style="" id="" >
 		
@@ -140,7 +141,7 @@
 	<?php } ?>
 	</table>
 
-	<a href="<?php echo base_url('forms/core_journal_form3') ?>" >Add Core Journal</a>
+	
 	</div>
 </div>
 
