@@ -1155,12 +1155,12 @@ class Forms extends Admin_Controller {
     $this->auth->check_access('Therapists',true);
     $this->load->model('Core1_model');
     $data['uri']=$this->uri->segment(2);
-    $data['page_title']   = "Core Journal-1";
-
-    $pat_data=$this->Core1_model->getNormalUser();
+    $data['page_title']   = "Core Journal-1";    
 
     $data['admin_session'] = $this->admin_session->userdata('admin');
     $user_id = $data['admin_session']['id'];
+
+    $pat_data=$this->Core1_model->getNormalUser($user_id);
     
     $id="";
     $this->load->helper('form');
@@ -1346,15 +1346,16 @@ class Forms extends Admin_Controller {
   function core_journal_form2()
   {
     $this->auth->check_access('Therapists',true);
+    $this->load->model('Core1_model');
     $this->load->model('Core2_model');
     $data['uri']=$this->uri->segment(2);
-    $data['page_title']   = "Core Journal-2";
-
-    $pat_data=$this->Core2_model->getNormalUser();
-      
+    $data['page_title']   = "Core Journal-2";          
       
     $data['admin_session'] = $this->admin_session->userdata('admin');
     $user_id = $data['admin_session']['id'];
+
+    $pat_data = $this->Core1_model->getNormalUser($user_id);
+
     $id="";
     $this->load->helper('form');
     $this->load->library('form_validation');
@@ -1397,16 +1398,10 @@ class Forms extends Admin_Controller {
       
       }
       
-    
-      
     }
   
     $this->form_validation->set_rules('coredate', 'lang:name', 'trim|required');
-    
-    
-    
-    
-      
+          
     // validate the form
     $data['patient']=$pat_data;
     if ($this->form_validation->run() == FALSE)
@@ -1415,8 +1410,7 @@ class Forms extends Admin_Controller {
       $this->load->view($this->config->item('admin_folder').'/core_journal_form2', $data);
     }
     else
-    {
-      
+    {      
             
       $save['user_id']      = $user_id;
       $save['patient_id']     = $this->input->post('patient');
@@ -1433,7 +1427,6 @@ class Forms extends Admin_Controller {
       $this->session->set_flashdata('message', lang('message_core2_saved'));
       redirect($this->config->item('admin_folder').'/forms/core2_list');
     }
-
     
   }
 
@@ -1441,15 +1434,15 @@ class Forms extends Admin_Controller {
   function core_journal_form2_edit($id = null)
   {
     $this->auth->check_access('Therapists',true);
+    $this->load->model('Core1_model');
     $this->load->model('Core2_model');
     $data['uri']=$this->uri->segment(2);
-    $data['page_title']   = "Core Journal-2";
-
-    $pat_data=$this->Core2_model->getNormalUser();
-      
+    $data['page_title']   = "Core Journal-2";      
       
     $data['admin_session'] = $this->admin_session->userdata('admin');
     $user_id = $data['admin_session']['id'];
+
+    $pat_data=$this->Core1_model->getNormalUser($user_id);
     
     $this->load->helper('form');
     $this->load->library('form_validation');
@@ -1479,29 +1472,23 @@ class Forms extends Admin_Controller {
       //if the cooccurring does not exist, redirect them to the cooccurring list with an error
       if ($core2)
       {
-      $id             = $core2->id;
-      $data['id']         = $core2->id;
-      $data['user_id']      = $core2->user_id;      
-      $data['coredate']     = $core2->coredate;
-      $data['renewal']    = $core2->renewal;
-      $data['plan']   = $core2->plan;
-      $data['step1']= $core2->step1;  
-      $data['step2']= $core2->step2;
-      $data['step3']      = $core2->step3;
-      $data['target']     = $core2->target;
+        $id             = $core2->id;
+        $data['id']         = $core2->id;
+        $data['user_id']      = $core2->user_id;      
+        $data['coredate']     = $core2->coredate;
+        $data['renewal']    = $core2->renewal;
+        $data['plan']   = $core2->plan;
+        $data['step1']= $core2->step1;  
+        $data['step2']= $core2->step2;
+        $data['step3']      = $core2->step3;
+        $data['target']     = $core2->target;
       
-      }
-      
-    
+      }    
       
     }
   
     $this->form_validation->set_rules('coredate', 'lang:name', 'trim|required');
-    
-    
-    
-    
-      
+          
     // validate the form
     $data['patient']=$pat_data;
     if ($this->form_validation->run() == FALSE)
@@ -1536,6 +1523,7 @@ class Forms extends Admin_Controller {
   function core_journal_form3()
   {
     $this->auth->check_access('Therapists',true);
+    $this->load->model('Core1_model');
     $this->load->model('Core3_model');
     $data['uri']=$this->uri->segment(2);
     $data['page_title']   = "Core Journal-3";
@@ -1543,6 +1531,10 @@ class Forms extends Admin_Controller {
       
     $data['admin_session'] = $this->admin_session->userdata('admin');
     $user_id = $data['admin_session']['id'];
+
+    $pat_data = $this->Core1_model->getNormalUser($user_id);
+
+
     $id="";
     $this->load->helper('form');
     $this->load->library('form_validation');
@@ -1568,36 +1560,9 @@ class Forms extends Admin_Controller {
     
     $identify_data ="";
     $visits_data = "";
-
-        $this->load->model('Core1_model');
-    $pat_data=$this->Core1_model->getNormalUser();
-    $data['patient']=$pat_data;
-      
-  
-    if ($user_id)
-    { 
-      $core3    = $this->Core3_model->get_core3($user_id);
-      //if the cooccurring does not exist, redirect them to the cooccurring list with an error
-      if ($core3)
-      {
-      $id             = $core3->id;
-      $data['id']         = $core3->id;
-      $data['user_id']      = $core3->user_id;      
-      $data['zip']      = $core3->zip;
-      $data['identify']   = $core3->identify;
-      $data['is_present']   = $core3->is_present;
-      $data['is_service']= $core3->is_service;  
-      $data['pulse']= $core3->pulse;
-      $data['relatiopnship']      = $core3->relatiopnship;
-      $data['supporter']      = $core3->supporter;
-      $data['visits']     = $core3->visits;
-      $data['medicine']     = $core3->medicine;
-      $data['concentration']      = $core3->concentration;
-      $data['pulse2']     = $core3->pulse2;
-      
-      }
-      
-    }
+     
+    $data['patient']=$pat_data;  
+    
   
     $this->form_validation->set_rules('zip', 'lang:name', 'trim|required');
         
@@ -1650,17 +1615,19 @@ class Forms extends Admin_Controller {
   }
 
 
-  function core_journal_form3_edit()
+  function core_journal_form3_edit($id)
   {
     $this->auth->check_access('Therapists',true);
+    $this->load->model('Core1_model');
     $this->load->model('Core3_model');
     $data['uri']=$this->uri->segment(2);
-      $data['page_title']   = "Core Journal-3";
-      
+    $data['page_title']   = "Core Journal-3";      
       
     $data['admin_session'] = $this->admin_session->userdata('admin');
     $user_id = $data['admin_session']['id'];
-    $id="";
+
+    $pat_data = $this->Core1_model->getNormalUser($user_id);
+    
     $this->load->helper('form');
     $this->load->library('form_validation');
     $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
@@ -1669,27 +1636,29 @@ class Forms extends Admin_Controller {
     $data['page_title']   = "core3";
     
     //default values are empty if the customer is new
-      $data['id']       = "";
-      $data['user_id']    = "";     
-      $data['zip']      = "";
-      $data['identify']   = "";
-      $data['is_present']     = "";
-      $data['is_service']= "";  
-        $data['pulse']      = "";
-      $data['relatiopnship']      = "";
-      $data['supporter']      = "";
-      $data['visits']     = "";
-      $data['medicine']     = "";
-      $data['concentration']      = "";
-      $data['pulse2']     = "";
-      
-      $identify_data ="";
-      $visits_data = "";
+    $data['id']       = "";
+    $data['user_id']    = "";     
+    $data['zip']      = "";
+    $data['identify']   = "";
+    $data['is_present']     = "";
+    $data['is_service']= "";  
+    $data['pulse']      = "";
+    $data['relatiopnship']      = "";
+    $data['supporter']      = "";
+    $data['visits']     = "";
+    $data['medicine']     = "";
+    $data['concentration']      = "";
+    $data['pulse2']     = "";
+    
+    $identify_data ="";
+    $visits_data = "";
+
+    $data['patient']=$pat_data;
       
   
     if ($user_id)
     { 
-      $core3    = $this->Core3_model->get_core3($user_id);
+      $core3    = $this->Core3_model->get_core3($id);
       //if the cooccurring does not exist, redirect them to the cooccurring list with an error
       if ($core3)
       {
@@ -1708,17 +1677,11 @@ class Forms extends Admin_Controller {
       $data['concentration']      = $core3->concentration;
       $data['pulse2']     = $core3->pulse2;
       
-      }
-      
-    
+      }    
       
     }
   
-    $this->form_validation->set_rules('zip', 'lang:name', 'trim|required');
-    
-    
-    
-    
+    $this->form_validation->set_rules('zip', 'lang:name', 'trim|required');    
       
     // validate the form
     if ($this->form_validation->run() == FALSE)
@@ -1727,8 +1690,7 @@ class Forms extends Admin_Controller {
       $this->load->view($this->config->item('admin_folder').'/core_journal_form3', $data);
     }
     else
-    {
-      
+    {      
             
       $save['user_id']      = $user_id;
       //$save['id']         = $id;
@@ -1757,7 +1719,7 @@ class Forms extends Admin_Controller {
       
       $core3_id = $this->Core3_model->save($save);
       $this->session->set_flashdata('message', lang('message_core3_saved'));
-      redirect($this->config->item('admin_folder').'/forms/core_journal_form3');
+      redirect($this->config->item('admin_folder').'/forms/core3_list');
     }
     
   }

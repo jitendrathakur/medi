@@ -1,144 +1,109 @@
 <?php include('header.php'); ?>
-
 		
-  <div class="span8" style="margin-left:150px" >
-          
+  	<div class="col-md-10 well">
 
-  	<div style="height:100%; " id="" class="well" >
+	<!-- begin form -->
+	<h2>T-MeD Recovery &amp; Wellness Goals</h2>
+	<?php echo form_open_multipart($this->config->item('admin_folder').'forms/core_journal_form2', array('class' => 'form-horizontal')); ?>
+      
+		<div class="form-group">
+	        <label for="inputEmail3" class="col-sm-2 control-label">Patient</label>
+	        <div class="col-sm-10">
+	          <select name="patient" class='span3'>
+	            <?php foreach ($patient as $key => $value) {
+	            ?>
+	            <option value="<?php echo $value->id; ?>"><?php echo $value->firstname. ' '.$value->lastname; ?></option>
+	            <?php } ?>
+	          </select> 
+	        </div>
+	    </div>
 
+	    <div class="form-group">
+	        <label for="inputEmail3" class="col-sm-2 control-label">Date</label>
+	        <div class="col-sm-10">
+	           <?php
+				$data	= array('id' => 'datepicker', 'name'=>'coredate', 'value'=>set_value('coredate', ''), 'class'=>'form-control');
+				echo form_input($data); ?>
+	        </div>
+	    </div>
 
-		<!-- begin form -->
-	<?php echo form_open_multipart($this->config->item('admin_folder').'forms/core_journal_form2'); ?>
-      <ul id="mainForm_11" class="mainForm">
-
-      			
-				<li id="fieldBox_92" class="mainForm first-child">
-					<label class="formFieldQuestion"><span style="white-space:pre; " class="Apple-tab-span">
-									</span>&nbsp; &nbsp;T-MeD Recovery &amp; Wellness Goals</label>
-				</li>
-
-				<li id="pfieldBox_83" class="mainForm">
-					<label class="formFieldQuestion">Patient:&nbsp;*</label>
-	      			<select name="patient">
-						<?php foreach ($patient as $key => $value) {
-						?>
-						<option value="<?php echo $value->id; ?>"><?php echo $value->firstname. ' '.$value->lastname; ?></option>
-						<?php } ?>
-					</select> 
-				</li>
-
-
-				<li id="fieldBox_93" class="mainForm">
-					<label class="formFieldQuestion">Date:&nbsp;*</label>
-                   
- <?php
-			$data	= array('id' => 'datepicker', 'name'=>'coredate', 'value'=>set_value('coredate', ''), 'class'=>'mainForm');
+	    <div class="form-group">
+	        <label for="inputEmail3" class="col-sm-2 control-label">Renewal</label>
+	        <div class="col-sm-10">
+	          <?php
+			$data	= array('id' => 'renewal', 'name'=>'renewal', 'value'=>set_value('renewal', ''), 'class'=>'form-control');
 			echo form_input($data); ?>
-				<li id="fieldBox_94" class="mainForm">
-					<label class="formFieldQuestion">Renewal:&nbsp;*</label>
-                     <?php
-			$data	= array('id' => 'renewal', 'name'=>'renewal', 'value'=>set_value('renewal', ''), 'class'=>'mainForm');
-			echo form_input($data); ?>
-                    </li>
+	        </div>
+	    </div>
 
-				<li id="fieldBox_95" class="mainForm">
-					<label class="formFieldQuestion">T-MeD Plan#:&nbsp;*</label>
-                    
-                      <?php
-			$data	= array('name'=>'plan', 'value'=>set_value('plan', ''), 'class'=>'mainForm');
-			echo form_input($data); ?>
-                    </li>
+	    <div class="form-group">
+	        <label for="inputEmail3" class="col-sm-2 control-label">T-MeD Plan</label>
+	        <div class="col-sm-10">
+	          	<?php
+				$data	= array('name'=>'plan', 'value'=>set_value('plan', ''), 'class'=>'form-control');
+				echo form_input($data); ?>
+	        </div>
+	    </div>
 
-				<li id="fieldBox_96" class="mainForm">
-					<label class="formFieldQuestion">Goal One:&nbsp;*</label>
-                    
-
-<?php
-				$data	= array('name'=>'goal',  'value'=>set_value('goal', ''));
+	    <div class="form-group">
+	        <label for="inputEmail3" class="col-sm-2 control-label">Goal One</label>
+	        <div class="col-sm-10">
+	          	<?php
+				$data	= array('name'=>'goal',  'value'=>set_value('goal', ''), 'class' => 'form-control');
 				echo form_textarea($data);
 				?>
-</li>
+	        </div>
+	    </div>
 
-				<li id="fieldBox_97" class="mainForm">
-					<label class="formFieldQuestion">Step I:&nbsp;*</label>
-                    
-                    <?php
-				$data	= array('name'=>'step1',  'value'=>set_value('step1', ''));
+	    <div class="form-group">
+	        <label for="inputEmail3" class="col-sm-2 control-label">Step I</label>
+	        <div class="col-sm-10">
+	          	<?php
+				$data	= array('name'=>'step1',  'value'=>set_value('step1', ''), 'class' => 'form-control');
 				echo form_textarea($data);
 				?>
-                   </li>
+	        </div>
+	    </div>
 
-				<li id="fieldBox_98" class="mainForm">
-					<label class="formFieldQuestion">Step II:&nbsp;*</label>
-                    
- <?php
-				$data	= array('name'=>'step2',  'value'=>set_value('step2', ''));
+	    <div class="form-group">
+	        <label for="inputEmail3" class="col-sm-2 control-label">Step II</label>
+	        <div class="col-sm-10">
+	          	<?php
+				$data	= array('name'=>'step2',  'value'=>set_value('step2', ''), 'class' => 'form-control');
 				echo form_textarea($data);
 				?>
-</li>
+	        </div>
+	    </div>
 
-				<li id="fieldBox_99" class="mainForm">
-					<label class="formFieldQuestion">Step III:&nbsp;*</label>
-                     <?php
-				$data	= array('name'=>'step3',  'value'=>set_value('step3', ''));
+	    <div class="form-group">
+	        <label for="inputEmail3" class="col-sm-2 control-label">Step III</label>
+	        <div class="col-sm-10">
+	          	<?php
+				$data	= array('name'=>'step3',  'value'=>set_value('step3', ''), 'class' => 'form-control');
 				echo form_textarea($data);
 				?>
-                    </li>
+	        </div>
+	    </div>
 
-				<li id="fieldBox_100" class="mainForm">
-					<label class="formFieldQuestion">Target Dates &amp; Concentration:&nbsp;*</label>
-
- <?php
-				$data	= array('name'=>'target',  'value'=>set_value('target', ''));
+	    <div class="form-group">
+	        <label for="inputEmail3" class="col-sm-2 control-label">Target Dates &amp; Concentration</label>
+	        <div class="col-sm-10">
+	          	<?php
+				$data	= array('name'=>'target',  'value'=>set_value('target', ''), 'class' => 'form-control');
 				echo form_textarea($data);
 				?>
-</li>
-		
-		
-		<!-- end of this page -->
-
-		<!-- page validation -->
-	
-
-		<!-- end page validaton -->
+	        </div>
+	    </div>
 
 
-						</ul>
-                        
-                          <div id="post-9" class="post-9 page type-page status-publish hentry" >
-<button type="submit" style=" background-color: #6195C5;
-    border: 2px solid #142872;
-    color: #FFFFFF;
-    margin-bottom: 7px;height: 36px;
-    left: 201px;
-    position: absolute;cursor: pointer;
-      width: 137px;"><?php echo lang('form_save');?></button>
-				<!--<div class="main-container" style="position:absolute; left:-50px; top:534px; " > -->
- 				<?php /*?><div class="side-menu-class" >
-       				 <ul id="side-menu" >
-         			   <li style="position:absolute; left:-5px; top:63px; width:137px; height:36px; " ><a href="core.html" >Core Journal</a></li>
-          			   <li style="position:absolute; left:201px; top:63px; width:137px; height:36px; " ><a href="core2.html" >Core Journal II</a></li>
-          			   
-						<li style="position:absolute; left:395px; top:63px; width:137px; height:36px; " ><a href="core3.html" >Core Journal III</a></li>
-       				</ul>
-    			</div>
-<?php */?>
+	    <div class="form-group">
+	        <div class="col-sm-offset-2 col-sm-10">
+	          <button type="submit" class="btn btn-primary btn-large"><?php echo lang('form_save');?></button>
+	        </div>
+	    </div> 
 
-		
-		<!-- close the display stuff for this page -->
-    	</div></li></ul>
-      	</form></div>
-    	
-<!-- .entry-content -->
-<!-- #post-## -->
-
-	
-	</div><!-- #content -->
-
-
-
-
-
-
+    </form>
+  </div>
+</div> 
 
 <?php include('footer.php');
