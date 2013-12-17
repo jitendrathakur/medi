@@ -79,14 +79,12 @@
 			<?php if ($result->close) { ?>
 				closed
 			<?php } else { ?>
-			  <a  class ="edit_btn" href="<?php echo base_url('forms/core_journal_form_edit/').'/'.$result->id  ?>" >Edit</a>
-			<?php } ?>
-			
+			  <a  class ="" href="<?php echo base_url('forms/core_journal_form_edit/').'/'.$result->id  ?>" ><i class='glyphicon glyphicon-edit'></i></a>
+			<?php } ?>			
 			<!-- Button trigger modal -->			
-			<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#comment_<?php echo $result->id; ?>">
-			  
-			  Comments
-			</button>
+			<a class="" data-toggle="modal" data-target="#comment_<?php echo $result->id; ?>">
+			  <i class="glyphicon glyphicon-comment"></i>			  
+			</a>			
 			
 			<!-- Modal -->
 			<div class="modal fade" id="comment_<?php echo $result->id; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -98,17 +96,18 @@
 				 </div>
 				 <div class="modal-body">
 				   
-					<ul>
-						<?php
-							if(!empty($result->comments)){
-								foreach($result->comments as $comment){ ?>
-									<li> <?php echo $comment->created; ?>  | <?php echo $comment->comment; ?> </li>	
-								<?php }
-							}else{
-								echo "No Comments";
-							}
-						?>
-					</ul>
+					<?php
+						if(!empty($result->comments)){
+							foreach($result->comments as $comment){ ?>								
+								<div class="alert alert-info">
+									<p><?php echo $result->firstname. ' '.$result->lastname; ?> : <?php echo $comment->comment; ?></p>
+									<small><?php echo $comment->created; ?></small>
+								</div>																						
+							<?php }
+						}else{
+							echo "No Comments";
+						}
+					?>					
 			
 				 </div>
 				 <div class="modal-footer">

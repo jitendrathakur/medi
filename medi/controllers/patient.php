@@ -20,10 +20,11 @@ class Patient extends CI_Controller
 
       $this->load->model('Patient_model');
       $data = array(
-      'core1_id' => $id,
-      'patient_id' => $user['id'],
-      'comment' => $comment
-    );
+        'core1_id' => $id,
+        'patient_id' => $user['id'],
+        'comment' => $comment,
+        'created' => date("Y-m-d H:i:s")
+      );
 
     $this->Patient_model->core1_comment($data);
 
@@ -40,11 +41,12 @@ class Patient extends CI_Controller
       $comment = $this->input->post('comment');
 
       $this->load->model('Patient_model');
-    $data = array(
-      'core2_id' => $id,
-      'patient_id' => $user['id'],
-      'comment' => $comment
-    );
+      $data = array(
+        'core2_id' => $id,
+        'patient_id' => $user['id'],
+        'comment' => $comment,
+        'created' => date("Y-m-d H:i:s")
+      );
 
     $this->Patient_model->core2_comment($data);
 
@@ -64,7 +66,8 @@ class Patient extends CI_Controller
       $data = array(
         'core3_id' => $id,
         'patient_id' => $user['id'],
-        'comment' => $comment
+        'comment' => $comment,
+        'created' => date("Y-m-d H:i:s")
       );
 
       $this->Patient_model->core3_comment($data);

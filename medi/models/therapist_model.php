@@ -99,5 +99,30 @@ Class Therapist_model extends CI_Model
 		return true;
 
 	}//end setModelAlert()
+
+	function getCommentsByPatient($patient_id, $id, $model)
+	{
+		
+		$this->db->select('comment, created');
+		
+		if(!empty($patient_id) && !empty($id))
+		{
+			$this->db->where('patient_id', $patient_id);
+			$this->db->where($model.'_id', $id);
+		}
+		
+		$result	= $this->db->get($model.'_reply')->result();
+		
+		//print_r($result);
+		//die;
+	
+		if(!empty($result))	{
+			return $result;	
+		}else{
+			return false;
+		}
+		
+	}
+	//================= getCommentsByPatient ==============
 		
 }//end class

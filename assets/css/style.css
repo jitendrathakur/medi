@@ -1788,3 +1788,9 @@ table th { font-weight:bold;}
 .error{
 	color: #FF0000;
 }
+
+.glyphicon {
+	margin-top: 5px;
+	margin-bottom: 10px;
+	font-size: 24px;
+}

@@ -17,18 +17,17 @@
 <link rel="alternate" type="application/rss+xml" title="Transformative Medicine » Feed" href="http://tmed3000.org/feed/" >
 <link rel="alternate" type="application/rss+xml" title="Transformative Medicine » Comments Feed" href="http://tmed3000.org/comments/feed/" >
 <link rel="alternate" type="application/rss+xml" title="Transformative Medicine » Contact Us Comments Feed" href="http://tmed3000.org/about-us/feed/" >
-<link rel="stylesheet" id="calp-general-css" href="css/general.css?ver=1" type="text/css" media="all" >
+
 
 <link rel="stylesheet" href="<?php echo base_url('assets/css/style.css') ?>">
 <link rel="stylesheet" href="<?php echo base_url('assets/css/blue.css') ?>">
-<link rel="stylesheet" href="<?php echo base_url('assets/css//side-menu.css') ?>">
+
 
 <link rel="stylesheet" id="quick_chat_style_sheet-css" href="css/quick-chat.css?ver=3.5.1" type="text/css" media="all" >
 <!--[if lt IE 8]>
 <link rel='stylesheet' id='quick_chat_ie_style_sheet-css'  href='css/quick-chat-ie.css?ver=3.5.1' type='text/css' media='all' />
 <![endif]-->
-<script type="text/javascript" src="js/jquery.js?ver=1.8.3" ></script>
-<script type="text/javascript" src="js/include.js?ver=3.5.1" ></script>
+
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
@@ -44,10 +43,7 @@
 <link rel="next" title="Partners" href="http://tmed3000.org/partners/" >
 <meta name="generator" content="WordPress 3.5.1" >
 <link rel="canonical" href="http://tmed3000.org/about-us/" >
-<link rel="stylesheet" href="css/overlay_styles.css" type="text/css" >
 
-<!-- Dropdown Menu Widget Styles by shailan (http://shailan.com) v1.9 on wp3.5.1 -->
-<link rel="stylesheet" href="css/shailan-dropdown.min.css" type="text/css" >
 
 <link rel="stylesheet" href="<?php echo base_url('assets/include/ui-1.10.0/ui-lightness/jquery-ui-1.10.0.custom.min.css') ?>" type="text/css" />
 <link rel="stylesheet" href="<?php echo base_url('assets/css/jquery.ui.timepicker.css?v=0.3.3') ?>" type="text/css" />

@@ -65,23 +65,18 @@ class Forms extends Admin_Controller {
      $user_id = $data['admin_session']['id'];  
 
      $this->load->model('Core1_model');
+     $this->load->model('Therapist_model');     
     
      $sorting = array('field' => $field, 'dir' => $order);
      $results= $this->Core1_model->readAll($user_id, $sorting);
     
-     //print_r($results);
-     //die;
-    
-     if(!empty($results)){
-          foreach($results as $result){
-               $result->comments = $this->Core1_model->getCommentsByPatient($result->patient_id, $result->id);
-               
-               
-          }
-     }
+     
+      if(!empty($results)){
+        foreach($results as $result){
+          $result->comments = $this->Therapist_model->getCommentsByPatient($result->patient_id, $result->id, 'core1');
+        }
+      }
 
-     //print_r($results);
-     //die;
     
     $data['total_read_count'] = $this->__therapistAlert($user_id);
      
@@ -103,14 +98,21 @@ class Forms extends Admin_Controller {
     $data['admin_session'] = $this->admin_session->userdata('admin');
     $user_id = $data['admin_session']['id'];  
 
+    $this->load->model('Therapist_model');
     $this->load->model('Core2_model');
     
     $sorting = array('field' => $field, 'dir' => $order);
-    $result= $this->Core2_model->readAll($user_id, $sorting);
+    $results = $this->Core2_model->readAll($user_id, $sorting);
+
+    if(!empty($results)){
+      foreach($results as $result){
+        $result->comments = $this->Therapist_model->getCommentsByPatient($result->patient_id, $result->id, 'core2');               
+      }
+    }
 
     $data['total_read_count'] = $this->__therapistAlert($user_id);
     
-    $data['results'] = $result; 
+    $data['results'] = $results; 
 
     $data['order'] = $order;
 
@@ -128,13 +130,20 @@ class Forms extends Admin_Controller {
     $user_id = $data['admin_session']['id'];  
     
     $this->load->model('Core3_model');
+    $this->load->model('Therapist_model');
     
     $sorting = array('field' => $field, 'dir' => $order);
-    $result= $this->Core3_model->readAll($user_id, $sorting);
+    $results = $this->Core3_model->readAll($user_id, $sorting);
+
+    if(!empty($results)){
+      foreach($results as $result){
+        $result->comments = $this->Therapist_model->getCommentsByPatient($result->patient_id, $result->id, 'core3');               
+      }
+    }
 
     $data['total_read_count'] = $this->__therapistAlert($user_id);
    
-    $data['results'] = $result; 
+    $data['results'] = $results; 
 
     $data['order'] = $order;
 
