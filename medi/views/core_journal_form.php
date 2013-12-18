@@ -13,8 +13,6 @@
     a { cursor: pointer; }
     #requirements li { line-height: 1.6em; }
 </style>
-
-
   
 <script type="text/javascript">
   $(document).ready(function() {

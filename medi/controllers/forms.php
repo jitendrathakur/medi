@@ -18,7 +18,7 @@ class Forms extends Admin_Controller {
 
   function __sendEmail($option = array()) {  
 
-    $config = Array(
+    /*$config = Array(
       'protocol' => 'smtp',
       'smtp_host' => 'ssl://smtp.googlemail.com',
       'smtp_port' => 465,
@@ -50,7 +50,7 @@ class Forms extends Admin_Controller {
     else
     {
       show_error($this->email->print_debugger());
-    }
+    }*/
 
   }//end __sendEmail()
 
