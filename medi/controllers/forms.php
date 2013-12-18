@@ -18,7 +18,7 @@ class Forms extends Admin_Controller {
 
   function __sendEmail($option = array()) {  
 
-    /*$config = Array(
+    $config = Array(
       'protocol' => 'smtp',
       'smtp_host' => 'ssl://smtp.googlemail.com',
       'smtp_port' => 465,
@@ -50,7 +50,7 @@ class Forms extends Admin_Controller {
     else
     {
       show_error($this->email->print_debugger());
-    }*/
+    }
 
   }//end __sendEmail()
 
@@ -161,8 +161,7 @@ class Forms extends Admin_Controller {
     $data['admin_session'] = $this->admin_session->userdata('admin');
     $user_id = $data['admin_session']['id'];    
     $therapist = $this->auth->getTherapist($user_id);
-    
-    
+        
     $data['total_read_count'] = $this->__patientAlert($user_id);
     $id="";
     $this->load->helper('form');
@@ -183,18 +182,22 @@ class Forms extends Admin_Controller {
     $apply_data = "";
     //create the photos array for later use
     $data['photos']   = array();  
-      
+         
     $this->form_validation->set_rules('feel', 'lang:name', 'trim|required|max_length[64]');
     
     $this->form_validation->set_rules('pulse', 'lang:description', 'trim'); 
       
     // validate the form
-    if ($this->form_validation->run() == FALSE)
-    {   
+    $this->load->model('Patient_model');
+    $data['done'] = $this->Patient_model->__checkPatientSubmission($user_id, 'wellness');
+        
+    if ($data['done']) {
+      $data['view'] = 'already_done';     
+      $this->load->view($this->config->item('patient').'/layout', $data);
+      
+    } else if ($this->form_validation->run() == FALSE) {   
       $this->load->view($this->config->item('admin_folder').'/wellness_form', $data);
-    }
-    else
-    {
+    } else {
       
       //$save['id']       = $id;
       $save['user_id']    = $user_id;     
@@ -365,15 +368,19 @@ class Forms extends Admin_Controller {
     $data['arrest']     = "";
     $data['incarceration']      = "";
     $data['pulse']      = "";
-      
-  
+        
     $this->form_validation->set_rules('is_parole', 'lang:name', 'trim|required');   
     $this->form_validation->set_rules('pulse', 'lang:name', 'trim');
-    
-    
-      
+          
     // validate the form
-    if ($this->form_validation->run() == FALSE)
+    $this->load->model('Patient_model');
+    $data['done'] = $this->Patient_model->__checkPatientSubmission($user_id, 'forensic');
+        
+    if ($data['done']) {
+      $data['view'] = 'already_done';     
+      $this->load->view($this->config->item('patient').'/layout', $data);
+      
+    } else if ($this->form_validation->run() == FALSE)
     {
     
       $this->load->view($this->config->item('admin_folder').'/forensic_form', $data);
@@ -574,7 +581,15 @@ class Forms extends Admin_Controller {
     $this->form_validation->set_rules('pulse', 'lang:description', 'trim');
     
     // validate the form
-    if ($this->form_validation->run() == FALSE)
+    // validate the form
+    $this->load->model('Patient_model');
+    $data['done'] = $this->Patient_model->__checkPatientSubmission($user_id, 'cooccurring');
+        
+    if ($data['done']) {
+      $data['view'] = 'already_done';     
+      $this->load->view($this->config->item('patient').'/layout', $data);
+      
+    } else if ($this->form_validation->run() == FALSE)
     {
     
       $this->load->view($this->config->item('admin_folder').'/cooccurring_form', $data);
@@ -793,7 +808,15 @@ class Forms extends Admin_Controller {
     
       
     // validate the form
-    if ($this->form_validation->run() == FALSE)
+    // validate the form
+    $this->load->model('Patient_model');
+    $data['done'] = $this->Patient_model->__checkPatientSubmission($user_id, 'recoveryvitals');
+        
+    if ($data['done']) {
+      $data['view'] = 'already_done';     
+      $this->load->view($this->config->item('patient').'/layout', $data);
+      
+    } else if ($this->form_validation->run() == FALSE)
     {
     
       $this->load->view($this->config->item('admin_folder').'/recoveryvitals_form', $data);
@@ -914,7 +937,15 @@ class Forms extends Admin_Controller {
     $this->form_validation->set_rules('is_std', 'lang:name', 'trim|required');
     
     // validate the form
-    if ($this->form_validation->run() == FALSE)
+    // validate the form
+    $this->load->model('Patient_model');
+    $data['done'] = $this->Patient_model->__checkPatientSubmission($user_id, 'physicalhealth');
+        
+    if ($data['done']) {
+      $data['view'] = 'already_done';     
+      $this->load->view($this->config->item('patient').'/layout', $data);
+      
+    } else if ($this->form_validation->run() == FALSE)
     {
     
       $this->load->view($this->config->item('admin_folder').'/physicalhealth_form', $data);
@@ -1125,7 +1156,15 @@ class Forms extends Admin_Controller {
     $this->form_validation->set_rules('is_medicine', 'lang:name', 'trim|required');
           
     // validate the form
-    if ($this->form_validation->run() == FALSE)
+    // validate the form
+    $this->load->model('Patient_model');
+    $data['done'] = $this->Patient_model->__checkPatientSubmission($user_id, 'tmed');
+        
+    if ($data['done']) {
+      $data['view'] = 'already_done';     
+      $this->load->view($this->config->item('patient').'/layout', $data);
+      
+    } else if ($this->form_validation->run() == FALSE)
     {
     
       $this->load->view($this->config->item('admin_folder').'/tmed_form', $data);

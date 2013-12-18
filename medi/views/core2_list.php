@@ -103,9 +103,9 @@
 		</td>
 		<td>
 			
-			<?php if ($result->close) {
-                echo "closed";
-	            } else {
+			<?php if ($result->close) { ?>
+                <i class='glyphicon glyphicon-off'></i>
+	        <?php } else {
 
 	              ?>
 	              <a  class ="" href="<?php echo base_url('forms/core_journal_form2_edit/').'/'.$result->id  ?>" ><i class='glyphicon glyphicon-edit'></i></a>
