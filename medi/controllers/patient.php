@@ -227,6 +227,17 @@ class Patient extends CI_Controller
       return $sum;
 
     }//end __patientAlert() 
+
+
+    function thank_you()
+    {
+
+      $this->auth->check_access('Normal',true);
+      $data['uri']=$this->uri->segment(2);
+      $data['view'] = 'thank_you';     
+      $this->load->view($this->config->item('patient').'/layout', $data);      
+      
+    }//end thank_you()
       
     
 }//end class

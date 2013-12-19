@@ -1208,7 +1208,7 @@ class Forms extends Admin_Controller {
       $this->__sendEmail($option);
 
       $this->session->set_flashdata('message', lang('message_tmed_saved'));
-      redirect($this->config->item('admin_folder').'/forms/tmed_form');
+      redirect($this->config->item('patient').'/thank_you');     
     }
   }
   
