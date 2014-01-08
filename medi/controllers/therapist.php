@@ -246,16 +246,16 @@ class Therapist extends CI_Controller
           if(!empty($core1)){
                foreach($core1 as $cor1){
                     $cor1_arr = $this->auth->getPatientById($cor1->patient_id);
-                    $cor1->firstname = $cor1_arr->firstname;
-                    $cor1->lastname = $cor1_arr->lastname;
+                    $cor1->firstname = @$cor1_arr->firstname;
+                    $cor1->lastname = @$cor1_arr->lastname;
                }
           }
           
           if(!empty($core2)){
                foreach($core2 as $cor2){
                     $cor2_arr = $this->auth->getPatientById($cor2->patient_id);
-                    $cor2->firstname = $cor2_arr->firstname;
-                    $cor2->lastname = $cor2_arr->lastname;
+                    $cor2->firstname = @$cor2_arr->firstname;
+                    $cor2->lastname = @$cor2_arr->lastname;
                }
           }
           
@@ -263,8 +263,8 @@ class Therapist extends CI_Controller
           if(!empty($core3)){
                foreach($core3 as $cor3){
                     $cor3_arr = $this->auth->getPatientById($cor3->patient_id);
-                    $cor3->firstname = $cor3_arr->firstname;
-                    $cor3->lastname = $cor3_arr->lastname;
+                    $cor3->firstname = @$cor3_arr->firstname;
+                    $cor3->lastname = @$cor3_arr->lastname;
                }
           }
           //print_r($core1);
