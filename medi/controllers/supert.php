@@ -526,7 +526,7 @@ class Supert extends CI_Controller
 				//die;
 			
 				$result->therapist_name	= $therapist_arr->firstname.' '.$therapist_arr->lastname;
-				$result->patient_name	= $patient_arr->firstname.' '.$patient_arr->lastname;
+				@$result->patient_name	= @$patient_arr->firstname.' '.@$patient_arr->lastname;
 					
 				$result_arr[] = $result;
 			}
