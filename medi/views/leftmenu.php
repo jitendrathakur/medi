@@ -18,7 +18,7 @@
   <div class="col-md-2" >
   	<ul id="side-menu" >		
 		<li <? if( $uri == "therapist_to_patient_view" ){ ?> style="background-color:#000000;" <? } ?> >
-			<a href="<?php echo base_url('therapist/therapist_to_patient_view') ?>" >
+			<a href="<?php echo base_url('therapist/wellness_list') ?>" >
 				Daily Journals
 			</a>
 		</li>		

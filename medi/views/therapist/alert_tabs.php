@@ -1,7 +1,7 @@
 <?php
 $temp = explode("_", $uri);
 ?>
-<h3>Notifications</h3>
+<h3>Daily Journal</h3>
 <ul class="nav-tabs nav" id="alert_therapist" data-url="<?php echo $temp[0]; ?>">
   <li <? if (strpos($uri, "wellness") !== false) { ?> class="active" <? } ?> ><a href="<?php echo base_url('therapist/wellness_list/') ?>">Wellness</a></li>
   <li <? if (strpos($uri, "forensic") !== false) { ?> class="active" <? } ?> ><a href="<?php echo base_url('therapist/forensic_list/') ?>">Forensic</a></li>

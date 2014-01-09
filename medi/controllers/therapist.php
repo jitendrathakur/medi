@@ -5,6 +5,8 @@ class Therapist extends CI_Controller
      function __construct()
      {
        parent::__construct();
+
+       $this->load->library('pagination');
            
        //load the admin language file in
        $this->lang->load('admin');   
@@ -14,19 +16,39 @@ class Therapist extends CI_Controller
      {
 
           $this->auth->check_access('Therapists',true);
+
+          $this->load->model('Therapist_model');
+
+          $data['admin_session'] = $this->admin_session->userdata('admin');
+          $user_id = $data['admin_session']['id'];    
+
+          $config['base_url'] = 'http://localhost/medi/therapist/wellness_list/';
+          $config['total_rows'] = $this->Therapist_model->getModelReadCount($user_id, 'wellness');
+          $config['per_page'] = 2;        
+         // $config['num_links'] = 2;
+          $config['uri_segment'] = 3;
+          $choice = $config["total_rows"] / $config["per_page"];
+          $config["num_links"] = round($choice);
+
+          $this->pagination->initialize($config); 
+
+          $data["links"] = $this->pagination->create_links();
+
+          //print_r($config['total_rows']);
+
+          $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
           
           $this->lang->load('wellness');      
           $data['uri']=$this->uri->segment(2);
           
-          $data['admin_session'] = $this->admin_session->userdata('admin');
-          $user_id = $data['admin_session']['id'];    
+          
                     
           $data['total_read_count'] = $this->__therapistAlert($user_id);
     
-          $this->load->model('Therapist_model');
+          
     
           $sorting = array('field' => $field, 'dir' => $order);
-          $data['results'] = $this->Therapist_model->getModelList($user_id, null, null, 'wellness', $sorting, $start_date, $patient_id);
+          $data['results'] = $this->Therapist_model->getModelList($user_id, $config['per_page'], $page, 'wellness', $sorting, $start_date, $patient_id);
     
           $data['order'] = $order;
         
@@ -66,9 +88,6 @@ class Therapist extends CI_Controller
           }else{
                $this->load->view($this->config->item('therapist').'/layout', $data);     
           }
-
-    
-          $this->load->view($this->config->item('therapist').'/layout', $data);        
       
      }//end forensic_list()
 

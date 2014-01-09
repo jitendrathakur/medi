@@ -2,7 +2,7 @@
 Class Therapist_model extends CI_Model
 {	
 	
-	function getModelList($userId = false,$limit = NULL,$offset = NULL, $model, $order = array(), $start_date=null, $patient_id=null)
+	function getModelList($userId = false,$limit = null,$offset = null, $model, $order = array(), $start_date=null, $patient_id=null)
 	{
 
 		$patientId = $this->__getPatientByTherapist($userId);
@@ -33,10 +33,11 @@ Class Therapist_model extends CI_Model
 		//$start_date
 
 		if (!empty($order['field'])) {
-			//$this->db->order_by($order['field'], $order['dir']);
+			$this->db->order_by($order['field'], $order['dir']);
 		} else {
-			$this->db->order_by('is_read', 'ASC');	
-		}	
+			$this->db->order_by('cr_timestamp', 'DESC');	
+			$this->db->order_by('is_read', 'ASC');
+		}
 			
 		$query	= $this->db->get($model);
  
@@ -63,6 +64,16 @@ Class Therapist_model extends CI_Model
         }
 		
         return array_sum($data);			
+	}
+
+	function getModelReadCount($therapistId = null, $model = null) {
+
+		$patientId = $this->__getPatientByTherapist($therapistId);
+
+		$this->db->where_in('user_id', $patientId);
+		$data = $this->db->count_all_results($model);        
+		
+        return $data;			
 	}
 
 

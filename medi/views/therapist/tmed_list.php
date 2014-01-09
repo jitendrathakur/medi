@@ -54,7 +54,8 @@
 
 	<?php if(!empty($results)){ ?>
 	<?php foreach($results as $result ){ ?>
-	<tr>
+	<?php $class = (date('Y-m-d', strtotime($result->cr_timestamp)) == date('Y-m-d')) ? 'success' : ''; ?>
+	<tr class="<?php echo $class; ?>">	
 		<td>
 			<?php echo $result->id; ?>
 		</td>
