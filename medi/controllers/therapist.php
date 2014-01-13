@@ -12,7 +12,7 @@ class Therapist extends CI_Controller
        $this->lang->load('admin');   
      }
  
-     function wellness_list($field = null, $order = null, $start_date = null, $patient_id = null, $is_popup = false)
+     function wellness_list($page = 0, $field = null, $order = null, $start_date = null, $patient_id = null, $is_popup = false)
      {
 
           $this->auth->check_access('Therapists',true);
@@ -20,12 +20,11 @@ class Therapist extends CI_Controller
           $this->load->model('Therapist_model');
 
           $data['admin_session'] = $this->admin_session->userdata('admin');
-          $user_id = $data['admin_session']['id'];    
+          $user_id = $data['admin_session']['id'];         
 
-          $config['base_url'] = 'http://localhost/medi/therapist/wellness_list/';
+          $config['base_url'] = $this->config->item('base_url').$this->uri->segment(1).'/'.$this->uri->segment(2);
           $config['total_rows'] = $this->Therapist_model->getModelReadCount($user_id, 'wellness');
-          $config['per_page'] = 2;        
-         // $config['num_links'] = 2;
+          $config['per_page'] = $this->config->item('per_page');      
           $config['uri_segment'] = 3;
           $choice = $config["total_rows"] / $config["per_page"];
           $config["num_links"] = round($choice);
@@ -33,24 +32,20 @@ class Therapist extends CI_Controller
           $this->pagination->initialize($config); 
 
           $data["links"] = $this->pagination->create_links();
-
-          //print_r($config['total_rows']);
-
-          $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
           
+          $page = ($this->uri->segment($config['uri_segment'])) ? $this->uri->segment($config['uri_segment']) : 0;
+          $data['page'] = $page;
+
           $this->lang->load('wellness');      
-          $data['uri']=$this->uri->segment(2);
-          
-          
+          $data['uri'] = $this->uri->segment(2);
                     
-          $data['total_read_count'] = $this->__therapistAlert($user_id);
-    
-          
+          $data['total_read_count'] = $this->__therapistAlert($user_id);          
     
           $sorting = array('field' => $field, 'dir' => $order);
           $data['results'] = $this->Therapist_model->getModelList($user_id, $config['per_page'], $page, 'wellness', $sorting, $start_date, $patient_id);
     
           $data['order'] = $order;
+          
         
           $data['view'] = 'wellness_list';
     
@@ -64,20 +59,33 @@ class Therapist extends CI_Controller
      }//end wellness_list()
 
 
-     function forensic_list($field = null, $order = null, $start_date = null, $patient_id = null, $is_popup = false)
+     function forensic_list($page = 0, $field = null, $order = null, $start_date = null, $patient_id = null, $is_popup = false)
      {
           $this->auth->check_access('Therapists',true);
+          $this->load->model('Therapist_model');
                   
           $data['uri']=$this->uri->segment(2);
           $data['admin_session'] = $this->admin_session->userdata('admin');
           $user_id = $data['admin_session']['id'];    
+
+          $config['base_url'] = $this->config->item('base_url').$this->uri->segment(1).'/'.$this->uri->segment(2);
+          $config['total_rows'] = $this->Therapist_model->getModelReadCount($user_id, 'forensic');
+          $config['per_page'] = $this->config->item('per_page');      
+          $config['uri_segment'] = 3;
+          $choice = $config["total_rows"] / $config["per_page"];
+          $config["num_links"] = round($choice);
+
+          $this->pagination->initialize($config); 
+
+          $data["links"] = $this->pagination->create_links();
           
-          $this->load->model('Therapist_model');
-                    
+          $page = ($this->uri->segment($config['uri_segment'])) ? $this->uri->segment($config['uri_segment']) : 0;
+          $data['page'] = $page;          
+                              
           $data['total_read_count'] = $this->__therapistAlert($user_id);
     
           $sorting = array('field' => $field, 'dir' => $order);
-          $data['results'] = $this->Therapist_model->getModelList($user_id, null, null, 'forensic', $sorting, $start_date, $patient_id);
+          $data['results'] = $this->Therapist_model->getModelList($user_id, $config['per_page'], $page, 'forensic', $sorting, $start_date, $patient_id);
     
           $data['view'] = 'forensic_list';
     
@@ -91,20 +99,33 @@ class Therapist extends CI_Controller
       
      }//end forensic_list()
 
-     function physicalhealth_list($field = null, $order = null, $start_date = null, $patient_id = null, $is_popup = false)
+     function physicalhealth_list($page = 0, $field = null, $order = null, $start_date = null, $patient_id = null, $is_popup = false)
      {
           $this->auth->check_access('Therapists',true);
+          $this->load->model('Therapist_model');
                   
           $data['uri']=$this->uri->segment(2);
           $data['admin_session'] = $this->admin_session->userdata('admin');
-          $user_id = $data['admin_session']['id'];    
+          $user_id = $data['admin_session']['id']; 
+
+          $config['base_url'] = $this->config->item('base_url').$this->uri->segment(1).'/'.$this->uri->segment(2);
+          $config['total_rows'] = $this->Therapist_model->getModelReadCount($user_id, 'physicalhealth');
+          $config['per_page'] = $this->config->item('per_page');      
+          $config['uri_segment'] = 3;
+          $choice = $config["total_rows"] / $config["per_page"];
+          $config["num_links"] = round($choice);
+
+          $this->pagination->initialize($config); 
+
+          $data["links"] = $this->pagination->create_links();
           
-          $this->load->model('Therapist_model');
+          $page = ($this->uri->segment($config['uri_segment'])) ? $this->uri->segment($config['uri_segment']) : 0;
+          $data['page'] = $page;          
                     
           $data['total_read_count'] = $this->__therapistAlert($user_id);
     
           $sorting = array('field' => $field, 'dir' => $order);
-          $data['results'] = $this->Therapist_model->getModelList($user_id, null, null, 'physicalhealth', $sorting, $start_date, $patient_id);
+          $data['results'] = $this->Therapist_model->getModelList($user_id, $config['per_page'], $page, 'physicalhealth', $sorting, $start_date, $patient_id);
     
           $data['view'] = 'physicalhealth_list';
     
@@ -118,20 +139,33 @@ class Therapist extends CI_Controller
       
      }//end physicalhealth_list()
 
-     function recoveryvitals_list($field = null, $order = null, $start_date = null, $patient_id = null, $is_popup = false)
+     function recoveryvitals_list($page = 0, $field = null, $order = null, $start_date = null, $patient_id = null, $is_popup = false)
      {
           $this->auth->check_access('Therapists',true);
+          $this->load->model('Therapist_model');
                   
           $data['uri']=$this->uri->segment(2);
           $data['admin_session'] = $this->admin_session->userdata('admin');
           $user_id = $data['admin_session']['id'];    
+
+          $config['base_url'] = $this->config->item('base_url').$this->uri->segment(1).'/'.$this->uri->segment(2);
+          $config['total_rows'] = $this->Therapist_model->getModelReadCount($user_id, 'recoveryvitals');
+          $config['per_page'] = $this->config->item('per_page');      
+          $config['uri_segment'] = 3;
+          $choice = $config["total_rows"] / $config["per_page"];
+          $config["num_links"] = round($choice);
+
+          $this->pagination->initialize($config); 
+
+          $data["links"] = $this->pagination->create_links();
           
-          $this->load->model('Therapist_model');
+          $page = ($this->uri->segment($config['uri_segment'])) ? $this->uri->segment($config['uri_segment']) : 0;
+          $data['page'] = $page;          
                     
           $data['total_read_count'] = $this->__therapistAlert($user_id);
     
           $sorting = array('field' => $field, 'dir' => $order);      
-          $data['results'] = $this->Therapist_model->getModelList($user_id, null, null, 'recoveryvitals', $sorting, $start_date, $patient_id);
+          $data['results'] = $this->Therapist_model->getModelList($user_id, $config['per_page'], $page, 'recoveryvitals', $sorting, $start_date, $patient_id);
     
           $data['view'] = 'recoveryvitals_list';
     
@@ -146,20 +180,34 @@ class Therapist extends CI_Controller
       
      }//end recoveryvitals_list()
 
-     function cooccurring_list($field = null, $order = null, $start_date = null, $patient_id = null, $is_popup = false)
+     function cooccurring_list($page = 0, $field = null, $order = null, $start_date = null, $patient_id = null, $is_popup = false)
      {
           $this->auth->check_access('Therapists',true);
+
+          $this->load->model('Therapist_model');
                   
           $data['uri']=$this->uri->segment(2);
           $data['admin_session'] = $this->admin_session->userdata('admin');
-          $user_id = $data['admin_session']['id'];    
+          $user_id = $data['admin_session']['id'];  
+
+          $config['base_url'] = $this->config->item('base_url').$this->uri->segment(1).'/'.$this->uri->segment(2);
+          $config['total_rows'] = $this->Therapist_model->getModelReadCount($user_id, 'cooccurring');
+          $config['per_page'] = $this->config->item('per_page');      
+          $config['uri_segment'] = 3;
+          $choice = $config["total_rows"] / $config["per_page"];
+          $config["num_links"] = round($choice);
+
+          $this->pagination->initialize($config); 
+
+          $data["links"] = $this->pagination->create_links();
           
-          $this->load->model('Therapist_model');
+          $page = ($this->uri->segment($config['uri_segment'])) ? $this->uri->segment($config['uri_segment']) : 0;
+          $data['page'] = $page;
                     
           $data['total_read_count'] = $this->__therapistAlert($user_id);
     
           $sorting = array('field' => $field, 'dir' => $order);
-          $data['results'] = $this->Therapist_model->getModelList($user_id, null, null, 'cooccurring', $sorting, $start_date, $patient_id);
+          $data['results'] = $this->Therapist_model->getModelList($user_id, $config['per_page'], $page, 'cooccurring', $sorting, $start_date, $patient_id);
     
           $data['view'] = 'cooccurring_list';
     
@@ -173,22 +221,33 @@ class Therapist extends CI_Controller
       
      }//end cooccurring_list()
 
-     function tmed_list($field = null, $order = null, $start_date = null, $patient_id = null, $is_popup = false)
-     {
-          //print_r($start_date);
-          //die;
+     function tmed_list($page = 0, $field = null, $order = null, $start_date = null, $patient_id = null, $is_popup = false)
+     {       
           $this->auth->check_access('Therapists',true);
+          $this->load->model('Therapist_model');
                   
           $data['uri']=$this->uri->segment(2);
           $data['admin_session'] = $this->admin_session->userdata('admin');
-          $user_id = $data['admin_session']['id'];    
-         
-          $this->load->model('Therapist_model');
+          $user_id = $data['admin_session']['id'];   
+
+          $config['base_url'] = $this->config->item('base_url').$this->uri->segment(1).'/'.$this->uri->segment(2);
+          $config['total_rows'] = $this->Therapist_model->getModelReadCount($user_id, 'tmed');
+          $config['per_page'] = $this->config->item('per_page');      
+          $config['uri_segment'] = 3;
+          $choice = $config["total_rows"] / $config["per_page"];
+          $config["num_links"] = round($choice);
+
+          $this->pagination->initialize($config); 
+
+          $data["links"] = $this->pagination->create_links();
+          
+          $page = ($this->uri->segment($config['uri_segment'])) ? $this->uri->segment($config['uri_segment']) : 0;
+          $data['page'] = $page;          
                     
           $data['total_read_count'] = $this->__therapistAlert($user_id);
     
           $sorting = array('field' => $field, 'dir' => $order);
-          $data['results'] = $this->Therapist_model->getModelList($user_id, null, null, 'tmed', $sorting, $start_date, $patient_id);
+          $data['results'] = $this->Therapist_model->getModelList($user_id, $config['per_page'], $page, 'tmed', $sorting, $start_date, $patient_id);
     
           $data['view'] = 'tmed_list';
           $data['order'] = $order;

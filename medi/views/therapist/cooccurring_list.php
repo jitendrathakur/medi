@@ -13,7 +13,7 @@
 		<?php		
         $sort = ($order == 'ASC') ? 'DESC' : 'ASC';
 		?>
-		 <a class ="" href="<?php echo base_url('therapist/cooccurring_list/').'/user_id/'.$sort  ?>" >Patient</a>				
+		 <a class ="" href="<?php echo base_url('therapist/cooccurring_list/').'/'.$page.'/user_id/'.$sort  ?>" >Patient</a>				
 		</th>
 
 		<th>			
@@ -72,7 +72,7 @@
 		<?php		
         $sort = ($order == 'ASC') ? 'DESC' : 'ASC';
 		?>
-		<a class ="" href="<?php echo base_url('therapist/cooccurring_list/').'/cr_timestamp/'.$sort  ?>" >Created</a>
+		<a class ="" href="<?php echo base_url('therapist/cooccurring_list/').'/'.$page.'/cr_timestamp/'.$sort  ?>" >Created</a>
 		</th>		
 
 	</tr>
@@ -156,6 +156,7 @@
 	</tr>
 	<?php } ?>
 	</table>
+		<?php echo $links; ?>
 
 </div>
 </div>

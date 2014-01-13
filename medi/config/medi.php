@@ -101,3 +101,5 @@ $config['sms_group']	= array();
 $config['therapist']	= 'therapist';
 
 $config['admin']	= 'admin';
+
+$config['per_page'] = 2;
