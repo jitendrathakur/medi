@@ -32,7 +32,8 @@
                 <td><?php echo $row->user; ?></td>   
                 <td><?php echo $row->email; ?></td>                
                 <td><?php echo $row->mobile; ?></td> 
-                <td><a href="<?php echo base_url('admin/add/')."/".$row->id ?>" >Edit</a></td>            
+                <td><a href="<?php echo base_url('admin/add/')."/".$row->id ?>" >Edit</a> |
+                <a onclick="return confirm('Are you sure you want to delete?');" href="<?php echo base_url('admin/delete/')."/".$row->id ?>" >Delete</a></td>            
               </tr>
             <?php
               }

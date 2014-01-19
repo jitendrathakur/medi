@@ -42,7 +42,7 @@
         <div class="navbar-collapse collapse" id="navbar-main">
           <ul class="nav navbar-nav navbar-right">
             <li>
-              <a href="javascript:;" class="navbar-brand">Administrator</a>
+              <a href="<?php echo base_url('admin/index/') ?>" class="navbar-brand">Administrator</a>
             </li>            
             <li class="dropdown">
               <a href="<?php echo base_url('login/logout') ?>" >Logout</a>             
