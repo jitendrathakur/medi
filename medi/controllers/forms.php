@@ -150,6 +150,68 @@ class Forms extends Admin_Controller {
     $this->load->view($this->config->item('admin_folder').'/core3_list', $data);
   }
 
+  function wrap_form()
+  {
+    $this->auth->check_access('Normal',true);
+    $this->load->model('Wrap_model');
+    $data['uri']=$this->uri->segment(2);
+    $data['admin_session'] = $this->admin_session->userdata('admin');
+    $user_id = $data['admin_session']['id'];
+    $this->load->helper('form');
+    $this->load->library('form_validation');
+    $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+  
+    $data['page_title']   = "wrap";
+    
+    //default values are empty if the customer is new
+    $data['id']       = "";
+    $data['user_id']    = "";     
+    $data['is_social']      = "";
+    $data['is_discipline']   = "";
+    $data['trigger']      = "";
+    $data['motivator']= "";  
+    $data['behaviour']      = "";
+    $data['necessity']     = "";
+    $data['strategy']      = "";
+    $data['dimension']     = "";
+            
+    $this->form_validation->set_rules('trigger', 'Triggers/Criminal Induced Trigger & Action Plan', 'trim|required');   
+    $this->form_validation->set_rules('motivator', ' Earl Warning Signs/Criminal Motivators & Action Plan
+    ', 'trim|required');
+    $this->form_validation->set_rules('behaviour', ' Things Are Breaking Down/Criminal Behaviors & Acion Plan
+    ', 'trim|required');
+    $this->form_validation->set_rules('necessity', ' Crisis & Forensic Necessities Plan
+    ', 'trim|required');
+    $this->form_validation->set_rules('strategy', 'Post Crisis & Trans-Entry Startegies', 'trim|required');
+                     
+    // validate the form
+      
+    if ($this->form_validation->run() == FALSE)
+    {
+      $this->load->view($this->config->item('admin_folder').'/wrap_form', $data);
+    }
+    else
+    {     
+      //$save['id']       = $id;
+      $save['user_id']        = $user_id;   
+      $save['is_social']      = $this->input->post('is_social');
+      $save['is_discipline'] = $this->input->post('is_discipline');
+      $save['trigger']        = $this->input->post('trigger');
+      $save['motivator']      = $this->input->post('motivator'); 
+      $save['behaviour']      = $this->input->post('behaviour');
+      $save['necessity']      = $this->input->post('necessity');
+      $save['strategy']       = $this->input->post('strategy');
+      $save['dimension']      = $this->input->post('dimension');
+            
+      $this->Wrap_model->save($save);
+
+      $this->session->set_flashdata('message', lang('message_wrap_saved'));
+      
+      //go back to the forensic list
+      redirect($this->config->item('patient').'/thank_you');     
+    }
+  }
+
   
   function wellness_form()
   {

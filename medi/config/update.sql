@@ -102,3 +102,20 @@ VALUES (
 
 
 UPDATE med_admin SET PASSWORD =  'e10adc3949ba59abbe56e057f20f883e';
+
+
+
+CREATE TABLE IF NOT EXISTS `med_wrap` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `is_social` tinyint(1) NOT NULL,
+  `is_discipline` tinyint(1) NOT NULL,
+  `trigger` varchar(200) NOT NULL,
+  `motivator` varchar(200) NOT NULL,
+  `behaviour` varchar(200) NOT NULL,
+  `necessity` varchar(200) NOT NULL,
+  `strategy` varchar(200) NOT NULL,
+  `dimension` varchar(200) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
