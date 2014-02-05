@@ -9,7 +9,8 @@
 		    <li  <? if (strpos($uri, "recoveryvitals") !== false) { ?> style="background-color:#000000;" <? } ?>><a href="<?php echo base_url('forms/recoveryvitals_form') ?>" >Recovery Vitals Journal</a></li>
 		    <li  <? if (strpos($uri, "physicalhealth") !== false) { ?> style="background-color:#000000;" <? } ?>><a href="<?php echo base_url('forms/physicalhealth_form') ?>" >Physical Health Journal</a></li>
 			<li <? if (strpos($uri, "tmed") !== false) { ?> style="background-color:#000000;" <? } ?>><a href="<?php echo base_url('forms/tmed_form') ?>" >T-MeD Journal</a></li>
-			<li <? if (strpos($uri, "wrap") !== false) { ?> style="background-color:#000000;" <? } ?>><a href="<?php echo base_url('forms/wrap_form') ?>" >Wrap</a></li>
+			<li <? if (strpos($uri, "wrap") !== false) { ?> style="background-color:#000000;" <? } ?>><a href="<?php echo base_url('forms/wrap_form') ?>" >Wrap Journal</a></li>
+			<li <? if (strpos($uri, "empowerment") !== false) { ?> style="background-color:#000000;" <? } ?>><a href="<?php echo base_url('forms/empowerment_form') ?>" >Declaration of Empowerment "Live Pulse"</a></li>
 	  	</ul>
  	</div>
 <? } ?>

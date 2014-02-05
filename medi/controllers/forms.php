@@ -208,7 +208,7 @@ class Forms extends Admin_Controller {
       $this->session->set_flashdata('message', lang('message_wrap_saved'));
       
       //go back to the forensic list
-      redirect($this->config->item('patient').'/thank_you');     
+      redirect($this->config->item('admin_folder').'/forms/empowerment_form');      
     }
   }
 
@@ -1270,7 +1270,7 @@ class Forms extends Admin_Controller {
       $this->__sendEmail($option);
 
       $this->session->set_flashdata('message', lang('message_tmed_saved'));
-      redirect($this->config->item('patient').'/thank_you');     
+      redirect($this->config->item('admin_folder').'/forms/wrap_form');     
     }
   }
   
@@ -1912,6 +1912,58 @@ class Forms extends Admin_Controller {
     return $sum;
 
   }//end __patientAlert() 
+
+  function empowerment_form()
+  {
+    $this->auth->check_access('Normal',true);
+    $this->load->model('Empowerment_model');
+    $data['uri']=$this->uri->segment(2);
+    $data['admin_session'] = $this->admin_session->userdata('admin');
+    $user_id = $data['admin_session']['id'];
+    $this->load->helper('form');
+    $this->load->library('form_validation');
+    $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+  
+    $data['page_title']   = "Empowerment";
+    
+    //default values are empty if the customer is new
+    $data['id']       = "";
+    $data['user_id']    = "";     
+    $data['achievement']      = "";
+    $data['goal']   = "";
+    $data['personal_char']      = "";
+    $data['other']= "";  
+    $data['pulse']      = "";
+                
+    $this->form_validation->set_rules('achievement', 'Life or current achievement', 'trim|required');   
+    $this->form_validation->set_rules('goal', ' goal/hope', 'trim|required');
+    $this->form_validation->set_rules('pulse', 'pulse', 'trim|required');
+     
+                     
+    // validate the form
+      
+    if ($this->form_validation->run() == FALSE)
+    {
+      $this->load->view($this->config->item('admin_folder').'/empowerment_form', $data);
+    }
+    else
+    {     
+      //$save['id']       = $id;
+      $save['user_id']        = $user_id;   
+      $save['achievement']    = $this->input->post('achievement');
+      $save['goal']           = $this->input->post('goal');
+      $save['personal_char'] = $this->input->post('personal_char');
+      $save['other']          = $this->input->post('other'); 
+      $save['pulse']          = $this->input->post('pulse');
+                  
+      $this->Empowerment_model->save($save);
+
+      $this->session->set_flashdata('message', lang('message_empowerment_saved'));
+      
+      //go back to the forensic list
+      redirect($this->config->item('patient').'/thank_you');      
+    }
+  }
 
 
 }//end class

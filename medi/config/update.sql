@@ -119,3 +119,30 @@ CREATE TABLE IF NOT EXISTS `med_wrap` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
+
+
+-- phpMyAdmin SQL Dump
+-- version 4.0.4.1
+-- http://www.phpmyadmin.net
+--
+-- Host: 127.0.0.1
+-- Generation Time: Feb 03, 2014 at 06:17 PM
+-- Server version: 5.6.11
+-- PHP Version: 5.5.1
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+CREATE TABLE IF NOT EXISTS `med_empowerment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `achievement` varchar(200) NOT NULL,
+  `goal` varchar(200) NOT NULL,
+  `personal_char` tinyint(1) NOT NULL,
+  `other` varchar(200) NOT NULL,
+  `pulse` varchar(200) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `created_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
