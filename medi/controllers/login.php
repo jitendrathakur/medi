@@ -73,6 +73,7 @@ class Login extends CI_Controller {
 	    			$redirect = $this->__roleRedirect();				
 					redirect($redirect);
 	    		} else {
+	    		
 	    			if (!in_array($admin['access'], $this->config->item('sms_group'))) {
 	    				$redirect = $this->__roleRedirect();				
 						redirect($redirect);

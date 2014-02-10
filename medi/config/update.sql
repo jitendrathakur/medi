@@ -146,3 +146,5 @@ CREATE TABLE IF NOT EXISTS `med_empowerment` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
+ALTER TABLE `med_patient_therapist` ADD `single_relation` TINYINT NOT NULL DEFAULT '1' AFTER `patient_id` ,
+ADD `status` VARCHAR( 255 ) NOT NULL DEFAULT 'new' AFTER `single_relation` ;

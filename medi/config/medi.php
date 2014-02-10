@@ -97,10 +97,10 @@ $config['patient']		= 'patient';
 $config['sms_feature']	= true;
 
 //$config['sms_group']	= array('Admin', 'supert', 'Therapists');
-$config['sms_group']	= array('Admin', 'supert', 'Therapists');
+$config['sms_group']	= array();
 
 $config['therapist']	= 'therapist';
 
 $config['admin']	= 'admin';
 
-$config['per_page'] = 5;
+$config['per_page'] = 5; 

@@ -123,6 +123,7 @@ class Admin extends Admin_Controller
       $save['user']   = $this->input->post('user');
       $save['email']    = $this->input->post('email');
       $save['access']   = $this->input->post('access');
+      
       $save['mobile']   = $this->input->post('mobile');
       
       if ($this->input->post('password') != '' || !$id)
@@ -130,7 +131,11 @@ class Admin extends Admin_Controller
         $save['password'] = md5($this->input->post('password'));
       }
       
-      $this->auth->save($save);
+      $patientId = $this->auth->save($save);
+
+      if ($save['access'] == 'Normal') {
+        $this->auth->assignTherepist($patientId);
+      }
       
       $this->session->set_flashdata('message', lang('message_user_saved'));
       
@@ -138,6 +143,17 @@ class Admin extends Admin_Controller
       redirect($this->config->item('admin').'/index');
     }
   }
+
+
+  function migrate() {
+
+    $response = $this->auth->assignTherepist();
+
+    if ($response) {
+      echo "all patient has been assigned to all therapist";
+    }
+
+  }//end migrate
 
   
   function check_email($str)

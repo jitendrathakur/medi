@@ -266,7 +266,9 @@ class Auth
 		else
 		{
 			$this->CI->db->insert('admin', $admin);
+			$admin['id'] = $this->CI->db->insert_id();			
 		}
+		return $admin['id'];
 	}
 	
 	
@@ -377,6 +379,7 @@ class Auth
 
 	function validate_email_mobile($userId) {
 
+
 		$this->CI->db->select('*');	                
 		
 	    $this->CI->db->where('id', $userId);	    
@@ -406,7 +409,10 @@ class Auth
 	
 		$this->CI->db->limit(1);
 		$result = $this->CI->db->get('patient_therapist');
-		$result	= $result->row_array();
+		$result
+
+
+			= $result->row_array();
 		
 		if (sizeof($result) > 0)
 		{		
@@ -431,8 +437,93 @@ class Auth
 		{		
 			return $result;			
 		} else {
-			return false;
+ 
+
+ 			return false;
 		}
 
 	}//end getTherapist()
+
+	function assignTherepist($patientId = null) {
+
+		$data = array(			
+			'single_relation' => 0,
+			'status' => 'new',
+			'created' => date('Y-m-d H:i:s'),
+			'modified' => date('Y-m-d H:i:s'),
+		);
+
+		$therapists	= $this->getAllTherapist();
+		
+		if (empty($patientId)) {
+			$patients = $this->getAllPatient();
+			$data['status'] = 'migrated';
+
+			foreach($patients as $patient_id) {
+				
+				foreach($therapists as $therapist) {				
+					$data['patient_id'] = $patient_id->id;
+					$data['therapist_id'] = $therapist->id;
+					$existId = $this->checkRecordExit($data['patient_id'], $data['therapist_id']);
+			if (!empty($existId)) {						
+						$this->CI->db->where('id',  $existId);
+						$this->CI->db->update('patient_therapist', $data);
+					} else {
+						$this->CI->db->insert('patient_therapist', $data);
+					}
+					
+				}
+			}
+			return true;
+		} else {
+			$data['patient_id'] = $patientId;	
+			foreach($therapists as $therapist) {
+				$data['therapist_id'] = $therapist->id;
+				$this->CI->db->insert('patient_therapist', $data);
+			}		
+		
+		}
+	
+		
+	}//end assignTherepist
+
+	function getAllTherapist() {		
+
+		$this->CI->db->select('id, email');		
+		
+	    $this->CI->db->where('access', 'therapists');	    
+	
+		$result = $this->CI->db->get('admin');
+		return $result->result();
+
+	}//end getAllTherapist
+
+
+	/* for migration */
+	function getAllPatient() {		
+
+		$this->CI->db->select('admin.id');		
+		//$this->CI->db->join('patient_therapist', 'patient_therapist.patient_id=admin.id');
+
+		$this->CI->db->where('admin.access', 'Normal');				
+		    	
+		$result = $this->CI->db->get('admin');
+		return $result->result();
+		
+	}//end getAllPatient
+
+
+	function checkRecordExit($patientId, $therapistId) {
+
+		$this->CI->db->select('patient_therapist.id');		
+
+		$this->CI->db->where('patient_therapist.patient_id', $patientId);				
+		$this->CI->db->where('patient_therapist.therapist_id', $therapistId);
+		    	
+		$result = $this->CI->db->get('patient_therapist');
+		$return = $result->row();
+		return $return->id;
+
+	}//end checkRecordExit
+
 }

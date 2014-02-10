@@ -103,7 +103,9 @@
 	        <div class="col-sm-9">
 		        <?php
 				$options = array(
+					'Individual' => 'Individual',
 					'Illustration' => 'Illustration',
+					'Application' => 'Application'
 				);
 				echo form_dropdown('dimension', $options, set_value('dimension', ''));
 				?>

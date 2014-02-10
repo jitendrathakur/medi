@@ -18,7 +18,7 @@ class Forms extends Admin_Controller {
 
   function __sendEmail($option = array()) {  
 
-    $config = Array(
+   /* $config = Array(
       'protocol' => 'smtp',
       'smtp_host' => 'ssl://smtp.googlemail.com',
       'smtp_port' => 465,
@@ -50,7 +50,7 @@ class Forms extends Admin_Controller {
     else
     {
       show_error($this->email->print_debugger());
-    }
+    }*/
 
   }//end __sendEmail()
 
@@ -292,7 +292,11 @@ class Forms extends Admin_Controller {
         $option['subject'] = 'HIGH ALERT Patient: '.$data['admin_session']['firstname'];
       }
 
-      $this->__sendEmail($option);
+      $therapists = $this->auth->getAllTherapist();
+      foreach($therapists as $therapist) {       
+        $option['to'] = $therapist->email;   
+        $this->__sendEmail($option);  
+      } 
       
       $this->session->set_flashdata('message', lang('message_wellness_saved'));
       
@@ -484,7 +488,11 @@ class Forms extends Admin_Controller {
         $option['subject'] = 'HIGH ALERT Patient: '.$data['admin_session']['firstname'];
       }
 
-      $this->__sendEmail($option);
+      $therapists = $this->auth->getAllTherapist();
+      foreach($therapists as $therapist) {       
+        $option['to'] = $therapist->email;   
+        $this->__sendEmail($option);  
+      } 
 
       $this->session->set_flashdata('message', lang('message_forensic_saved'));
       
@@ -692,7 +700,11 @@ class Forms extends Admin_Controller {
         $option['subject'] = 'HIGH ALERT Patient: '.$data['admin_session']['firstname'];
       }
 
-      $this->__sendEmail($option);
+      $therapists = $this->auth->getAllTherapist();
+      foreach($therapists as $therapist) {       
+        $option['to'] = $therapist->email;   
+        $this->__sendEmail($option);  
+      } 
 
       $this->session->set_flashdata('message', lang('message_cooccurring_saved'));
       //go back to the cooccurring list
@@ -915,12 +927,18 @@ class Forms extends Admin_Controller {
 
       $haystack = $save['pulse'];
       $needle = 'suicide';
+     
 
       if (strpos($haystack,$needle) !== false) {
         $option['subject'] = 'HIGH ALERT Patient: '.$data['admin_session']['firstname'];
       }
 
-      $this->__sendEmail($option);
+      $therapists = $this->auth->getAllTherapist();
+      foreach($therapists as $therapist) {       
+        $option['to'] = $therapist->email;   
+        $this->__sendEmail($option);  
+      } 
+     
 
       $this->session->set_flashdata('message', lang('message_recoveryvitals_saved'));
       //go back to the recoveryvitals list
@@ -1054,7 +1072,11 @@ class Forms extends Admin_Controller {
         $option['subject'] = 'HIGH ALERT Patient: '.$data['admin_session']['firstname'];
       }*/
 
-      $this->__sendEmail($option);
+      $therapists = $this->auth->getAllTherapist();
+      foreach($therapists as $therapist) {       
+        $option['to'] = $therapist->email;   
+        $this->__sendEmail($option);  
+      } 
 
 
       $this->session->set_flashdata('message', lang('message_physicalhealth_saved'));
@@ -1267,7 +1289,11 @@ class Forms extends Admin_Controller {
         $option['subject'] = 'HIGH ALERT Patient: '.$data['admin_session']['firstname'];
       }
 
-      $this->__sendEmail($option);
+      $therapists = $this->auth->getAllTherapist();
+      foreach($therapists as $therapist) {       
+        $option['to'] = $therapist->email;   
+        $this->__sendEmail($option);  
+      } 
 
       $this->session->set_flashdata('message', lang('message_tmed_saved'));
       redirect($this->config->item('admin_folder').'/forms/wrap_form');     
